@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 2023_07_24_040226) do
     t.date "end_date"
     t.boolean "boarding"
     t.boolean "in_house"
+    t.boolean "accepted"
+    t.boolean "declined"
+    t.boolean "completed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_appointments_on_client_id"

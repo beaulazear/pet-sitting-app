@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import PetSitterProfile from "./PetSitterProfile";
+import PendingPetSits from "./PendingPetSits";
 
 export default function PetSitterOpt({ user }) {
 
@@ -42,33 +44,13 @@ export default function PetSitterOpt({ user }) {
         })
     }
 
-    const styles = {
-        petSitterProfile: {
-          backgroundColor: '#f8f8f8',
-          padding: '20px',
-          border: '1px solid #ddd',
-          borderRadius: '8px',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-          maxWidth: '400px',
-          margin: '0 auto',
-        },
-        image: {
-          display: 'block',
-          margin: '0 auto',
-          borderRadius: '8px',
-        },
-      };
-
     if (petSitter) {
         return (
-            <div id="petSitterProfile" style={styles.petSitterProfile}>
-                <img src={petSitter.photo} height="400" width="300" style={styles.image}></img>
-                <h2>Your pet sitting account:</h2>
-                <p><b>City:</b> {petSitter.city}, NYC</p>
-                <p><b>Day Rate:</b> ${petSitter.day_rate}</p>
-                <p><b>Bio:</b> {petSitter.bio}</p>
-                <p><b>My Ideal Pet Sit:</b> {petSitter.my_ideal_pet_sit}</p>
+            <div>
+                <PetSitterProfile petSitter={petSitter} user={user} />
+                <PendingPetSits petSitter={petSitter} user={user} />
             </div>
+
         )
     } else {
         return (

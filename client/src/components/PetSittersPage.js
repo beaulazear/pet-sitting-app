@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PetSitterCard from "./PetSitterCard";
 
-export default function PetSittersPage({ handleLogout }) {
+export default function PetSittersPage({ handleLogout, user }) {
 
     const [petSitters, setPetSitters] = useState(null)
 
@@ -15,7 +15,7 @@ export default function PetSittersPage({ handleLogout }) {
         return (
             <div id="petSittersPageDiv">
                 {petSitters.map((petSitter) => (
-                    <PetSitterCard key={petSitter.id} petSitter={petSitter} />
+                    <PetSitterCard user={user} key={petSitter.id} petSitter={petSitter} />
                 ))}
                 <button onClick={handleLogout}>Logout</button>
             </div>

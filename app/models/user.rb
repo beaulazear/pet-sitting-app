@@ -5,4 +5,5 @@ class User < ApplicationRecord
 
     has_one :petsitter
     has_one :client
+
 end

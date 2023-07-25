@@ -3,6 +3,7 @@ class Petsitter < ApplicationRecord
     has_many :appointments
     has_many :clients, through: :appointments
 
+
     validates :bio, presence: true
     validates :city, presence: true
     validates :day_rate, presence: true

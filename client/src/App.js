@@ -32,7 +32,7 @@ function App() {
         <PageNavLinks />
         <Routes>
           <Route path="/" element={<Home user={user} setUser={setUser} handleLogout={handleLogout}/>} />
-          <Route path="/petsitters" element={<PetSittersPage handleLogout={handleLogout} />} />
+          <Route path="/petsitters" element={<PetSittersPage user={user} handleLogout={handleLogout} />} />
         </Routes>
       </div>
     );

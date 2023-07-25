@@ -8,6 +8,9 @@ class CreateAppointments < ActiveRecord::Migration[6.1]
       t.date :end_date
       t.boolean :boarding
       t.boolean :in_house
+      t.boolean :accepted
+      t.boolean :declined
+      t.boolean :completed
 
       t.timestamps
     end

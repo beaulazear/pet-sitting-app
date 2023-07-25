@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   post "/clients", to: "clients#create"
   get "/clients", to: "clients#index"
   get "/client", to: "clients#show"
+  post "/appointments", to: "appointments#create"
+  get "/appointments", to: "appointments#index"
 
 
 

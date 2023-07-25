@@ -1,7 +1,8 @@
 import React from "react";
 import '../App.css';
+import PetSitRequestForm from "./PetSitRequestForm";
 
-export default function PetSitterCard({ petSitter }) {
+export default function PetSitterCard({ petSitter, user }) {
 
     const styles = {
         petSitterCard: {
@@ -31,6 +32,7 @@ export default function PetSitterCard({ petSitter }) {
             <p>{petSitter.my_ideal_pet_sit}</p>
             <h4>What do I charge?</h4>
             <p>My rate is currently ${petSitter.day_rate}</p>
+            <PetSitRequestForm user={user} petSitter={petSitter}/>
         </div>
     )
 }
