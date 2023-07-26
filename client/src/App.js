@@ -3,9 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import Home from './components/Home';
 import PageNavLinks from './components/PageNavLinks';
 import PetSittersPage from './components/PetSittersPage';
+import PetSitterPage from './components/PetSitterPage';
+import ClientPage from './components/ClientPage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -24,16 +25,32 @@ function App() {
     }).then(setUser(null))
   }
 
-  // <button onClick={handleLogout}>Logout</button>
+  function updateUser(clientAccount) {
+    const newUser = user
+    newUser.client = clientAccount
+    setUser(newUser)
+  }
+
+  const headerStyle = {
+    textAlign: 'center',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    color: '#9e9e9e',
+    width: '100%',
+    fontSize: '36px',
+    lineHeight: '1.2',
+  };
 
   if (user) {
     return (
       <div>
         <PageNavLinks />
+        <h1 style={headerStyle}>NYC Pet Sitters</h1>
         <Routes>
-          <Route path="/" element={<Home user={user} setUser={setUser} handleLogout={handleLogout}/>} />
+          <Route path="/" element={<PetSitterPage  updateUser={updateUser} user={user} setUser={setUser} handleLogout={handleLogout} />} />
+          <Route path="/client" element={<ClientPage updateUser={updateUser} user={user} setUser={setUser} handleLogout={handleLogout} />} />
           <Route path="/petsitters" element={<PetSittersPage user={user} handleLogout={handleLogout} />} />
         </Routes>
+        <button onClick={handleLogout}>Logout</button>
       </div>
     );
   } else {

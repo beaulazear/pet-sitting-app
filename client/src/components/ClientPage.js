@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function ClientOpt({ user }) {
+export default function ClientPage({ user, updateUser }) {
 
     const [pet_information, setPetInformation] = useState("")
     const [pet_photo, setPetPhoto] = useState("")
@@ -16,9 +16,7 @@ export default function ClientOpt({ user }) {
         });
     }, []);
 
-    // ending here for now, change this submit request to create new client instance and reflect as such on the front end!
-
-    function handlePetSitterOptIn(e) {
+    function handleClientOptIn(e) {
         e.preventDefault();
         fetch(`/clients`, {
             method: "POST",
@@ -35,27 +33,30 @@ export default function ClientOpt({ user }) {
             }),
         }).then((response) => {
             if (response.ok) {
-                response.json().then((client) => setClient(client));
+                response.json().then((client) => {
+                    setClient(client)
+                    updateUser(client)
+                });
             }
         })
     }
 
     const styles = {
         clientProfile: {
-          backgroundColor: '#f8f8f8',
-          padding: '20px',
-          border: '1px solid #ddd',
-          borderRadius: '8px',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-          maxWidth: '400px',
-          margin: '0 auto',
+            backgroundColor: '#f8f8f8',
+            padding: '20px',
+            border: '1px solid #ddd',
+            borderRadius: '8px',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+            maxWidth: '400px',
+            margin: '0 auto',
         },
         image: {
-          display: 'block',
-          margin: '0 auto',
-          borderRadius: '8px',
+            display: 'block',
+            margin: '0 auto',
+            borderRadius: '8px',
         },
-      };
+    };
 
     if (client) {
         return (
@@ -70,7 +71,7 @@ export default function ClientOpt({ user }) {
     } else {
         return (
             <div className="form-container">
-                <form className="styled-form" onSubmit={handlePetSitterOptIn}>
+                <form className="styled-form" onSubmit={handleClientOptIn}>
                     <h2>Become a Client Form</h2>
                     <div className='form-group'>
                         <label htmlFor="full_name">Full Name:</label>

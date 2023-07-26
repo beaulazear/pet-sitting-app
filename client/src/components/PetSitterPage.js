@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PetSitterProfile from "./PetSitterProfile";
 import PendingPetSits from "./PendingPetSits";
+import AcceptedAppointments from "./AcceptedAppointments";
 
-export default function PetSitterOpt({ user }) {
+export default function PetSitterPage({ user }) {
 
     const [bio, setBio] = useState("")
     const [city, setCity] = useState("")
@@ -12,6 +13,8 @@ export default function PetSitterOpt({ user }) {
     const [my_ideal_pet_sit, setMyIdealPetSit] = useState("")
     const [petSitter, setPetSitter] = useState(null)
 
+    const [appointments, setAppointments] = useState([])
+
     useEffect(() => {
         fetch("/petsitter").then((response) => {
             if (response.ok) {
@@ -19,6 +22,20 @@ export default function PetSitterOpt({ user }) {
             }
         });
     }, []);
+
+    useEffect(() => {
+        fetch("/appointments").then((response) => {
+            if (response.ok) {
+                response.json().then((apts) => {
+                    setAppointments(apts)
+                });
+            }
+        });
+    }, []);
+
+    function updateAppointments(updatedAppointments) {
+        setAppointments(updatedAppointments)
+    }
 
     function handlePetSitterOptIn(e) {
         e.preventDefault();
@@ -48,7 +65,8 @@ export default function PetSitterOpt({ user }) {
         return (
             <div>
                 <PetSitterProfile petSitter={petSitter} user={user} />
-                <PendingPetSits petSitter={petSitter} user={user} />
+                <PendingPetSits updateAppointments={updateAppointments} appointments={appointments} petSitter={petSitter} user={user} />
+                <AcceptedAppointments appointments={appointments} petSitter={petSitter} user={user} />
             </div>
 
         )

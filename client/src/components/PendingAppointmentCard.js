@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PendingAppointmentCard({ appointment }) {
+export default function PendingAppointmentCard({ appointment, updatePendingAppointments }) {
 
     const styles = {
         petSitterProfile: {
@@ -20,21 +20,27 @@ export default function PendingAppointmentCard({ appointment }) {
 
     };
 
+    function handleAccept() {
+        fetch(`/appointments/${appointment.id}/accepted`)
+            .then((resp) => resp.json())
+            .then((apt) => updatePendingAppointments(apt))
+    }
 
-
-
-
-    console.log(appointment)
+    function handleDecline() {
+        fetch(`/appointments/${appointment.id}/declined`)
+            .then((resp) => resp.json())
+            .then((apt) => updatePendingAppointments(apt))
+    }
 
     return (
         <div id="petSitterProfile" style={styles.petSitterProfile}>
-            <img height="400" width="300" style={styles.image}></img>
+            <img height="400" width="300" src={appointment.client.pet_photo} style={styles.image}></img>
             <h2>Pending Request:</h2>
             <p><b>Client Name:</b> {appointment.client.full_name}</p>
             <p><b>Total Price:</b> $</p>
             <p><b>Appointment Information:</b>{appointment.appointment_information}</p>
-            <button className="acceptButton">Accept Pet Sit</button>
-            <button className="declineButton">Decline Pet Sit</button>
+            <button onClick={handleAccept} className="acceptButton" value="Accepted">Accept Pet Sit</button>
+            <button onClick={handleDecline} className="declineButton" value="Declined">Decline Pet Sit</button>
         </div>
     )
 }

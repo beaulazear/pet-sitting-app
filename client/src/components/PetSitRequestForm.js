@@ -10,7 +10,7 @@ export default function PetSitRequestForm({ petSitter, user }) {
 
     function handleSubmit(e) {
         e.preventDefault()
-
+        console.log(user)
         fetch("/appointments", {
             method: "POST",
             headers: {
@@ -30,7 +30,14 @@ export default function PetSitRequestForm({ petSitter, user }) {
           })
             .then((response) => {
               if (response.ok) {
-                response.json().then((apt) => console.log(apt));
+                response.json().then((apt) => {
+                    setAppointmentInformation("")
+                    setBoarding(true)
+                    setInHouse(true)
+                    setStartDate("")
+                    setEndDate("")
+                    console.log(apt)
+                });
               }
             });
           

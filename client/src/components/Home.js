@@ -1,8 +1,8 @@
 import React from 'react';
-import PetSitterOpt from './PetSitterOpt';
-import ClientOpt from './ClientOpt';
+import PetSitterPage from './PetSitterPage';
+import ClientPage from './ClientPage';
 
-export default function Home({ user, handleLogout }){
+export default function Home({ user, handleLogout, updateUser }){
 
     const headerStyle = {
         textAlign: 'center',
@@ -15,9 +15,9 @@ export default function Home({ user, handleLogout }){
       
     return (
         <div className='homePageDiv'>
-            <h1 className="pageHeaders" style={headerStyle}>NYC Pet Sitters</h1>
-            <PetSitterOpt user={user} />
-            <ClientOpt user={user} />
+            <h1 style={headerStyle}>NYC Pet Sitters</h1>
+            <PetSitterPage user={user} />
+            <ClientPage updateUser={updateUser} user={user} />
             <button onClick={handleLogout}>Logout</button>
         </div>
     )

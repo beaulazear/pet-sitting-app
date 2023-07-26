@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get "/client", to: "clients#show"
   post "/appointments", to: "appointments#create"
   get "/appointments", to: "appointments#index"
+  get "/appointments/:id/accepted", to: "appointments#accepted"
+  get "/appointments/:id/declined", to: "appointments#declined"
 
 
 
