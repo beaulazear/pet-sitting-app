@@ -34,6 +34,16 @@ class AppointmentsController < ApplicationController
       end
     end
 
+    def cancel
+      appointment = Appointment.find_by(id: params[:id])
+      if appointment
+        appointment.update(canceled: true)
+        render json: appointment, status: :created
+      else
+        render json: { error: "Bird not found" }, status: :not_found
+      end
+    end
+
     private
 
     def appointment_params

@@ -1,7 +1,8 @@
 import React from "react";
 
-export default function ActiveAppointmentCard({ appointment, updateAppointments }) {
+export default function ActiveAppointmentCard({ appointment, updateActiveAppointments }) {
 
+    // make it so acceping a pet sit automaticlly changes active apt state
     const styles = {
         activeAppointmentDiv: {
             backgroundColor: '#f8f8f8',
@@ -20,12 +21,15 @@ export default function ActiveAppointmentCard({ appointment, updateAppointments 
 
     };
 
-    function handleCancel(e) {
-        console.log(e.target.value)
+
+    function handleCancel() {
+        fetch(`/appointments/${appointment.id}/canceled`)
+            .then((resp) => resp.json())
+            .then((apt) => updateActiveAppointments(apt))
     }
 
     return (
-        <div id="activeAppointmentDiv" style={styles.petSitterProfile}>
+        <div id="activeAppointmentDiv" style={styles.activeAppointmentDiv}>
             <img height="400" width="300" src={appointment.client.pet_photo} style={styles.image}></img>
             <h2>Accepted Appointment:</h2>
             <p><b>Client Name:</b> {appointment.client.full_name}</p>

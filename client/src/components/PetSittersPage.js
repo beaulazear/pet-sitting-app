@@ -8,7 +8,10 @@ export default function PetSittersPage({ handleLogout, user }) {
     useEffect(() => {
         fetch("/petsitters")
             .then((response) => response.json())
-            .then((petSitters) => setPetSitters(petSitters))
+            .then((petSitters) => {
+                let newSitters = petSitters.filter((sitter) => sitter.user_id != user.id)
+                setPetSitters(newSitters)
+            })
     }, [])
 
     if (petSitters) {
@@ -17,7 +20,6 @@ export default function PetSittersPage({ handleLogout, user }) {
                 {petSitters.map((petSitter) => (
                     <PetSitterCard user={user} key={petSitter.id} petSitter={petSitter} />
                 ))}
-                <button onClick={handleLogout}>Logout</button>
             </div>
         )
     } else {

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get "/appointments", to: "appointments#index"
   get "/appointments/:id/accepted", to: "appointments#accepted"
   get "/appointments/:id/declined", to: "appointments#declined"
+  get "/appointments/:id/canceled", to: "appointments#cancel"
 
 
 

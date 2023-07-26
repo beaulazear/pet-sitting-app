@@ -14,33 +14,33 @@ export default function PetSitRequestForm({ petSitter, user }) {
         fetch("/appointments", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              appointment: {
-                appointment_information,
-                start_date,
-                end_date,
-                boarding,
-                in_house,
-                petsitter_id: petSitter.id,
-                client_id: user.client.id
-              },
+                appointment: {
+                    appointment_information,
+                    start_date,
+                    end_date,
+                    boarding,
+                    in_house,
+                    petsitter_id: petSitter.id,
+                    client_id: user.client.id
+                },
             }),
-          })
+        })
             .then((response) => {
-              if (response.ok) {
-                response.json().then((apt) => {
-                    setAppointmentInformation("")
-                    setBoarding(true)
-                    setInHouse(true)
-                    setStartDate("")
-                    setEndDate("")
-                    console.log(apt)
-                });
-              }
+                if (response.ok) {
+                    response.json().then((apt) => {
+                        setAppointmentInformation("")
+                        setBoarding(true)
+                        setInHouse(true)
+                        setStartDate("")
+                        setEndDate("")
+                        console.log(apt)
+                    });
+                }
             });
-          
+
 
     }
 
@@ -60,53 +60,59 @@ export default function PetSitRequestForm({ petSitter, user }) {
         }
     }
 
-    return (
-        <div className="form-container">
-            <form className="styled-form" onSubmit={handleSubmit}>
-                <h2>Pet Sit Request Form:</h2>
-                <div className='form-group'>
-                    <label htmlFor="appointment_information">Appointment Information:</label>
-                    <textarea
-                        type="text"
-                        className="appointment_information"
-                        value={appointment_information}
-                        onChange={(e) => setAppointmentInformation(e.target.value)}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor="start_date">Start Date:</label>
-                    <input
-                        type="date"
-                        className="start_date"
-                        value={start_date}
-                        onChange={(e) => setStartDate(e.target.value)}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor="end_date">End Date:</label>
-                    <input
-                        type="date"
-                        className="end_date"
-                        value={end_date}
-                        onChange={(e) => setEndDate(e.target.value)}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor="housesit">Interested in house sitting:</label>
-                    <select onChange={handleHouseSitSelect} className="house_sit">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-                <div className='form-group'>
-                    <label htmlFor="boarding">Interested in boarding:</label>
-                    <select onChange={handleBoardingSelect} className="boarding">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-                <button>Request a pet-sit</button>
-            </form>
-        </div>
-    )
+    if (user.client) {
+        return (
+            <div className="form-container">
+                <form className="styled-form" onSubmit={handleSubmit}>
+                    <h2>Pet Sit Request Form:</h2>
+                    <div className='form-group'>
+                        <label htmlFor="appointment_information">Appointment Information:</label>
+                        <textarea
+                            type="text"
+                            className="appointment_information"
+                            value={appointment_information}
+                            onChange={(e) => setAppointmentInformation(e.target.value)}
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor="start_date">Start Date:</label>
+                        <input
+                            type="date"
+                            className="start_date"
+                            value={start_date}
+                            onChange={(e) => setStartDate(e.target.value)}
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor="end_date">End Date:</label>
+                        <input
+                            type="date"
+                            className="end_date"
+                            value={end_date}
+                            onChange={(e) => setEndDate(e.target.value)}
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor="housesit">Interested in house sitting:</label>
+                        <select onChange={handleHouseSitSelect} className="house_sit">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor="boarding">Interested in boarding:</label>
+                        <select onChange={handleBoardingSelect} className="boarding">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <button>Request a pet-sit</button>
+                </form>
+            </div>
+        )
+    } else {
+        return (<div id="emptyAppointmentFormDiv">
+            <h4>Sign up as a client to request an appointment with this pet sitter!</h4>
+        </div>)
+    }
 }

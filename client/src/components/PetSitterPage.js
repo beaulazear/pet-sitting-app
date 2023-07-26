@@ -13,8 +13,6 @@ export default function PetSitterPage({ user }) {
     const [my_ideal_pet_sit, setMyIdealPetSit] = useState("")
     const [petSitter, setPetSitter] = useState(null)
 
-    const [appointments, setAppointments] = useState([])
-
     useEffect(() => {
         fetch("/petsitter").then((response) => {
             if (response.ok) {
@@ -22,20 +20,6 @@ export default function PetSitterPage({ user }) {
             }
         });
     }, []);
-
-    useEffect(() => {
-        fetch("/appointments").then((response) => {
-            if (response.ok) {
-                response.json().then((apts) => {
-                    setAppointments(apts)
-                });
-            }
-        });
-    }, []);
-
-    function updateAppointments(updatedAppointments) {
-        setAppointments(updatedAppointments)
-    }
 
     function handlePetSitterOptIn(e) {
         e.preventDefault();
@@ -65,8 +49,8 @@ export default function PetSitterPage({ user }) {
         return (
             <div>
                 <PetSitterProfile petSitter={petSitter} user={user} />
-                <PendingPetSits updateAppointments={updateAppointments} appointments={appointments} petSitter={petSitter} user={user} />
-                <AcceptedAppointments appointments={appointments} petSitter={petSitter} user={user} />
+                <PendingPetSits petSitter={petSitter} user={user} />
+                {/* <AcceptedAppointments petSitter={petSitter} user={user} /> */}
             </div>
 
         )

@@ -11,6 +11,7 @@ class CreateAppointments < ActiveRecord::Migration[6.1]
       t.boolean :accepted
       t.boolean :declined
       t.boolean :completed
+      t.boolean :canceled
 
       t.timestamps
     end
