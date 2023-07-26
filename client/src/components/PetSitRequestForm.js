@@ -31,6 +31,7 @@ export default function PetSitRequestForm({ petSitter, user }) {
             .then((response) => {
                 if (response.ok) {
                     response.json().then((apt) => {
+                        window.alert("Appointment was requested!")
                         setAppointmentInformation("")
                         setBoarding(true)
                         setInHouse(true)

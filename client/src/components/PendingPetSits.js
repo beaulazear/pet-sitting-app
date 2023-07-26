@@ -3,7 +3,7 @@ import PendingAppointmentCard from "./PendingAppointmentCard";
 import ActiveAppointmentCard from "./ActiveAppointmentCard";
 import '../App.css';
 
-export default function PendingPetSits({ petSitter }) {
+export default function PendingPetSits({ petSitterOrClient, user }) {
 
     const [appointments, setAppointments] = useState([])
     const [pendingAppointments, setPendingAppointments] = useState([])
@@ -15,12 +15,21 @@ export default function PendingPetSits({ petSitter }) {
                 response.json().then((apts) => {
                     setAppointments(apts)
 
-                    let pendingApts = apts.filter((apt) => apt.petsitter_id === petSitter.id && apt.accepted === null && apt.declined === null)
+                    if(petSitterOrClient.client){
+                        let pendingApts = apts.filter((apt) => apt.client_id === petSitterOrClient.id && apt.accepted === null && apt.declined === null)
 
-                    let activeApts = apts.filter((apt) => apt.petsitter_id === petSitter.id && apt.accepted === true && apt.completed === null  && apt.canceled != true)
+                        let activeApts = apts.filter((apt) => apt.client_id === petSitterOrClient.id && apt.accepted === true && apt.completed === null  && apt.canceled != true)
 
-                    setPendingAppointments(pendingApts)
-                    setActiveAppointments(activeApts)
+                        setPendingAppointments(pendingApts)
+                        setActiveAppointments(activeApts)
+                    } else {
+                        let pendingApts = apts.filter((apt) => apt.petsitter_id === petSitterOrClient.id && apt.accepted === null && apt.declined === null)
+    
+                        let activeApts = apts.filter((apt) => apt.petsitter_id === petSitterOrClient.id && apt.accepted === true && apt.completed === null  && apt.canceled != true)
+    
+                        setPendingAppointments(pendingApts)
+                        setActiveAppointments(activeApts)
+                    }
                 });
             }
         });
@@ -41,13 +50,14 @@ export default function PendingPetSits({ petSitter }) {
                 return apt
             }
         })
-
-        let newActiveApts = [...activeAppointments, acceptedAppointment]
-
-        console.log(newActiveApts)
-
+        
         setAppointments(newApts)
-        setActiveAppointments(newActiveApts)
+
+        if (acceptedAppointment.accepted === true) {
+            let newActiveApts = [...activeAppointments, acceptedAppointment]
+            console.log(newActiveApts)
+            setActiveAppointments(newActiveApts)
+        }
     }
 
     function updateActiveAppointments(acceptedAppointment) {
@@ -74,10 +84,10 @@ export default function PendingPetSits({ petSitter }) {
             <div>
                 <h2 className="pageHeader">Active Appointments / Requests:</h2>
                 {activeAppointments.map((appointment) => (
-                    <ActiveAppointmentCard updateActiveAppointments={updateActiveAppointments} appointment={appointment} key={appointment.id} />
+                    <ActiveAppointmentCard user={user} petSitterOrClient={petSitterOrClient} updateActiveAppointments={updateActiveAppointments} appointment={appointment} key={appointment.id} />
                 ))}
                 {pendingAppointments.map((appointment) => (
-                    <PendingAppointmentCard updatePendingAppointments={updatePendingAppointments} appointment={appointment} key={appointment.id} />
+                    <PendingAppointmentCard user={user} petSitterOrClient={petSitterOrClient} updatePendingAppointments={updatePendingAppointments} appointment={appointment} key={appointment.id} />
                 ))}
             </div>
         )

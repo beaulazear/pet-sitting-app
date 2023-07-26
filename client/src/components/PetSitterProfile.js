@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PetSitterProfile({ petSitter, user }) {
+export default function PetSitterProfile({ petSitter }) {
 
     const styles = {
         petSitterProfile: {

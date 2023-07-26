@@ -25,9 +25,15 @@ function App() {
     }).then(setUser(null))
   }
 
-  function updateUser(clientAccount) {
+  function updateUserClient(clientAccount) {
     const newUser = user
     newUser.client = clientAccount
+    setUser(newUser)
+  }
+
+  function updateUserPetsitter(petsitterAccount) {
+    const newUser = user
+    newUser.petsitter = petsitterAccount
     setUser(newUser)
   }
 
@@ -46,8 +52,8 @@ function App() {
         <PageNavLinks />
         <h1 style={headerStyle}>NYC Pet Sitters</h1>
         <Routes>
-          <Route path="/" element={<PetSitterPage  updateUser={updateUser} user={user} setUser={setUser} handleLogout={handleLogout} />} />
-          <Route path="/client" element={<ClientPage updateUser={updateUser} user={user} setUser={setUser} handleLogout={handleLogout} />} />
+          <Route path="/" element={<PetSitterPage  updateUser={updateUserPetsitter} user={user} setUser={setUser} handleLogout={handleLogout} />} />
+          <Route path="/client" element={<ClientPage updateUser={updateUserClient} user={user} setUser={setUser} handleLogout={handleLogout} />} />
           <Route path="/petsitters" element={<PetSittersPage user={user} handleLogout={handleLogout} />} />
         </Routes>
         <button onClick={handleLogout}>Logout</button>
