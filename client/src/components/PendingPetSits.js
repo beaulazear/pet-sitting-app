@@ -5,6 +5,15 @@ import '../App.css';
 
 export default function PendingPetSits({ petSitterOrClient, user }) {
 
+    const headerStyle = {
+        textAlign: 'center',
+        fontFamily: 'Arial, Helvetica, sans-serif',
+        color: '#9e9e9e',
+        width: '100%',
+        fontSize: '36px',
+        lineHeight: '1.2',
+      };
+
     const [appointments, setAppointments] = useState([])
     const [pendingAppointments, setPendingAppointments] = useState([])
     const [activeAppointments, setActiveAppointments] = useState([])
@@ -78,7 +87,7 @@ export default function PendingPetSits({ petSitterOrClient, user }) {
     if (pendingAppointments.length > 0 || activeAppointments.length > 0) {
         return (
             <div>
-                <h2 className="pageHeader">Active Appointments / Requests:</h2>
+                <h2 style={headerStyle}>Active Appointments / Requests:</h2>
                 {activeAppointments.map((appointment) => (
                     <ActiveAppointmentCard user={user} petSitterOrClient={petSitterOrClient} updateActiveAppointments={updateActiveAppointments} appointment={appointment} key={appointment.id} />
                 ))}

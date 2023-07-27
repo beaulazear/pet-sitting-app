@@ -4,6 +4,7 @@ import './App.css';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import PageNavLinks from './components/PageNavLinks';
+import Home from './components/Home';
 import PetSittersPage from './components/PetSittersPage';
 import PetSitterPage from './components/PetSitterPage';
 import ClientPage from './components/ClientPage';
@@ -52,17 +53,22 @@ function App() {
         <PageNavLinks />
         <h1 style={headerStyle}>NYC Pet Sitters</h1>
         <Routes>
-          <Route path="/" element={<PetSitterPage  updateUser={updateUserPetsitter} user={user} setUser={setUser} handleLogout={handleLogout} />} />
+          <Route path="/" element={<Home updateUser={updateUserPetsitter} user={user} setUser={setUser} handleLogout={handleLogout} />} />
+          <Route path="/petsitter" element={<PetSitterPage updateUser={updateUserPetsitter} user={user} setUser={setUser} handleLogout={handleLogout} />} />
           <Route path="/client" element={<ClientPage updateUser={updateUserClient} user={user} setUser={setUser} handleLogout={handleLogout} />} />
           <Route path="/petsitters" element={<PetSittersPage user={user} handleLogout={handleLogout} />} />
         </Routes>
-        <button onClick={handleLogout}>Logout</button>
+        <div style={{ marginTop: '20px' }}> {/* Add some space above the button */}
+          <button style={{ position: 'fixed', bottom: '0px', right: '0px' }} onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
       </div>
     );
   } else {
     return (
       <div id="notLoggedInHome">
-        <h1 className='page-header'>NYC Pet Sitters</h1>
+        <h1 style={headerStyle}>NYC Pet Sitters</h1>
         <Login onLogin={setUser} />
         <Signup onLogin={setUser} />
       </div>

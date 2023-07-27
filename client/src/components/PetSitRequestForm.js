@@ -2,6 +2,57 @@ import React, { useState } from "react";
 
 export default function PetSitRequestForm({ petSitter, user }) {
 
+    const formStyles = {
+        formContainer: {
+            marginTop: '20px',
+            backgroundColor: '#f8f8f8',
+            padding: '20px',
+            borderRadius: '8px',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+        },
+        formGroup: {
+            marginBottom: '15px',
+        },
+        label: {
+            display: 'block',
+            fontSize: '16px',
+            color: '#333',
+            marginBottom: '5px',
+        },
+        input: {
+            width: '100%',
+            padding: '8px',
+            fontSize: '16px',
+            borderRadius: '4px',
+            border: '1px solid #ccc',
+        },
+        select: {
+            width: '100%',
+            padding: '8px',
+            fontSize: '16px',
+            borderRadius: '4px',
+            border: '1px solid #ccc',
+            backgroundColor: '#fff',
+        },
+        button: {
+            width: '100%',
+            padding: '10px',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            color: '#fff',
+            backgroundColor: '#007bff',
+            borderRadius: '4px',
+            border: 'none',
+            cursor: 'pointer',
+        },
+        errorList: {
+            color: 'red',
+            marginTop: '10px',
+            textAlign: 'left',
+            paddingLeft: '20px',
+        },
+    };
+
     const [appointment_information, setAppointmentInformation] = useState("")
     const [start_date, setStartDate] = useState("")
     const [end_date, setEndDate] = useState("")
@@ -68,61 +119,82 @@ export default function PetSitRequestForm({ petSitter, user }) {
 
     if (user.client) {
         return (
-            <div className="form-container">
-                <form className="styled-form" onSubmit={handleSubmit}>
-                    <h2>Pet Sit Request Form:</h2>
-                    <div className='form-group'>
-                        <label htmlFor="appointment_information">Appointment Information:</label>
+            <div style={formStyles.formContainer}>
+                <h2>Pet Sit Request Form:</h2>
+                <form className="custom-form" onSubmit={handleSubmit}>
+                    <div style={formStyles.formGroup}>
+                        <label htmlFor="appointment_information" style={formStyles.label}>
+                            Appointment Information:
+                        </label>
                         <textarea
                             type="text"
-                            className="appointment_information"
+                            className="custom-input"
                             value={appointment_information}
                             onChange={(e) => setAppointmentInformation(e.target.value)}
+                            style={formStyles.input}
                         />
                     </div>
-                    <div className='form-group'>
-                        <label htmlFor="start_date">Start Date:</label>
+                    <div style={formStyles.formGroup}>
+                        <label htmlFor="start_date" style={formStyles.label}>
+                            Start Date:
+                        </label>
                         <input
                             type="date"
-                            className="start_date"
+                            className="custom-input"
                             value={start_date}
                             onChange={(e) => setStartDate(e.target.value)}
+                            style={formStyles.input}
                         />
                     </div>
-                    <div className='form-group'>
-                        <label htmlFor="end_date">End Date:</label>
+                    <div style={formStyles.formGroup}>
+                        <label htmlFor="end_date" style={formStyles.label}>
+                            End Date:
+                        </label>
                         <input
                             type="date"
-                            className="end_date"
+                            className="custom-input"
                             value={end_date}
                             onChange={(e) => setEndDate(e.target.value)}
+                            style={formStyles.input}
                         />
                     </div>
-                    <div className='form-group'>
-                        <label htmlFor="housesit">Interested in house sitting:</label>
-                        <select onChange={handleHouseSitSelect} className="house_sit">
+                    <div style={formStyles.formGroup}>
+                        <label htmlFor="housesit" style={formStyles.label}>
+                            Interested in house sitting:
+                        </label>
+                        <select
+                            onChange={handleHouseSitSelect}
+                            className="custom-select"
+                            style={formStyles.select}
+                        >
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
                     </div>
-                    <div className='form-group'>
-                        <label htmlFor="boarding">Interested in boarding:</label>
-                        <select onChange={handleBoardingSelect} className="boarding">
+                    <div style={formStyles.formGroup}>
+                        <label htmlFor="boarding" style={formStyles.label}>
+                            Interested in boarding:
+                        </label>
+                        <select
+                            onChange={handleBoardingSelect}
+                            className="custom-select"
+                            style={formStyles.select}
+                        >
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
                     </div>
-                    <button>Request a pet-sit</button>
-                    {errors.length > 0 && (
-                        <ul style={{ color: "red" }}>
-                            {errors.map((error) => (
-                                <li key={error}>{error}</li>
-                            ))}
-                        </ul>
-                    )}
+                    <button style={formStyles.button}>Request a pet-sit</button>
                 </form>
+                {errors.length > 0 && (
+                    <ul style={formStyles.errorList}>
+                        {errors.map((error) => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                )}
             </div>
-        )
+        );
     } else {
         return (<div id="emptyAppointmentFormDiv">
             <h4>Sign up as a client to request an appointment with this pet sitter!</h4>

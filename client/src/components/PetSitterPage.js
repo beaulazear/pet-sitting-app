@@ -59,7 +59,6 @@ export default function PetSitterPage({ user,updateUser }) {
     } else {
         return (
             <div className="form-container">
-                <h2>Welcome, {user.username}!</h2>
                 <form className="styled-form" onSubmit={handlePetSitterOptIn}>
                     <h2>Pet Sitter Form</h2>
                     <div className='form-group'>
