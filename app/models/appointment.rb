@@ -1,4 +1,22 @@
 class Appointment < ApplicationRecord
+    validates :start_date, presence: true
+    validates :end_date, presence: true, date: { after_or_equal_to: :start_date }
+  
     belongs_to :client
     belongs_to :petsitter
-end
+  
+    before_validation :ensure_dates_are_valid
+  
+    private
+  
+    def ensure_dates_are_valid
+      if start_date && start_date < Date.current
+        errors.add(:start_date, "must be in the future")
+      end
+  
+      if start_date && end_date && end_date < start_date
+        errors.add(:end_date, "must be after the start date")
+      end
+    end
+  end
+  

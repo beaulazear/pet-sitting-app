@@ -7,6 +7,7 @@ export default function PetSitRequestForm({ petSitter, user }) {
     const [end_date, setEndDate] = useState("")
     const [boarding, setBoarding] = useState(true)
     const [in_house, setInHouse] = useState(true)
+    const [errors, setErrorData] = useState([])
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -18,11 +19,11 @@ export default function PetSitRequestForm({ petSitter, user }) {
             },
             body: JSON.stringify({
                 appointment: {
-                    appointment_information,
-                    start_date,
-                    end_date,
-                    boarding,
-                    in_house,
+                    appointment_information: appointment_information,
+                    start_date: start_date,
+                    end_date: end_date,
+                    boarding: boarding,
+                    in_house: in_house,
                     petsitter_id: petSitter.id,
                     client_id: user.client.id
                 },
@@ -37,12 +38,16 @@ export default function PetSitRequestForm({ petSitter, user }) {
                         setInHouse(true)
                         setStartDate("")
                         setEndDate("")
+                        setErrorData([])
                         console.log(apt)
                     });
+                } else {
+                    response.json().then((errorData) => {
+                        console.log(errorData)
+                        setErrorData(errorData.errors)
+                    })
                 }
             });
-
-
     }
 
     function handleBoardingSelect(e) {
@@ -108,6 +113,13 @@ export default function PetSitRequestForm({ petSitter, user }) {
                         </select>
                     </div>
                     <button>Request a pet-sit</button>
+                    {errors.length > 0 && (
+                        <ul style={{ color: "red" }}>
+                            {errors.map((error) => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    )}
                 </form>
             </div>
         )

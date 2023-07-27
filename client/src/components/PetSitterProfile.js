@@ -21,7 +21,7 @@ export default function PetSitterProfile({ petSitter }) {
 
     return (
         <div id="petSitterProfile" style={styles.petSitterProfile}>
-            <img src={petSitter.photo} height="400" width="300" style={styles.image}></img>
+            <img src={petSitter.photo} alt="the petsitter" height="400" width="300" style={styles.image}></img>
             <h2>Your pet sitting account:</h2>
             <p><b>Name:</b> Hi, I am {petSitter.full_name}!</p>
             <p><b>City:</b> I am located in {petSitter.city}, NYC</p>

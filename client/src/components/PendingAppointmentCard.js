@@ -38,30 +38,30 @@ export default function PendingAppointmentCard({ appointment, updatePendingAppoi
         fetch(`/appointments/${appointment.id}/accepted`)
             .then((resp) => resp.json())
             .then((apt) => updatePendingAppointments(apt))
-        window.alert("Appointment has been accepted!")
+        // window.alert("Appointment has been accepted!")
     }
 
     function handleCancel() {
         fetch(`/appointments/${appointment.id}/canceled`)
             .then((resp) => resp.json())
             .then((apt) => updatePendingAppointments(apt))
-            window.alert("Appointment has been cancelled")
+            // window.alert("Appointment has been cancelled")
     }
 
     function handleDecline() {
         fetch(`/appointments/${appointment.id}/declined`)
             .then((resp) => resp.json())
             .then((apt) => updatePendingAppointments(apt))
-        window.alert("Appointment has been declined!")
+        // window.alert("Appointment has been declined!")
     }
 
     if (user.id === appointment.petsitter.user_id) {
         return (
             <div id="petSitterProfile" style={styles.petSitterProfile}>
-                <img height="400" width="300" src={appointment.client.pet_photo} style={styles.image}></img>
+                <img height="400" width="300" src={appointment.client.pet_photo} alt="the pet of the appointment" style={styles.image}></img>
                 <h2>Pending Request:</h2>
                 <p><b>Client Name:</b> {appointment.client.full_name}</p>
-                <p><b>Total Price:</b> {totalPriceCalculator(appointment.start_date, appointment.end_date)} $</p>
+                <p><b>Total Price:</b> ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
                 <p><b>Start Date:</b> {appointment.start_date}</p>
                 <p><b>End Date:</b> {appointment.end_date}</p>
                 <p><b>Appointment Information:</b>{appointment.appointment_information}</p>
@@ -72,10 +72,10 @@ export default function PendingAppointmentCard({ appointment, updatePendingAppoi
     } else {
         return (
             <div id="petSitterProfile" style={styles.petSitterProfile}>
-                <img height="400" width="300" src={appointment.client.pet_photo} style={styles.image}></img>
+                <img height="400" width="300" src={appointment.petsitter.photo} alt="the petsitter" style={styles.image}></img>
                 <h2>Pending Pet Sit Request:</h2>
                 <p><b>Pet Sitter Requested:</b> {appointment.petsitter.full_name}</p>
-                <p><b>Total Price:</b> {totalPriceCalculator(appointment.start_date, appointment.end_date)} $</p>
+                <p><b>Total Price:</b> ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
                 <p><b>Start Date:</b> {appointment.start_date}</p>
                 <p><b>End Date:</b> {appointment.end_date}</p>
                 <p><b>Appointment Information:</b>{appointment.appointment_information}</p>

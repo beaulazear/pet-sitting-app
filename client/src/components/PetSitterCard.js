@@ -23,7 +23,7 @@ export default function PetSitterCard({ petSitter, user }) {
 
     return (
         <div className="petSitterCardDiv" style={styles.petSitterCard}>
-            <img src={petSitter.photo} height={400} width={300} style={styles.image}></img>
+            <img src={petSitter.photo} alt="the petsitter" height={400} width={300} style={styles.image}></img>
             <h3>Hi, I am {petSitter.full_name}!</h3>
             <h4>About me:</h4>
             <p>I am based in {petSitter.city}, NYC</p>

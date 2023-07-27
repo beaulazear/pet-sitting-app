@@ -31,6 +31,7 @@ export default function Login({ onLogin }) {
                 <div className='form-group'>
                     <label htmlFor="username">Username:</label>
                     <input
+                        autoComplete="on"
                         type="text"
                         id="username"
                         value={username}
@@ -42,6 +43,7 @@ export default function Login({ onLogin }) {
                     <input
                         type="password"
                         id="password"
+                        autoComplete="on"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />

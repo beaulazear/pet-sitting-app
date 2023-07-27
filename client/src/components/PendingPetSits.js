@@ -15,17 +15,17 @@ export default function PendingPetSits({ petSitterOrClient, user }) {
                 response.json().then((apts) => {
                     setAppointments(apts)
 
-                    if(petSitterOrClient.client){
-                        let pendingApts = apts.filter((apt) => apt.client_id === petSitterOrClient.id && apt.accepted === null && apt.declined === null)
+                    if(user.client){
+                        let pendingApts = apts.filter((apt) => apt.client_id === petSitterOrClient.id && apt.accepted !== true && apt.declined !== true && apt.canceled !== true)
 
-                        let activeApts = apts.filter((apt) => apt.client_id === petSitterOrClient.id && apt.accepted === true && apt.completed === null  && apt.canceled != true)
+                        let activeApts = apts.filter((apt) => apt.client_id === petSitterOrClient.id && apt.accepted === true && apt.completed !== true  && apt.canceled !== true)
 
                         setPendingAppointments(pendingApts)
                         setActiveAppointments(activeApts)
                     } else {
-                        let pendingApts = apts.filter((apt) => apt.petsitter_id === petSitterOrClient.id && apt.accepted === null && apt.declined === null)
+                        let pendingApts = apts.filter((apt) => apt.petsitter_id === petSitterOrClient.id && apt.accepted !== true && apt.declined !== true && apt.canceled !== true)
     
-                        let activeApts = apts.filter((apt) => apt.petsitter_id === petSitterOrClient.id && apt.accepted === true && apt.completed === null  && apt.canceled != true)
+                        let activeApts = apts.filter((apt) => apt.petsitter_id === petSitterOrClient.id && apt.accepted === true && apt.completed === null  && apt.canceled !== true)
     
                         setPendingAppointments(pendingApts)
                         setActiveAppointments(activeApts)
@@ -33,18 +33,16 @@ export default function PendingPetSits({ petSitterOrClient, user }) {
                 });
             }
         });
-    }, []);
+    }, [petSitterOrClient, user]);
 
     function updatePendingAppointments(acceptedAppointment) {
 
-        console.log(acceptedAppointment)
-
-        let newPendingAppointments = pendingAppointments.filter((apt) => apt.id != acceptedAppointment.id)
+        let newPendingAppointments = pendingAppointments.filter((apt) => apt.declined !== true && apt.id !== acceptedAppointment.id )
 
         setPendingAppointments(newPendingAppointments)
 
         let newApts = appointments.map((apt) => {
-            if (apt.id == acceptedAppointment.id) {
+            if (apt.id === acceptedAppointment.id) {
                 return { ...apt, ...acceptedAppointment }
             } else {
                 return apt
@@ -62,14 +60,12 @@ export default function PendingPetSits({ petSitterOrClient, user }) {
 
     function updateActiveAppointments(acceptedAppointment) {
 
-        console.log(acceptedAppointment)
-
-        let newActiveAppointments = activeAppointments.filter((apt) => apt.id != acceptedAppointment.id)
+        let newActiveAppointments = activeAppointments.filter((apt) => apt.id !== acceptedAppointment.id)
 
         setActiveAppointments(newActiveAppointments)
 
         let newApts = appointments.map((apt) => {
-            if (apt.id == acceptedAppointment.id) {
+            if (apt.id === acceptedAppointment.id) {
                 return { ...apt, ...acceptedAppointment }
             } else {
                 return apt

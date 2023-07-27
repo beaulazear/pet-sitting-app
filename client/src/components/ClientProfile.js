@@ -21,7 +21,7 @@ export default function ClientProfile({ client }) {
 
     return (
         <div id="petSitterProfile" style={styles.clientProfile}>
-            <img style={styles.image} src={client.pet_photo} height="400" width="300"></img>
+            <img style={styles.image} alt="the client" src={client.pet_photo} height="400" width="300"></img>
             <h2>Your client account:</h2>
             <p><b>My Name:</b> {client.full_name}, NYC</p>
             <p><b>About my pet:</b> {client.pet_information}</p>

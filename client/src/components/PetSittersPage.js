@@ -9,10 +9,10 @@ export default function PetSittersPage({ handleLogout, user }) {
         fetch("/petsitters")
             .then((response) => response.json())
             .then((petSitters) => {
-                let newSitters = petSitters.filter((sitter) => sitter.user_id != user.id)
+                let newSitters = petSitters.filter((sitter) => sitter.user_id !== user.id)
                 setPetSitters(newSitters)
             })
-    }, [])
+    }, [user.id])
 
     if (petSitters) {
         return (
