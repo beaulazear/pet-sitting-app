@@ -1,3 +1,6 @@
+
+/* These are all made me create react app */
+
 .App {
   text-align: center;
 }
@@ -38,16 +41,13 @@
   }
 }
 
+/* folowing starts personal code */
+
 .navigation {
   display: flex;
   width: 100%;
   background-color: #f0f0f0;
 }
-
-.pageHeader {
-  text-align: center;
-}
-
  .navButtons{
   text-align: center;
   flex: 1;
@@ -58,8 +58,9 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-weight: bold;
+  text-decoration: none;
 }
-
 .navButtons:hover {
   background-color: blue;
 }
@@ -75,7 +76,6 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
 .acceptButton:hover {
   background-color: green;
 }
@@ -91,65 +91,9 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
 .declineButton:hover {
   background-color: red;
 }
-
-
-.page-header {
-  font-weight: bold;
-}
-
-/* Form container styles */
-.form-container {
-  display: block;
-  background-color: #f0f0f0;
-  padding-bottom: 25PX;
-}
-
-/* Styled form styles */
-.styled-form {
-  padding: 20px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: fit-content%;
-  margin: 0%;
-}
-
-.styled-form h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333333;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #666666;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  outline: none;
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
 
 button {
   width: 100%;
@@ -161,7 +105,6 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 button:hover {
   background-color: #0056b3;
 }

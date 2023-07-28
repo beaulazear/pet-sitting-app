@@ -12,7 +12,7 @@ const headerStyle = {
     lineHeight: '1.2',
 };
 
-export default function PendingPetSits({ petSitter, user }) {
+export default function ClientPendingAppointments({ client, user }) {
 
 
     const [appointments, setAppointments] = useState([])
@@ -24,19 +24,17 @@ export default function PendingPetSits({ petSitter, user }) {
             if (response.ok) {
                 response.json().then((apts) => {
                     setAppointments(apts)
-                    console.log(user)
-                    console.log(petSitter)
 
-                    let pendingApts = apts.filter((apt) => apt.petsitter_id === petSitter.id && apt.accepted !== true && apt.declined !== true && apt.canceled !== true)
+                    let pendingApts = apts.filter((apt) => apt.client_id === user.client.id && apt.accepted !== true && apt.declined !== true && apt.canceled !== true)
 
-                    let activeApts = apts.filter((apt) => apt.petsitter_id === petSitter.id && apt.accepted === true && apt.completed !== true && apt.canceled !== true)
+                    let activeApts = apts.filter((apt) => apt.client_id === user.client.id && apt.accepted === true && apt.completed !== true && apt.canceled !== true)
 
                     setPendingAppointments(pendingApts)
                     setActiveAppointments(activeApts)
                 });
             }
         });
-    }, [petSitter, user]);
+    }, [client, user]);
 
     function updatePendingAppointments(acceptedAppointment) {
 
@@ -83,10 +81,10 @@ export default function PendingPetSits({ petSitter, user }) {
             <div>
                 <h2 style={headerStyle}>Active Appointments / Requests:</h2>
                 {activeAppointments.map((appointment) => (
-                    <ActiveAppointmentCard user={user} petSitter={petSitter} updateActiveAppointments={updateActiveAppointments} appointment={appointment} key={appointment.id} />
+                    <ActiveAppointmentCard user={user} client={client} updateActiveAppointments={updateActiveAppointments} appointment={appointment} key={appointment.id} />
                 ))}
                 {pendingAppointments.map((appointment) => (
-                    <PendingAppointmentCard user={user} petSitter={petSitter} updatePendingAppointments={updatePendingAppointments} appointment={appointment} key={appointment.id} />
+                    <PendingAppointmentCard user={user} client={client} updatePendingAppointments={updatePendingAppointments} appointment={appointment} key={appointment.id} />
                 ))}
             </div>
         )

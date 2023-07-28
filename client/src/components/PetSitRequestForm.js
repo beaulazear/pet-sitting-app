@@ -63,6 +63,7 @@ export default function PetSitRequestForm({ petSitter, user }) {
     function handleSubmit(e) {
         e.preventDefault()
         console.log(user)
+        console.log(petSitter)
         fetch("/appointments", {
             method: "POST",
             headers: {

@@ -12,7 +12,7 @@ export default function PetSitterCard({ petSitter, user }) {
       borderRadius: '8px',
       boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
       maxWidth: '400px',
-      margin: '0 auto',
+      margin: '10px auto',
       textAlign: 'center',
     },
     imageWrapper: {

@@ -22,4 +22,4 @@ Petsitter.create(user_id: 4, bio: "NYC pet guru, making tails wag happily 🐕",
 
 puts "Seeding clients"
 
-Client.create(user_id: 2, full_name: "Gerard Zengel", pet_information: "Three kitties named mimu, marmu, and seamu!", ideal_petsitter: "Someone who loves my kitties and can come once a day")
+Client.create(user_id: 2, full_name: "Gerard Zengel", pet_information: "Three kitties named mimu, marmu, and seamu!", ideal_petsitter: "Someone who loves my kitties and can come once a day", pet_photo: "https://images.pexels.com/photos/1056252/pexels-photo-1056252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")

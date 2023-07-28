@@ -91,49 +91,48 @@ export default function PendingAppointmentCard({ appointment, updatePendingAppoi
 
   const isPetsitter = user.id === appointment.petsitter.user_id;
 
-  return (
-    <div style={styles.petSitterProfile}>
-      <div style={styles.imageWrapper}>
-        <img
-          height="150"
-          width="150"
-          src={isPetsitter ? appointment.client.pet_photo : appointment.petsitter.photo}
-          style={styles.image}
-          alt={isPetsitter ? "Client's Pet" : "Petsitter"}
-        />
-      </div>
-      <h2 style={styles.heading}>
-        {isPetsitter ? "Pending Request:" : "Pending Pet Sit Request:"}
-      </h2>
-      <p style={styles.subheading}>
-        {isPetsitter ? "Client Name:" : "Pet Sitter Requested:"} {isPetsitter ? appointment.client.full_name : appointment.petsitter.full_name}
-      </p>
-      <p style={styles.subheading}>
-        Total Price: ${totalPriceCalculator(appointment.start_date, appointment.end_date)}
-      </p>
-      <p style={styles.subheading}>
-        Start Date: {appointment.start_date}
-      </p>
-      <p style={styles.subheading}>
-        End Date: {appointment.end_date}
-      </p>
-      <p style={styles.subheading}>
-        Appointment Information: {appointment.appointment_information}
-      </p>
-      {isPetsitter ? (
-        <div>
-          <button onClick={handleAccept} style={{ ...styles.acceptButton, marginLeft: 0 }}>
-            Accept Pet Sit
-          </button>
-          <button onClick={handleDecline} style={styles.cancelButton}>
-            Decline Pet Sit
-          </button>
+  if (isPetsitter) {
+    return (
+      <div id="petSitterProfile" style={styles.petSitterProfile}>
+        <div style={styles.imageWrapper}>
+          <img
+            height="150"
+            width="150"
+            src={appointment.client.pet_photo}
+            style={styles.image}
+            alt="the pet of the appointment"
+          />
         </div>
-      ) : (
-        <button onClick={handleCancel} style={styles.cancelButton}>
-          Cancel Pet Sit Request
-        </button>
-      )}
-    </div>
-  );
+        <h2>Pending Request:</h2>
+        <p><b>Client Name:</b> {appointment.client.full_name}</p>
+        <p><b>Total Price:</b> ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
+        <p><b>Start Date:</b> {appointment.start_date}</p>
+        <p><b>End Date:</b> {appointment.end_date}</p>
+        <p><b>Appointment Information:</b>{appointment.appointment_information}</p>
+        <button onClick={handleAccept} className="acceptButton" value="Accepted">Accept Pet Sit</button>
+        <button onClick={handleDecline} className="declineButton" value="Declined">Decline Pet Sit</button>
+      </div>
+    );
+  } else {
+    return (
+      <div id="petSitterProfile" style={styles.petSitterProfile}>
+        <div style={styles.imageWrapper}>
+          <img
+            height="150"
+            width="150"
+            src={appointment.petsitter.photo}
+            style={styles.image}
+            alt="the petsitter"
+          />
+        </div>
+        <h2>Pending Pet Sit Request:</h2>
+        <p><b>Pet Sitter Requested:</b> {appointment.petsitter.full_name}</p>
+        <p><b>Total Price:</b> ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
+        <p><b>Start Date:</b> {appointment.start_date}</p>
+        <p><b>End Date:</b> {appointment.end_date}</p>
+        <p><b>Appointment Information:</b>{appointment.appointment_information}</p>
+        <button onClick={handleCancel} className="declineButton" value="Cancelled">Cancel Pet Sit Request</button>
+      </div>
+    );
+  }
 }
