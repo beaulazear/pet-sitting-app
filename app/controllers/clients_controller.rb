@@ -26,6 +26,6 @@ class ClientsController < ApplicationController
     private
 
     def client_params
-        params.permit(:id, :pet_photo, :ideal_petsitter, :pet_information, :user_id, :full_name)
+        params.permit(:id, :photo, :ideal_petsitter, :pet_information, :user_id, :full_name)
     end
 end

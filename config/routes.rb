@@ -27,7 +27,11 @@ Rails.application.routes.draw do
   get "/appointments/:id/declined", to: "appointments#declined"
   get "/appointments/:id/canceled", to: "appointments#cancel"
 
+  get "/conversations", to: "conversations#index"
+  post "/conversations", to: "conversations#create"
 
+  get "/messages", to: "messages#index"
+  post "/messages", to: "messages#create"
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

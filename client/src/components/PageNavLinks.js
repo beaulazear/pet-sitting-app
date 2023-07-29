@@ -10,6 +10,7 @@ export default function PageNavLinks() {
             <NavLink to="/petsitter" className="navButtons">Petsitter Account</NavLink>
             <NavLink to="/client" className="navButtons">Client Account</NavLink>
             <NavLink to="/petsitters" className="navButtons">View Pet Sitters</NavLink>
+            <NavLink to="/conversations" className="navButtons">Messages</NavLink>
         </div>
     )
 }

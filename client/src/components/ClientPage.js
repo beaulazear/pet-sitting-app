@@ -42,7 +42,7 @@ const formStyles = {
 export default function ClientPage({ user, updateUser }) {
 
     const [pet_information, setPetInformation] = useState("")
-    const [pet_photo, setPetPhoto] = useState("")
+    const [photo, setPetPhoto] = useState("")
     const [full_name, setFullName] = useState("")
     const [ideal_petsitter, setIdealPetSitter] = useState("")
     const [client, setClient] = useState(null)
@@ -65,7 +65,7 @@ export default function ClientPage({ user, updateUser }) {
             body: JSON.stringify({
                 pet_information,
                 full_name,
-                pet_photo,
+                photo,
                 ideal_petsitter,
                 user_id: user.id,
                 currently_available: true
@@ -129,14 +129,14 @@ export default function ClientPage({ user, updateUser }) {
                         />
                     </div>
                     <div style={formStyles.formGroup}>
-                        <label style={formStyles.label} htmlFor="pet_photo">
+                        <label style={formStyles.label} htmlFor="photo">
                             Pet Photo Url:
                         </label>
                         <input
                             style={formStyles.input}
                             type="text"
-                            id="pet_photo"
-                            value={pet_photo}
+                            id="photo"
+                            value={photo}
                             onChange={(e) => setPetPhoto(e.target.value)}
                         />
                     </div>

@@ -5,7 +5,7 @@ class CreateClients < ActiveRecord::Migration[6.1]
       t.string :full_name
       t.text :pet_information
       t.text :ideal_petsitter
-      t.string :pet_photo
+      t.string :photo
 
       t.timestamps
     end

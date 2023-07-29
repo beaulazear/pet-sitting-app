@@ -3,5 +3,6 @@ class PetsitterSerializer < ActiveModel::Serializer
 
   belongs_to :user
   has_many :appointments
+  has_many :conversations
   # has_many :clients, through: :appointments
 end

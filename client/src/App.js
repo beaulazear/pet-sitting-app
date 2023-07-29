@@ -7,6 +7,7 @@ import Home from './components/Home';
 import PetSittersPage from './components/PetSittersPage';
 import PetSitterPage from './components/PetSitterPage';
 import ClientPage from './components/ClientPage';
+import Conversations from './components/Conversations';
 
 const headerStyle = {
   textAlign: 'center',
@@ -57,6 +58,7 @@ function App() {
           <Route path="/petsitter" element={<PetSitterPage updateUser={updateUserPetsitter} user={user} setUser={setUser} handleLogout={handleLogout} />} />
           <Route path="/client" element={<ClientPage updateUser={updateUserClient} user={user} setUser={setUser} handleLogout={handleLogout} />} />
           <Route path="/petsitters" element={<PetSittersPage user={user} handleLogout={handleLogout} />} />
+          <Route path="/conversations" element={<Conversations user={user} handleLogout={handleLogout} />} />
         </Routes>
         <div style={{ marginTop: '20px' }}> {/* Add some space above the button */}
           <button style={{ position: 'fixed', bottom: '0px', right: '0px' }} onClick={handleLogout}>

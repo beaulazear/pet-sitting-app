@@ -71,7 +71,7 @@ export default function ActiveAppointmentCard({ appointment, updateActiveAppoint
                     <img
                         height="150"
                         width="150"
-                        src={appointment.client.pet_photo}
+                        src={appointment.client.photo}
                         style={styles.image}
                         alt="Client's Pet"
                     />

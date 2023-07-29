@@ -6,5 +6,8 @@ class User < ApplicationRecord
 
     has_one :petsitter
     has_one :client
+    has_many :conversations, through: :petsitter
+    has_many :conversations, through: :client
+    has_many :messages
 
 end

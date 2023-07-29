@@ -98,7 +98,7 @@ export default function PendingAppointmentCard({ appointment, updatePendingAppoi
           <img
             height="150"
             width="150"
-            src={appointment.client.pet_photo}
+            src={appointment.client.photo}
             style={styles.image}
             alt="the pet of the appointment"
           />

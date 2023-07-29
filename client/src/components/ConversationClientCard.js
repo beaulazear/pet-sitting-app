@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ClientProfile({ client }) {
+export default function ConversationClientCard({ client, scrollToBottom }) {
 
     const styles = {
         clientProfile: {
@@ -9,14 +9,14 @@ export default function ClientProfile({ client }) {
             border: '1px solid #ddd',
             borderRadius: '8px',
             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-            maxWidth: '400px',
-            margin: '0 auto',
+            maxWidth: '300px', // Reduced the width to make it smaller
+            margin: '10px auto',
             textAlign: 'center',
         },
         imageWrapper: {
-            width: '150px',
-            height: '150px',
-            margin: '0 auto 20px',
+            width: '100px', // Reduced the size of the imageWrapper
+            height: '100px', // Reduced the size of the imageWrapper
+            margin: '0 auto 10px', // Reduced the margin
             borderRadius: '50%',
             overflow: 'hidden',
             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
@@ -28,14 +28,14 @@ export default function ClientProfile({ client }) {
             borderRadius: '50%',
         },
         heading: {
-            fontSize: '24px',
+            fontSize: '20px', // Reduced the font size for the heading
             margin: '0',
             color: '#333',
         },
         info: {
-            fontSize: '16px',
+            fontSize: '14px', // Reduced the font size for info text
             color: '#666',
-            margin: '10px 0',
+            margin: '5px 0', // Reduced the margin for info text
         },
     };
 
@@ -48,11 +48,10 @@ export default function ClientProfile({ client }) {
                     style={styles.image}
                 />
             </div>
-            <h2 style={styles.heading}>Your client account:</h2>
-            <p style={styles.info}><b>My Name:</b> {client.full_name}, NYC</p>
+            <h3 style={styles.heading}>{client.full_name}</h3>
             <p style={styles.info}><b>About my pet:</b> {client.pet_information}</p>
             <p style={styles.info}><b>Ideal petsitter:</b> {client.ideal_petsitter}</p>
+            <button onClick={scrollToBottom}>Go to end of chat.</button>
         </div>
     );
-
 }
