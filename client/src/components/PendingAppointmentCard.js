@@ -8,7 +8,7 @@ const styles = {
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     maxWidth: '400px',
     margin: '0 auto',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   imageWrapper: {
     width: '150px',
@@ -16,23 +16,23 @@ const styles = {
     margin: '0 auto 20px',
     borderRadius: '50%',
     overflow: 'hidden',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
   },
   image: {
     width: '100%',
     height: '100%',
     objectFit: 'cover',
-    borderRadius: '50%',
+    borderRadius: '50%'
   },
   heading: {
     fontSize: '24px',
     margin: '0',
-    color: '#333',
+    color: '#333'
   },
   subheading: {
     fontSize: '18px',
     margin: '10px 0',
-    color: '#666',
+    color: '#666'
   },
   cancelButton: {
     padding: '8px 16px',
@@ -42,7 +42,7 @@ const styles = {
     backgroundColor: 'red',
     borderRadius: '4px',
     border: 'none',
-    cursor: 'pointer',
+    cursor: 'pointer'
   },
   acceptButton: {
     padding: '8px 16px',
@@ -53,7 +53,7 @@ const styles = {
     borderRadius: '4px',
     border: 'none',
     cursor: 'pointer',
-    marginLeft: '10px',
+    marginLeft: '10px'
   },
 };
 
@@ -72,21 +72,18 @@ export default function PendingAppointmentCard({ appointment, updatePendingAppoi
     fetch(`/appointments/${appointment.id}/accepted`)
       .then((resp) => resp.json())
       .then((apt) => updatePendingAppointments(apt))
-    // window.alert("Appointment has been accepted!")
   }
 
   function handleCancel() {
     fetch(`/appointments/${appointment.id}/canceled`)
       .then((resp) => resp.json())
       .then((apt) => updatePendingAppointments(apt))
-    // window.alert("Appointment has been cancelled")
   }
 
   function handleDecline() {
     fetch(`/appointments/${appointment.id}/declined`)
       .then((resp) => resp.json())
       .then((apt) => updatePendingAppointments(apt))
-    // window.alert("Appointment has been declined!")
   }
 
   const isPetsitter = user.id === appointment.petsitter.user_id;
@@ -95,13 +92,7 @@ export default function PendingAppointmentCard({ appointment, updatePendingAppoi
     return (
       <div id="petSitterProfile" style={styles.petSitterProfile}>
         <div style={styles.imageWrapper}>
-          <img
-            height="150"
-            width="150"
-            src={appointment.client.photo}
-            style={styles.image}
-            alt="the pet of the appointment"
-          />
+          <img height="150" width="150" src={appointment.client.photo} style={styles.image} alt="the pet of the appointment" />
         </div>
         <h2>Pending Request:</h2>
         <p><b>Client Name:</b> {appointment.client.full_name}</p>
@@ -117,13 +108,7 @@ export default function PendingAppointmentCard({ appointment, updatePendingAppoi
     return (
       <div id="petSitterProfile" style={styles.petSitterProfile}>
         <div style={styles.imageWrapper}>
-          <img
-            height="150"
-            width="150"
-            src={appointment.petsitter.photo}
-            style={styles.image}
-            alt="the petsitter"
-          />
+          <img height="150" width="150" src={appointment.petsitter.photo} style={styles.image} alt="the petsitter" />
         </div>
         <h2>Pending Pet Sit Request:</h2>
         <p><b>Pet Sitter Requested:</b> {appointment.petsitter.full_name}</p>

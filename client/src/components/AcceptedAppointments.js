@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ActiveAppointmentCard from "./ActiveAppointmentCard";
 import '../App.css';
 
-export default function AcceptedAppointments({ user, petSitter }) {
+export default function AcceptedAppointments({ petSitter }) {
 
     const [appointments, setAppointments] = useState([])
 
@@ -11,12 +11,12 @@ export default function AcceptedAppointments({ user, petSitter }) {
             .then((resp) => resp.json())
             .then((apts) => {
                 let newApts = apts.filter((apt) => apt.petsitter_id === petSitter.id && apt.accepted === true && apt.completed === null)
-                setAppointments(newApts)}
-                )
+                setAppointments(newApts)
+            })
     }, [])
 
     function updateAppointments(completedAppointment) {
-        const updatedAppointments = appointments.filter((apt) => apt.id != completedAppointment.id)
+        const updatedAppointments = appointments.filter((apt) => apt.id !== completedAppointment.id)
         setAppointments(updatedAppointments)
     }
 
@@ -31,7 +31,7 @@ export default function AcceptedAppointments({ user, petSitter }) {
         )
     } else {
         return (
-            <h2 className="pageHeader">No accepted appointments.</h2>
+            <div style={headerStyle}>No pending requests / active pet sits</div>
         )
     }
 }

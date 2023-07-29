@@ -7,23 +7,23 @@ const formStyles = {
         backgroundColor: '#f8f8f8',
         padding: '20px',
         borderRadius: '8px',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
     },
     formGroup: {
-        marginBottom: '15px',
+        marginBottom: '15px'
     },
     label: {
         display: 'block',
         fontSize: '16px',
         color: '#333',
-        marginBottom: '5px',
+        marginBottom: '5px'
     },
     input: {
         width: '100%',
         padding: '8px',
         fontSize: '16px',
         borderRadius: '4px',
-        border: '1px solid #ccc',
+        border: '1px solid #ccc'
     },
     button: {
         width: '100%',
@@ -34,8 +34,8 @@ const formStyles = {
         backgroundColor: '#007bff',
         borderRadius: '4px',
         border: 'none',
-        cursor: 'pointer',
-    },
+        cursor: 'pointer'
+    }
 };
 
 export default function Login({ onLogin }) {
@@ -70,25 +70,11 @@ export default function Login({ onLogin }) {
                 <h2>User Login</h2>
                 <div style={formStyles.formGroup}>
                     <label htmlFor="username" style={formStyles.label}>Username:</label>
-                    <input
-                        autoComplete="on"
-                        type="text"
-                        id="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        style={formStyles.input}
-                    />
+                    <input autoComplete="on" type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} style={formStyles.input} />
                 </div>
                 <div style={formStyles.formGroup}>
                     <label htmlFor="password" style={formStyles.label}>Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        autoComplete="on"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        style={formStyles.input}
-                    />
+                    <input type="password" id="password" autoComplete="on" value={password} onChange={(e) => setPassword(e.target.value)} style={formStyles.input} />
                 </div>
                 <button type="submit" style={formStyles.button}>Submit</button>
             </form>

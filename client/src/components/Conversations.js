@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import ConversationCard from "./ConversationCard";
-import NewMessageForm from "./NewMessageForm";
 import Messages from "./Messages";
 import ConversationPetSitterCard from "./ConversationPetSitterCard";
 import ConversationClientCard from "./ConversationClientCard";
-
 
 export default function Conversations({ user }) {
 
@@ -41,7 +39,7 @@ export default function Conversations({ user }) {
                     let filteredConvos = convos.filter((convo) => convo.client_id === user.client.id)
                     setConversations(filteredConvos)
                 } else {
-                    let filteredConvos = convos.filter((convo) => convo.petsitter_id === user.petsitter.id || convo.client_id === user.petsitter.id)
+                    let filteredConvos = convos.filter((convo) => convo.petsitter_id === user.petsitter.id)
                     setConversations(filteredConvos)
                 }
                 scrollToBottom()
@@ -53,7 +51,7 @@ export default function Conversations({ user }) {
             <div>
                 <div>
                     {conversations.map((conversation) => (
-                        <div>
+                        <div key={conversation.id}>
                             {openConvoButton === false &&
                                 <ConversationCard updateConvoButton={updateConvoButton} conversation={conversation} user={user} key={conversation.id} />
                             }
@@ -62,6 +60,7 @@ export default function Conversations({ user }) {
                                     <h3 style={{ textAlign: "center" }}>Conversation between:</h3>
                                     <ConversationPetSitterCard scrollToBottom={scrollToBottom} petSitter={conversation.petsitter} />
                                     <ConversationClientCard scrollToBottom={scrollToBottom} client={conversation.client} />
+                                    <h3 style={{ textAlign: "center" }}>Messages:</h3>
                                     <Messages scrollToBottom={scrollToBottom} updateConvoButton={updateConvoButton} currentConvoId={currentConvoId} user={user} />
                                 </div>
                             )}

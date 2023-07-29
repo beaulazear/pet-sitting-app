@@ -7,23 +7,23 @@ const formStyles = {
         backgroundColor: '#f8f8f8',
         padding: '20px',
         borderRadius: '8px',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
     },
     formGroup: {
-        marginBottom: '15px',
+        marginBottom: '15px'
     },
     label: {
         display: 'block',
         fontSize: '16px',
         color: '#333',
-        marginBottom: '5px',
+        marginBottom: '5px'
     },
     input: {
         width: '100%',
         padding: '8px',
         fontSize: '16px',
         borderRadius: '4px',
-        border: '1px solid #ccc',
+        border: '1px solid #ccc'
     },
     select: {
         width: '100%',
@@ -31,7 +31,7 @@ const formStyles = {
         fontSize: '16px',
         borderRadius: '4px',
         border: '1px solid #ccc',
-        backgroundColor: '#fff',
+        backgroundColor: '#fff'
     },
     button: {
         width: '100%',
@@ -42,14 +42,14 @@ const formStyles = {
         backgroundColor: '#007bff',
         borderRadius: '4px',
         border: 'none',
-        cursor: 'pointer',
+        cursor: 'pointer'
     },
     errorList: {
         color: 'red',
         marginTop: '10px',
         textAlign: 'left',
-        paddingLeft: '20px',
-    },
+        paddingLeft: '20px'
+    }
 };
 
 export default function ConvoRequestForm({ user, petSitter }) {
@@ -58,7 +58,6 @@ export default function ConvoRequestForm({ user, petSitter }) {
     const navigate = useNavigate()
 
     function startConversation(e) {
-
         e.preventDefault()
 
         if (user.client !== null) {
@@ -74,11 +73,9 @@ export default function ConvoRequestForm({ user, petSitter }) {
                 }),
             })
                 .then((resp) => resp.json())
-                .then((convo) => {
+                .then(() => {
                     navigate('/conversations')
                 })
-        } else {
-            window.alert("Must be signed up as a client to start a conversation with this pet sitter!")
         }
     }
 
@@ -91,13 +88,7 @@ export default function ConvoRequestForm({ user, petSitter }) {
                     <label htmlFor="housesit" style={formStyles.label}>
                         Conversation Title:
                     </label>
-                    <input
-                        onChange={(e) => setConvoTitle(e.target.value)}
-                        className="conversationTitle"
-                        style={formStyles.input}
-                        placeholder="example: June pet-sit"
-                    >
-                    </input>
+                    <input onChange={(e) => setConvoTitle(e.target.value)} className="conversationTitle" style={formStyles.input} placeholder="example: June pet-sit" />
                 </div>
                 <button style={formStyles.button}>Start a conversation</button>
             </form>

@@ -13,7 +13,7 @@ export default function Messages({ currentConvoId, user, scrollToBottom, updateC
                 let convoMessages = messages.filter((message) => message.conversation_id === currentConvoId)
                 setMessages(convoMessages)
             })
-    ], [])
+    ], [currentConvoId])
 
     function updateMessages(newMessage) {
         const newMessages = [...messages, newMessage]
@@ -24,7 +24,7 @@ export default function Messages({ currentConvoId, user, scrollToBottom, updateC
         return (
             <div>
                 {messages.map((message) => (
-                    <Message message={message} />
+                    <Message key={message.id} message={message} />
                 ))}
                 <NewMessageForm updateConvoButton={updateConvoButton} scrollToBottom={scrollToBottom} currentConvoId={currentConvoId} updateMessages={updateMessages} user={user} />
             </div>

@@ -8,38 +8,38 @@ const styles = {
         border: '1px solid #ddd',
         borderRadius: '8px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-        maxWidth: '300px', // Reduced the width to make it smaller
+        maxWidth: '300px',
         margin: '10px auto',
-        textAlign: 'center',
+        textAlign: 'center'
     },
     imageWrapper: {
-        width: '100px', // Reduced the size of the imageWrapper
-        height: '100px', // Reduced the size of the imageWrapper
-        margin: '0 auto 10px', // Reduced the margin
+        width: '100px',
+        height: '100px',
+        margin: '0 auto 10px',
         borderRadius: '50%',
         overflow: 'hidden',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
     },
     image: {
         width: '100%',
         height: '100%',
         objectFit: 'cover',
-        borderRadius: '50%',
+        borderRadius: '50%'
     },
     heading: {
-        fontSize: '20px', // Reduced the font size for a smaller heading
+        fontSize: '20px',
         margin: '0',
-        color: '#333',
+        color: '#333'
     },
     subheading: {
-        fontSize: '16px', // Reduced the font size for subheadings
-        margin: '5px 0', // Reduced the margin for subheadings
-        color: '#666',
+        fontSize: '16px',
+        margin: '5px 0',
+        color: '#666'
     },
     info: {
-        fontSize: '14px', // Reduced the font size for info text
+        fontSize: '14px',
         color: '#666',
-        margin: '5px 0', // Reduced the margin for info text
+        margin: '5px 0'
     },
     button: {
         fontSize: '14px',
@@ -53,16 +53,12 @@ const styles = {
     },
 };
 
-export default function ConversationPetSitterCard({ petSitter, scrollToBottom, user }) {
+export default function ConversationPetSitterCard({ petSitter }) {
 
     return (
         <div className="petSitterCardDiv" style={styles.petSitterCard}>
             <div style={styles.imageWrapper}>
-                <img
-                    src={petSitter.photo}
-                    alt="the petsitter"
-                    style={styles.image}
-                />
+                <img src={petSitter.photo} alt="the petsitter" style={styles.image} />
             </div>
             <h3 style={styles.heading}>{petSitter.full_name}</h3>
             <h4 style={styles.subheading}>About me:</h4>

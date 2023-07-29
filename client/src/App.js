@@ -47,14 +47,13 @@ function App() {
     setUser(newUser)
   }
 
-
   if (user) {
     return (
       <div>
         <PageNavLinks />
         <h1 style={headerStyle}>NYC Pet Sitters</h1>
         <Routes>
-          <Route path="/" element={<Home updateUser={updateUserPetsitter} user={user} setUser={setUser} handleLogout={handleLogout} />} />
+          <Route path="/" element={<Home user={user} setUser={setUser} />} />
           <Route path="/petsitter" element={<PetSitterPage updateUser={updateUserPetsitter} user={user} setUser={setUser} handleLogout={handleLogout} />} />
           <Route path="/client" element={<ClientPage updateUser={updateUserClient} user={user} setUser={setUser} handleLogout={handleLogout} />} />
           <Route path="/petsitters" element={<PetSittersPage user={user} handleLogout={handleLogout} />} />

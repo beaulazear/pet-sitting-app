@@ -56,7 +56,7 @@ export default function NewMessageForm({ updateMessages, user, currentConvoId, u
     const [messageInformation, setMessageInformation] = useState("")
 
     scrollToBottom()
-    
+
     function handleSubmit(e) {
         e.preventDefault()
         fetch("/messages", {
@@ -70,12 +70,12 @@ export default function NewMessageForm({ updateMessages, user, currentConvoId, u
                 body: messageInformation
             })
         })
-        .then((resp) => resp.json())
-        .then((data) => {
-            setMessageInformation("")
-            updateMessages(data)
-            scrollToBottom()
-        })
+            .then((resp) => resp.json())
+            .then((data) => {
+                setMessageInformation("")
+                updateMessages(data)
+                scrollToBottom()
+            })
     }
 
     return (
@@ -86,17 +86,11 @@ export default function NewMessageForm({ updateMessages, user, currentConvoId, u
                     <label htmlFor="appointment_information" style={formStyles.label}>
                         Message Content:
                     </label>
-                    <textarea
-                        type="text"
-                        className="custom-input"
-                        value={messageInformation}
-                        onChange={(e) => setMessageInformation(e.target.value)}
-                        style={formStyles.input}
-                    />
+                    <textarea type="text" className="custom-input" value={messageInformation} onChange={(e) => setMessageInformation(e.target.value)} style={formStyles.input} />
                 </div>
                 <button style={formStyles.button}>Send Message</button>
-                <button style={formStyles.button} onClick={updateConvoButton}>Exit Conversation.</button>
             </form>
+            <button style={formStyles.button} onClick={updateConvoButton}>Exit Conversation</button>
         </div>
     );
 }

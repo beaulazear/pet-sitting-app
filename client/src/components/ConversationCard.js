@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const conversationCardStyles = {
   conversationCard: {
@@ -49,11 +49,11 @@ const conversationCardStyles = {
   }
 };
 
-export default function ConversationCard({ conversation, user, updateConvoButton }) {
+export default function ConversationCard({ conversation, updateConvoButton }) {
 
-  const { petsitter, client } = conversation;
+  const { petsitter, client, created_at } = conversation;
 
-  const date = new Date(conversation.created_at);
+  const date = new Date(created_at);
   const year = date.getUTCFullYear();
   const month = String(date.getUTCMonth() + 1).padStart(2, "0");
   const day = String(date.getUTCDate()).padStart(2, "0");
@@ -61,17 +61,13 @@ export default function ConversationCard({ conversation, user, updateConvoButton
   function displayMessagesAndForm() {
     updateConvoButton(conversation.id)
   }
+
   return (
     <div style={conversationCardStyles.conversationCard}>
       <div style={conversationCardStyles.userContainer}>
-        <img
-          src={client.photo}
-          alt="Client Photo"
-          style={conversationCardStyles.userPhoto}
-        />
+        <img src={client.photo} alt="Client" style={conversationCardStyles.userPhoto} />
         <p style={conversationCardStyles.userName}>{client.full_name}</p>
       </div>
-
       <div style={conversationCardStyles.userContainer}>
         <p style={conversationCardStyles.conversationTitle}>{conversation.conversation_title}</p>
         <p style={conversationCardStyles.chatStartedText}>
@@ -81,13 +77,8 @@ export default function ConversationCard({ conversation, user, updateConvoButton
           Open Conversation
         </button>
       </div>
-
       <div style={conversationCardStyles.userContainer}>
-        <img
-          src={petsitter.photo}
-          alt="Petsitter Photo"
-          style={conversationCardStyles.userPhoto}
-        />
+        <img src={petsitter.photo} alt="Petsitter" style={conversationCardStyles.userPhoto} />
         <p style={conversationCardStyles.userName}>{petsitter.full_name}</p>
       </div>
     </div>

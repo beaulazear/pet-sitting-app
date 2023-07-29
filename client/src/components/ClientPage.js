@@ -96,49 +96,25 @@ export default function ClientPage({ user, updateUser }) {
                         <label style={formStyles.label} htmlFor="full_name">
                             Full Name:
                         </label>
-                        <input
-                            style={formStyles.input}
-                            type="text"
-                            id="photo"
-                            value={full_name}
-                            onChange={(e) => setFullName(e.target.value)}
-                        />
+                        <input style={formStyles.input} type="text" id="photo" value={full_name} onChange={(e) => setFullName(e.target.value)} />
                     </div>
                     <div style={formStyles.formGroup}>
                         <label style={formStyles.label} htmlFor="pet_information">
                             Pet Information:
                         </label>
-                        <textarea
-                            style={formStyles.input}
-                            type="text"
-                            id="pet_information"
-                            value={pet_information}
-                            onChange={(e) => setPetInformation(e.target.value)}
-                        />
+                        <textarea style={formStyles.input} type="text" id="pet_information" value={pet_information} onChange={(e) => setPetInformation(e.target.value)} />
                     </div>
                     <div style={formStyles.formGroup}>
                         <label style={formStyles.label} htmlFor="ideal_petsitter">
                             Your Ideal Pet-Sitter:
                         </label>
-                        <textarea
-                            style={formStyles.input}
-                            type="text"
-                            id="ideal_petsitter"
-                            value={ideal_petsitter}
-                            onChange={(e) => setIdealPetSitter(e.target.value)}
-                        />
+                        <textarea style={formStyles.input} type="text" id="ideal_petsitter" value={ideal_petsitter} onChange={(e) => setIdealPetSitter(e.target.value)} />
                     </div>
                     <div style={formStyles.formGroup}>
                         <label style={formStyles.label} htmlFor="photo">
                             Pet Photo Url:
                         </label>
-                        <input
-                            style={formStyles.input}
-                            type="text"
-                            id="photo"
-                            value={photo}
-                            onChange={(e) => setPetPhoto(e.target.value)}
-                        />
+                        <input style={formStyles.input} type="text" id="photo" value={photo} onChange={(e) => setPetPhoto(e.target.value)} />
                     </div>
                     <button style={formStyles.button} type="submit">
                         Create client account

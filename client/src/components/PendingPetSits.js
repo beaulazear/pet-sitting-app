@@ -9,11 +9,10 @@ const headerStyle = {
     color: '#9e9e9e',
     width: '100%',
     fontSize: '36px',
-    lineHeight: '1.2',
+    lineHeight: '1.2'
 };
 
 export default function PendingPetSits({ petSitter, user }) {
-
 
     const [appointments, setAppointments] = useState([])
     const [pendingAppointments, setPendingAppointments] = useState([])
@@ -24,57 +23,49 @@ export default function PendingPetSits({ petSitter, user }) {
             if (response.ok) {
                 response.json().then((apts) => {
                     setAppointments(apts)
-                    console.log(user)
-                    console.log(petSitter)
 
                     let pendingApts = apts.filter((apt) => apt.petsitter_id === petSitter.id && apt.accepted !== true && apt.declined !== true && apt.canceled !== true)
+                    setPendingAppointments(pendingApts)
 
                     let activeApts = apts.filter((apt) => apt.petsitter_id === petSitter.id && apt.accepted === true && apt.completed !== true && apt.canceled !== true)
-
-                    setPendingAppointments(pendingApts)
                     setActiveAppointments(activeApts)
                 });
             }
         });
     }, [petSitter, user]);
 
-    function updatePendingAppointments(acceptedAppointment) {
+    function updatePendingAppointments(updatedAppointment) {
 
-        let newPendingAppointments = pendingAppointments.filter((apt) => apt.declined !== true && apt.id !== acceptedAppointment.id)
-
+        let newPendingAppointments = pendingAppointments.filter((apt) => apt.declined !== true && apt.id !== updatedAppointment.id)
         setPendingAppointments(newPendingAppointments)
 
         let newApts = appointments.map((apt) => {
-            if (apt.id === acceptedAppointment.id) {
-                return { ...apt, ...acceptedAppointment }
+            if (apt.id === updatedAppointment.id) {
+                return { ...apt, ...updatedAppointment }
             } else {
                 return apt
             }
         })
-
         setAppointments(newApts)
 
-        if (acceptedAppointment.accepted === true) {
-            let newActiveApts = [...activeAppointments, acceptedAppointment]
-            console.log(newActiveApts)
+        if (updatedAppointment.accepted === true) {
+            let newActiveApts = [...activeAppointments, updatedAppointment]
             setActiveAppointments(newActiveApts)
         }
     }
 
-    function updateActiveAppointments(acceptedAppointment) {
+    function updateActiveAppointments(updatedAppointment) {
 
-        let newActiveAppointments = activeAppointments.filter((apt) => apt.id !== acceptedAppointment.id)
-
+        let newActiveAppointments = activeAppointments.filter((apt) => apt.id !== updatedAppointment.id)
         setActiveAppointments(newActiveAppointments)
 
         let newApts = appointments.map((apt) => {
-            if (apt.id === acceptedAppointment.id) {
-                return { ...apt, ...acceptedAppointment }
+            if (apt.id === updatedAppointment.id) {
+                return { ...apt, ...updatedAppointment }
             } else {
                 return apt
             }
         })
-
         setAppointments(newApts)
     }
 
@@ -92,7 +83,7 @@ export default function PendingPetSits({ petSitter, user }) {
         )
     } else {
         return (
-            <div className="emptyRequestsDiv"></div>
+            <div style={headerStyle}>No pending requests / active pet sits</div>
         )
     }
 }

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import '../App.css';
 import PetSitRequestForm from "./PetSitRequestForm";
-import { useNavigate } from 'react-router-dom';
 import ConvoRequestForm from "./ConvoRequestForm";
 
 const styles = {
@@ -13,7 +12,7 @@ const styles = {
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     maxWidth: '400px',
     margin: '10px auto',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   imageWrapper: {
     width: '150px',
@@ -21,28 +20,28 @@ const styles = {
     margin: '0 auto 20px',
     borderRadius: '50%',
     overflow: 'hidden',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
   },
   image: {
     width: '100%',
     height: '100%',
     objectFit: 'cover',
-    borderRadius: '50%',
+    borderRadius: '50%'
   },
   heading: {
     fontSize: '24px',
     margin: '0',
-    color: '#333',
+    color: '#333'
   },
   subheading: {
     fontSize: '18px',
     margin: '10px 0',
-    color: '#666',
+    color: '#666'
   },
   info: {
     fontSize: '16px',
     color: '#666',
-    margin: '10px 0',
+    margin: '10px 0'
   },
 };
 
@@ -51,15 +50,13 @@ export default function PetSitterCard({ petSitter, user }) {
   const [displayForm, setDisplayForm] = useState(false)
   const [buttonText, setButtonText] = useState("Contact / Request Pet Sit")
 
-  const navigate = useNavigate()
-
   function updateDisplayForm() {
     if (displayForm === false) {
       setDisplayForm(true)
       setButtonText("Close forms")
     } else {
       setDisplayForm(false)
-      setButtonText("Book appointment with this petsitter")
+      setButtonText("Contact / Request Pet Sit")
     }
   }
 
@@ -67,39 +64,10 @@ export default function PetSitterCard({ petSitter, user }) {
     setDisplayForm(false)
   }
 
-  function startConversation() {
-    console.log(petSitter)
-    console.log(user)
-
-    if (user.client !== null) {
-      fetch("/conversations", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          client_id: user.client.id,
-          petsitter_id: petSitter.id
-        }),
-      })
-        .then((resp) => resp.json())
-        .then((convo) => {
-          navigate('/conversations')
-        })
-    } else {
-      window.alert("Must be signed up as a client to start a conversation with this pet sitter!")
-    }
-
-  }
-
   return (
     <div className="petSitterCardDiv" style={styles.petSitterCard}>
       <div style={styles.imageWrapper}>
-        <img
-          src={petSitter.photo}
-          alt="the petsitter"
-          style={styles.image}
-        />
+        <img src={petSitter.photo} alt="the petsitter" style={styles.image} />
       </div>
       <h3 style={styles.heading}>{petSitter.full_name}</h3>
       <h4 style={styles.subheading}>About me:</h4>
@@ -123,5 +91,3 @@ export default function PetSitterCard({ petSitter, user }) {
     </div>
   );
 }
-
-{/* <button onClick={startConversation}>Start a conversation</button> */ }

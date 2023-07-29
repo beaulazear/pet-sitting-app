@@ -1,37 +1,40 @@
 import React from "react";
 
 const messageStyle = {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f2f7ff',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    padding: '20px',
-    marginBottom: '20px',
-    borderRadius: '10px',
+    padding: '16px', // Increased padding for more space around the content
+    marginBottom: '5px',
+    borderRadius: '8px',
     width: '90%',
     maxWidth: '600px',
     margin: '0 auto',
-    border: '4px solid #007bff', // Add a 4px solid border with a stylish blue color (#007bff)
+    border: '2px solid #007bff',
     fontFamily: 'Arial, sans-serif',
-    lineHeight: '1.5',
+    lineHeight: '1.6', // Slightly increased line height for better readability
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
 };
 
 const headingStyle = {
-    fontSize: '20px',
+    fontSize: '24px', // Increased font size for the heading
     fontWeight: 'bold',
-    marginBottom: '5px',
+    marginBottom: '8px',
+    marginTop: '2px'
 };
 
 const metaInfoStyle = {
     fontSize: '14px',
     color: '#888',
-    marginBottom: '10px',
+    marginBottom: '6px' // Increased margin at the bottom for separation
 };
 
 const messageBodyStyle = {
-    fontSize: '16px',
+    fontSize: '18px', // Increased font size for the main message body
     color: '#333',
+    marginBottom: '10px' // Slightly increased margin at the bottom
 };
+
 
 export default function Message({ message }) {
 
@@ -52,13 +55,9 @@ export default function Message({ message }) {
 
     const { date, time } = parseTimestamp(message.created_at);
 
-    console.log(date, time)
-    console.log(message.created_at)
-    console.log(message)
-
     return (
         <div style={messageStyle}>
-            <h4 style={headingStyle}>Message from: {message.user.username}</h4>
+            <p style={headingStyle}>Message from: {message.user.username}</p>
             <p style={metaInfoStyle}>{date}, {time}</p>
             <p style={messageBodyStyle}>{message.body}</p>
         </div>

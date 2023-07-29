@@ -14,7 +14,6 @@ const headerStyle = {
 
 export default function ClientPendingAppointments({ client, user }) {
 
-
     const [appointments, setAppointments] = useState([])
     const [pendingAppointments, setPendingAppointments] = useState([])
     const [activeAppointments, setActiveAppointments] = useState([])
@@ -90,7 +89,7 @@ export default function ClientPendingAppointments({ client, user }) {
         )
     } else {
         return (
-            <div className="emptyRequestsDiv"></div>
+            <div style={headerStyle}>No pending requests / active pet sits</div>
         )
     }
 }

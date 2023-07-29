@@ -46,13 +46,12 @@ const styles = {
     },
 };
 
-export default function ActiveAppointmentCard({ appointment, updateActiveAppointments, petSitterOrClient, user }) {
+export default function ActiveAppointmentCard({ appointment, updateActiveAppointments, user }) {
 
     function handleCancel() {
         fetch(`/appointments/${appointment.id}/canceled`)
             .then((resp) => resp.json())
             .then((apt) => updateActiveAppointments(apt))
-        // window.alert("Appointment has been cancelled")
     }
 
     function totalPriceCalculator(startDate, endDate) {
@@ -68,13 +67,7 @@ export default function ActiveAppointmentCard({ appointment, updateActiveAppoint
         return (
             <div style={styles.activeAppointmentDiv}>
                 <div style={styles.imageWrapper}>
-                    <img
-                        height="150"
-                        width="150"
-                        src={appointment.client.photo}
-                        style={styles.image}
-                        alt="Client's Pet"
-                    />
+                    <img height="150" width="150" src={appointment.client.photo} style={styles.image} alt="Client's Pet" />
                 </div>
                 <h2 style={styles.heading}>Accepted Appointment:</h2>
                 <p style={styles.subheading}>Client Name: {appointment.client.full_name}</p>
@@ -89,13 +82,7 @@ export default function ActiveAppointmentCard({ appointment, updateActiveAppoint
         return (
             <div style={styles.activeAppointmentDiv}>
                 <div style={styles.imageWrapper}>
-                    <img
-                        height="150"
-                        width="150"
-                        src={appointment.petsitter.photo}
-                        alt="Petsitter"
-                        style={styles.image}
-                    />
+                    <img height="150" width="150" src={appointment.petsitter.photo} alt="Petsitter" style={styles.image} />
                 </div>
                 <h2 style={styles.heading}>Accepted Appointment:</h2>
                 <p style={styles.subheading}>Pet Sitter Name: {appointment.petsitter.full_name}</p>

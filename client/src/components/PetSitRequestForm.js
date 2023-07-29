@@ -6,23 +6,23 @@ const formStyles = {
         backgroundColor: '#f8f8f8',
         padding: '20px',
         borderRadius: '8px',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
     },
     formGroup: {
-        marginBottom: '15px',
+        marginBottom: '15px'
     },
     label: {
         display: 'block',
         fontSize: '16px',
         color: '#333',
-        marginBottom: '5px',
+        marginBottom: '5px'
     },
     input: {
         width: '100%',
         padding: '8px',
         fontSize: '16px',
         borderRadius: '4px',
-        border: '1px solid #ccc',
+        border: '1px solid #ccc'
     },
     select: {
         width: '100%',
@@ -30,7 +30,7 @@ const formStyles = {
         fontSize: '16px',
         borderRadius: '4px',
         border: '1px solid #ccc',
-        backgroundColor: '#fff',
+        backgroundColor: '#fff'
     },
     button: {
         width: '100%',
@@ -41,13 +41,13 @@ const formStyles = {
         backgroundColor: '#007bff',
         borderRadius: '4px',
         border: 'none',
-        cursor: 'pointer',
+        cursor: 'pointer'
     },
     errorList: {
         color: 'red',
         marginTop: '10px',
         textAlign: 'left',
-        paddingLeft: '20px',
+        paddingLeft: '20px'
     },
 };
 
@@ -63,8 +63,6 @@ export default function PetSitRequestForm({ petSitter, user, updateDisplayForm }
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log(user)
-        console.log(petSitter)
         fetch("/appointments", {
             method: "POST",
             headers: {
@@ -93,7 +91,6 @@ export default function PetSitRequestForm({ petSitter, user, updateDisplayForm }
                         setEndDate("")
                         setErrorData([])
                         updateDisplayForm()
-                        console.log(apt)
                     });
                 } else {
                     response.json().then((errorData) => {
@@ -126,63 +123,27 @@ export default function PetSitRequestForm({ petSitter, user, updateDisplayForm }
                 <h2>Pet Sit Request Form:</h2>
                 <form className="custom-form" onSubmit={handleSubmit}>
                     <div style={formStyles.formGroup}>
-                        <label htmlFor="appointment_information" style={formStyles.label}>
-                            Appointment Information:
-                        </label>
-                        <textarea
-                            type="text"
-                            className="custom-input"
-                            value={appointment_information}
-                            onChange={(e) => setAppointmentInformation(e.target.value)}
-                            style={formStyles.input}
-                        />
+                        <label htmlFor="appointment_information" style={formStyles.label}>Appointment Information:</label>
+                        <textarea type="text" className="custom-input" value={appointment_information} onChange={(e) => setAppointmentInformation(e.target.value)} style={formStyles.input} />
                     </div>
                     <div style={formStyles.formGroup}>
-                        <label htmlFor="start_date" style={formStyles.label}>
-                            Start Date:
-                        </label>
-                        <input
-                            type="date"
-                            className="custom-input"
-                            value={start_date}
-                            onChange={(e) => setStartDate(e.target.value)}
-                            style={formStyles.input}
-                        />
+                        <label htmlFor="start_date" style={formStyles.label}>Start Date:</label>
+                        <input type="date" className="custom-input" value={start_date} onChange={(e) => setStartDate(e.target.value)} style={formStyles.input} />
                     </div>
                     <div style={formStyles.formGroup}>
-                        <label htmlFor="end_date" style={formStyles.label}>
-                            End Date:
-                        </label>
-                        <input
-                            type="date"
-                            className="custom-input"
-                            value={end_date}
-                            onChange={(e) => setEndDate(e.target.value)}
-                            style={formStyles.input}
-                        />
+                        <label htmlFor="end_date" style={formStyles.label}>End Date:</label>
+                        <input type="date" className="custom-input" value={end_date} onChange={(e) => setEndDate(e.target.value)} style={formStyles.input} />
                     </div>
                     <div style={formStyles.formGroup}>
-                        <label htmlFor="housesit" style={formStyles.label}>
-                            Interested in house sitting:
-                        </label>
-                        <select
-                            onChange={handleHouseSitSelect}
-                            className="custom-select"
-                            style={formStyles.select}
-                        >
+                        <label htmlFor="housesit" style={formStyles.label}>Interested in house sitting:</label>
+                        <select onChange={handleHouseSitSelect} className="custom-select" style={formStyles.select} >
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
                     </div>
                     <div style={formStyles.formGroup}>
-                        <label htmlFor="boarding" style={formStyles.label}>
-                            Interested in boarding:
-                        </label>
-                        <select
-                            onChange={handleBoardingSelect}
-                            className="custom-select"
-                            style={formStyles.select}
-                        >
+                        <label htmlFor="boarding" style={formStyles.label}>Interested in boarding:</label>
+                        <select onChange={handleBoardingSelect} className="custom-select" style={formStyles.select} >
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>

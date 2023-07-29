@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import PetSitterCard from "./PetSitterCard";
 
-export default function PetSittersPage({ handleLogout, user }) {
+const headerStyle = {
+    textAlign: 'center',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    color: '#9e9e9e',
+    width: '100%',
+    fontSize: '36px',
+    lineHeight: '1.2'
+};
+
+export default function PetSittersPage({ user }) {
 
     const [petSitters, setPetSitters] = useState(null)
 
@@ -26,6 +35,6 @@ export default function PetSittersPage({ handleLogout, user }) {
             </div>
         )
     } else {
-        return <h1>... No pet sitters loaded yet ...</h1>
+        return <h1 style={headerStyle}>... No pet sitters loaded yet ...</h1>
     }
 }
