@@ -49,6 +49,7 @@ export default function Signup({ onLogin }) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
+  const [errors, setErrors] = useState([])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -66,10 +67,12 @@ export default function Signup({ onLogin }) {
       .then((response) => {
         if (response.ok) {
           response.json().then((user) => onLogin(user));
+        } else {
+          response.json().then((errorData) => setErrors(errorData.errors))
         }
       })
   }
-
+  
   return (
     <div style={formStyles.formContainer}>
       <form className="styled-form" onSubmit={handleSubmit}>
@@ -109,6 +112,13 @@ export default function Signup({ onLogin }) {
         </div>
         <button type="submit" style={formStyles.button}>Submit</button>
       </form>
+      {errors.length > 0 && (
+        <ul style={formStyles.errorList}>
+          {errors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

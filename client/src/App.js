@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import PageNavLinks from './components/PageNavLinks';
@@ -8,6 +7,15 @@ import Home from './components/Home';
 import PetSittersPage from './components/PetSittersPage';
 import PetSitterPage from './components/PetSitterPage';
 import ClientPage from './components/ClientPage';
+
+const headerStyle = {
+  textAlign: 'center',
+  fontFamily: 'Arial, Helvetica, sans-serif',
+  color: '#9e9e9e',
+  width: '100%',
+  fontSize: '36px',
+  lineHeight: '1.2',
+};
 
 function App() {
   const [user, setUser] = useState(null);
@@ -38,14 +46,6 @@ function App() {
     setUser(newUser)
   }
 
-  const headerStyle = {
-    textAlign: 'center',
-    fontFamily: 'Arial, Helvetica, sans-serif',
-    color: '#9e9e9e',
-    width: '100%',
-    fontSize: '36px',
-    lineHeight: '1.2',
-  };
 
   if (user) {
     return (

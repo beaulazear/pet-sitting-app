@@ -48,6 +48,7 @@ export default function PetSitterPage({ user, updateUser }) {
     const [full_name, setFullName] = useState("")
     const [my_ideal_pet_sit, setMyIdealPetSit] = useState("")
     const [petSitter, setPetSitter] = useState(null)
+    const [errors, setErrors] = useState([])
 
     useEffect(() => {
         fetch("/petsitter").then((response) => {
@@ -80,9 +81,15 @@ export default function PetSitterPage({ user, updateUser }) {
                     setPetSitter(petSitter)
                     updateUser(petSitter)
                 });
+            } else {
+                response.json().then((errorData) => {
+                    console.log(errorData)
+                    setErrors(errorData.errors)
+                })
             }
         })
     }
+    console.log(errors)
 
     if (petSitter) {
         return (
@@ -160,6 +167,13 @@ export default function PetSitterPage({ user, updateUser }) {
                     </div>
                     <button type="submit" style={formStyles.button}>Become a pet sitter!</button>
                 </form>
+                {errors.length > 0 && (
+                    <ul style={formStyles.errorList}>
+                        {errors.map((error) => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                )}
             </div>
         );
     }

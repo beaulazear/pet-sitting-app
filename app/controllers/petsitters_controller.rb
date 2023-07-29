@@ -5,7 +5,7 @@ class PetsittersController < ApplicationController
         if pet_sitter.valid?
             render json: pet_sitter, include: :user, status: :created 
         else 
-            render json: { error: "Unprocessable entity" }, status: :unprocessable_entity
+            render json: { errors: pet_sitter.errors.full_messages }, status: :unprocessable_entity
         end       
     end
 
@@ -26,6 +26,6 @@ class PetsittersController < ApplicationController
     private
 
     def pet_sitter_params
-        params.permit(:bio, :photo, :city, :full_name, :my_ideal_pet_sit, :day_rate, :id, :user_id, :currently_available)
+        params.permit(:bio, :photo, :city, :full_name, :my_ideal_pet_sit, :day_rate, :id, :user_id, :petsitter, :currently_available)
     end
 end
