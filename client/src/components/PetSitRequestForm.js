@@ -198,7 +198,7 @@ export default function PetSitRequestForm({ petSitter, user }) {
         );
     } else {
         return (<div id="emptyAppointmentFormDiv">
-            <h4>Sign up as a client to request an appointment with this pet sitter!</h4>
+            <h4>You must be signed up as a client to request an appointment with this pet sitter!</h4>
         </div>)
     }
 }

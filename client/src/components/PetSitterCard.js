@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import '../App.css';
 import PetSitRequestForm from "./PetSitRequestForm";
 
 export default function PetSitterCard({ petSitter, user }) {
+
+  const [displayForm, setDisplayForm] = useState(false)
+  const [buttonText, setButtonText] = useState("Book appointment with this petsitter")
+
+  function updateDisplayForm() {
+    if (displayForm === false) {
+      setDisplayForm(true)
+      setButtonText("Close request form")
+    } else {
+      setDisplayForm(false)
+      setButtonText("Book appointment with this petsitter")
+    }
+  }
 
   const styles = {
     petSitterCard: {
@@ -63,7 +76,10 @@ export default function PetSitterCard({ petSitter, user }) {
       <p style={styles.info}>{petSitter.my_ideal_pet_sit}</p>
       <h4 style={styles.subheading}>What do I charge?</h4>
       <p style={styles.info}>My rate is currently ${petSitter.day_rate}</p>
-      <PetSitRequestForm user={user} petSitter={petSitter} />
+      <button onClick={updateDisplayForm} value={buttonText}>{buttonText}</button>
+      {displayForm === true &&
+        <PetSitRequestForm user={user} petSitter={petSitter} />
+      }
     </div>
   );
 
