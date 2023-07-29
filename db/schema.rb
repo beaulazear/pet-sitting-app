@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2023_07_29_011212) do
   create_table "conversations", force: :cascade do |t|
     t.bigint "petsitter_id"
     t.bigint "client_id"
+    t.string "conversation_title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_conversations_on_client_id"

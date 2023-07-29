@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Message from "./Message";
+import NewMessageForm from "./NewMessageForm";
 
-export default function Messages({ currentConvoId, user, scrollToBottom }) {
+export default function Messages({ currentConvoId, user, scrollToBottom, updateConvoButton }) {
 
     const [messages, setMessages] = useState([])
 
@@ -14,18 +15,25 @@ export default function Messages({ currentConvoId, user, scrollToBottom }) {
             })
     ], [])
 
+    function updateMessages(newMessage) {
+        const newMessages = [...messages, newMessage]
+        setMessages(newMessages)
+    }
+
     if (messages.length > 0) {
         return (
             <div>
                 {messages.map((message) => (
                     <Message message={message} />
                 ))}
+                <NewMessageForm updateConvoButton={updateConvoButton} scrollToBottom={scrollToBottom} currentConvoId={currentConvoId} updateMessages={updateMessages} user={user} />
             </div>
         )
     } else {
         return (
             <div>
-                <p>There are currently no messages in this conversation, send one to start it out!</p>
+                <h4 style={{textAlign: "center"}}>There are currently no messages in this conversation, send one to start it out!</h4>
+                <NewMessageForm updateConvoButton={updateConvoButton} scrollToBottom={scrollToBottom} currentConvoId={currentConvoId} updateMessages={updateMessages} user={user} />
             </div>
         )
     }

@@ -62,8 +62,7 @@ export default function Conversations({ user }) {
                                     <h3 style={{ textAlign: "center" }}>Conversation between:</h3>
                                     <ConversationPetSitterCard scrollToBottom={scrollToBottom} petSitter={conversation.petsitter} />
                                     <ConversationClientCard scrollToBottom={scrollToBottom} client={conversation.client} />
-                                    <Messages currentConvoId={currentConvoId} user={user} />
-                                    <NewMessageForm currentConvoId={currentConvoId} updateConvoButton={updateConvoButton} user={user} />
+                                    <Messages scrollToBottom={scrollToBottom} updateConvoButton={updateConvoButton} currentConvoId={currentConvoId} user={user} />
                                 </div>
                             )}
                         </div>

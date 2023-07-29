@@ -51,13 +51,14 @@ const formStyles = {
     },
 };
 
-export default function NewMessageForm({ updateConvoButton, user, currentConvoId }) {
+export default function NewMessageForm({ updateMessages, user, currentConvoId, updateConvoButton, scrollToBottom }) {
 
     const [messageInformation, setMessageInformation] = useState("")
 
+    scrollToBottom()
+    
     function handleSubmit(e) {
         e.preventDefault()
-        updateConvoButton()
         fetch("/messages", {
             method: "POST",
             headers: {
@@ -70,7 +71,11 @@ export default function NewMessageForm({ updateConvoButton, user, currentConvoId
             })
         })
         .then((resp) => resp.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+            setMessageInformation("")
+            updateMessages(data)
+            scrollToBottom()
+        })
     }
 
     return (

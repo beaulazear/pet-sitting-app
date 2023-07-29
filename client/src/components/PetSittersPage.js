@@ -17,6 +17,9 @@ export default function PetSittersPage({ handleLogout, user }) {
     if (petSitters) {
         return (
             <div id="petSittersPageDiv">
+                {user.client === null && (
+                    <h3 style={{textAlign: "center"}}>Sign up as a client to interact with other pet sitters.</h3>
+                )}
                 {petSitters.map((petSitter) => (
                     <PetSitterCard user={user} key={petSitter.id} petSitter={petSitter} />
                 ))}

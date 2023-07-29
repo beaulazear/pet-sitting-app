@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import '../App.css';
 import PetSitRequestForm from "./PetSitRequestForm";
 import { useNavigate } from 'react-router-dom';
+import ConvoRequestForm from "./ConvoRequestForm";
 
 const styles = {
   petSitterCard: {
@@ -48,14 +49,14 @@ const styles = {
 export default function PetSitterCard({ petSitter, user }) {
 
   const [displayForm, setDisplayForm] = useState(false)
-  const [buttonText, setButtonText] = useState("Book appointment with this petsitter")
+  const [buttonText, setButtonText] = useState("Contact / Request Pet Sit")
 
   const navigate = useNavigate()
 
   function updateDisplayForm() {
     if (displayForm === false) {
       setDisplayForm(true)
-      setButtonText("Close request form")
+      setButtonText("Close forms")
     } else {
       setDisplayForm(false)
       setButtonText("Book appointment with this petsitter")
@@ -65,6 +66,7 @@ export default function PetSitterCard({ petSitter, user }) {
   function updateDisplayFormAfterSubmit() {
     setDisplayForm(false)
   }
+
   function startConversation() {
     console.log(petSitter)
     console.log(user)
@@ -82,7 +84,6 @@ export default function PetSitterCard({ petSitter, user }) {
       })
         .then((resp) => resp.json())
         .then((convo) => {
-
           navigate('/conversations')
         })
     } else {
@@ -108,12 +109,19 @@ export default function PetSitterCard({ petSitter, user }) {
       <p style={styles.info}>{petSitter.my_ideal_pet_sit}</p>
       <h4 style={styles.subheading}>What do I charge?</h4>
       <p style={styles.info}>My rate is currently ${petSitter.day_rate}</p>
-      <button onClick={startConversation}>Start a conversation</button>
-      <button onClick={updateDisplayForm} value={buttonText}>{buttonText}</button>
-      {displayForm === true &&
-        <PetSitRequestForm updateDisplayForm={updateDisplayFormAfterSubmit} user={user} petSitter={petSitter} />
-      }
+      {user.client && (
+        <div>
+          <button onClick={updateDisplayForm} value={buttonText}>{buttonText}</button>
+          {displayForm === true &&
+            <div>
+              <ConvoRequestForm user={user} petSitter={petSitter} />
+              <PetSitRequestForm updateDisplayForm={updateDisplayFormAfterSubmit} user={user} petSitter={petSitter} />
+            </div>
+          }
+        </div>
+      )}
     </div>
   );
-
 }
+
+{/* <button onClick={startConversation}>Start a conversation</button> */ }

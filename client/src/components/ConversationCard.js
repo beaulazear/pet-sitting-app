@@ -41,6 +41,12 @@ const conversationCardStyles = {
     width: "120px",
     marginTop: "10px",
   },
+  conversationTitle: {
+    textAlign: "center",
+    fontSize: "16px",
+    fontWeight: "bold",
+    marginBottom: "10px",
+  }
 };
 
 export default function ConversationCard({ conversation, user, updateConvoButton }) {
@@ -67,6 +73,7 @@ export default function ConversationCard({ conversation, user, updateConvoButton
       </div>
 
       <div style={conversationCardStyles.userContainer}>
+        <p style={conversationCardStyles.conversationTitle}>{conversation.conversation_title}</p>
         <p style={conversationCardStyles.chatStartedText}>
           Chat started on {year}-{month}-{day}
         </p>
