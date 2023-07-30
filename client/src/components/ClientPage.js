@@ -55,6 +55,12 @@ export default function ClientPage({ user, updateUser }) {
         });
     }, []);
 
+    console.log(client)
+
+    function updateClient(newClient) {
+        setClient(newClient)
+    }
+
     function handleClientOptIn(e) {
         e.preventDefault();
         fetch(`/clients`, {
@@ -83,7 +89,7 @@ export default function ClientPage({ user, updateUser }) {
     if (client) {
         return (
             <div>
-                <ClientProfile client={client} />
+                <ClientProfile updateClient={updateClient} client={client} />
                 <ClientPendingAppointments client={client} user={user} />
             </div>
         )

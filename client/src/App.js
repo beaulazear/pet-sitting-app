@@ -49,9 +49,9 @@ function App() {
 
   if (user) {
     return (
-      <div>
+      <div style={{paddingBottom: "20px"}}>
         <PageNavLinks />
-        <h1 style={headerStyle}>NYC Pet Sitters</h1>
+        <h1 style={headerStyle}>NYCPetSitters</h1>
         <Routes>
           <Route path="/" element={<Home user={user} setUser={setUser} />} />
           <Route path="/petsitter" element={<PetSitterPage updateUser={updateUserPetsitter} user={user} setUser={setUser} handleLogout={handleLogout} />} />
@@ -60,9 +60,7 @@ function App() {
           <Route path="/conversations" element={<Conversations user={user} handleLogout={handleLogout} />} />
         </Routes>
         <div style={{ marginTop: '20px' }}> {/* Add some space above the button */}
-          <button style={{ position: 'fixed', bottom: '0px', right: '0px' }} onClick={handleLogout}>
-            Logout
-          </button>
+          <button style={{ position: 'fixed', bottom: '0', right: '0px', marginTop: "2%" }} onClick={handleLogout}>Logout</button>
         </div>
       </div>
     );

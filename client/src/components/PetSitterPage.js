@@ -58,6 +58,10 @@ export default function PetSitterPage({ user, updateUser }) {
         });
     }, []);
 
+    function updatePetSitter(newPetsitter) {
+        setPetSitter(newPetsitter)
+    }
+
     function handlePetSitterOptIn(e) {
         e.preventDefault();
         fetch(`/petsitters`, {
@@ -93,7 +97,7 @@ export default function PetSitterPage({ user, updateUser }) {
     if (petSitter) {
         return (
             <div>
-                <PetSitterProfile petSitter={petSitter} />
+                <PetSitterProfile updatePetSitter={updatePetSitter} petSitter={petSitter} />
                 <PendingPetSits petSitter={petSitter} user={user} />
             </div>
 

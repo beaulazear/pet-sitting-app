@@ -70,12 +70,8 @@ export default function ConversationCard({ conversation, updateConvoButton }) {
       </div>
       <div style={conversationCardStyles.userContainer}>
         <p style={conversationCardStyles.conversationTitle}>{conversation.conversation_title}</p>
-        <p style={conversationCardStyles.chatStartedText}>
-          Chat started on {year}-{month}-{day}
-        </p>
-        <button onClick={displayMessagesAndForm} style={conversationCardStyles.openConversationButton}>
-          Open Conversation
-        </button>
+        <p style={conversationCardStyles.chatStartedText}>Chat started on {year}-{month}-{day}</p>
+        <button onClick={displayMessagesAndForm} style={conversationCardStyles.openConversationButton}>Open Conversation</button>
       </div>
       <div style={conversationCardStyles.userContainer}>
         <img src={petsitter.photo} alt="Petsitter" style={conversationCardStyles.userPhoto} />

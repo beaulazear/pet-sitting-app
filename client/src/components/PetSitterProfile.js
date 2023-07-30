@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import UpdatePetSitter from "./UpdatePetSitter";
 
 const styles = {
     petSitterProfile: {
@@ -37,7 +38,12 @@ const styles = {
     },
 };
 
-export default function PetSitterProfile({ petSitter }) {
+export default function PetSitterProfile({ petSitter, updatePetSitter }) {
+    const [updateButton, setUpdateButton] = useState(false)
+
+    function changeFormView(){
+        setUpdateButton(!updateButton)
+    }
 
     return (
         <div id="petSitterProfile" style={styles.petSitterProfile}>
@@ -46,10 +52,14 @@ export default function PetSitterProfile({ petSitter }) {
             </div>
             <h2 style={styles.heading}>Your pet sitting account:</h2>
             <p style={styles.info}><b>Name:</b> Hi, I am {petSitter.full_name}!</p>
-            <p style={styles.info}><b>City:</b> I am located in {petSitter.city}, NYC</p>
+            <p style={styles.info}><b>City:</b> I am located in {petSitter.city}</p>
             <p style={styles.info}><b>Day Rate:</b> ${petSitter.day_rate} a day.</p>
             <p style={styles.info}><b>Bio:</b> {petSitter.bio}</p>
             <p style={styles.info}><b>My Ideal Pet Sit:</b> {petSitter.my_ideal_pet_sit}</p>
+            <button onClick={() => changeFormView()}>Update Account</button>
+            {updateButton === true && (
+                <UpdatePetSitter changeFormView={changeFormView} updatePetSitter={updatePetSitter} petSitter={petSitter} />
+            )}
         </div>
     );
 }

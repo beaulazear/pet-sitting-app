@@ -37,7 +37,18 @@ const styles = {
     }
 };
 
-export default function ConversationClientCard({ client, scrollToBottom }) {
+export default function ConversationClientCard({ conversation, removeConversation, client, scrollToBottom }) {
+
+    function handleConvoDelete() {
+        fetch(`/conversations/${conversation.id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then((resp) => resp.json())
+        .then((data) => removeConversation(data))
+    }
 
     return (
         <div id="clientProfile" style={styles.clientProfile}>
@@ -47,7 +58,9 @@ export default function ConversationClientCard({ client, scrollToBottom }) {
             <h3 style={styles.heading}>{client.full_name}</h3>
             <p style={styles.info}><b>About my pet:</b> {client.pet_information}</p>
             <p style={styles.info}><b>Ideal petsitter:</b> {client.ideal_petsitter}</p>
-            <button onClick={scrollToBottom}>Go to end of chat.</button>
+            <button className="acceptButton" onClick={scrollToBottom}>Go to end of chat.</button>
+            <br></br><br></br>
+            <button className="declineButton" onClick={handleConvoDelete}>Delete conversation.</button>
         </div>
     );
 }

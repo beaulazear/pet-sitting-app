@@ -16,10 +16,12 @@ Rails.application.routes.draw do
   get "/petsitters", to: "petsitters#index"
   post "/petsitters", to: "petsitters#create"
   get "/petsitter", to: "petsitters#show"
+  patch "/petsitters/:id", to: "petsitters#update"
 
   post "/clients", to: "clients#create"
   get "/clients", to: "clients#index"
   get "/client", to: "clients#show"
+  patch "/clients/:id", to: "clients#update"
   
   post "/appointments", to: "appointments#create"
   get "/appointments", to: "appointments#index"
@@ -29,6 +31,7 @@ Rails.application.routes.draw do
 
   get "/conversations", to: "conversations#index"
   post "/conversations", to: "conversations#create"
+  delete "/conversations/:id", to: "conversations#destroy"
 
   get "/messages", to: "messages#index"
   post "/messages", to: "messages#create"

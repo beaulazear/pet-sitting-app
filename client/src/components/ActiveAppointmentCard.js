@@ -74,7 +74,7 @@ export default function ActiveAppointmentCard({ appointment, updateActiveAppoint
                 <p style={styles.subheading}>Total Price: ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
                 <p style={styles.subheading}>Start Date: {appointment.start_date}</p>
                 <p style={styles.subheading}>End Date: {appointment.end_date}</p>
-                <p style={styles.subheading}>Appointment Information: {appointment.appointment_information}</p>
+                <p style={styles.subheading}>Pet Information: {appointment.client.pet_information}</p>
                 <button onClick={handleCancel} className="declineButton">Cancel Pet Sit</button>
             </div>
         );
@@ -89,7 +89,7 @@ export default function ActiveAppointmentCard({ appointment, updateActiveAppoint
                 <p style={styles.subheading}>Total Price: ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
                 <p style={styles.subheading}>Start Date: {appointment.start_date}</p>
                 <p style={styles.subheading}>End Date: {appointment.end_date}</p>
-                <p style={styles.subheading}>Appointment Information: {appointment.appointment_information}</p>
+                <p style={styles.subheading}>Pet Information: {appointment.client.pet_information}</p>
                 <button onClick={handleCancel} className="declineButton">Cancel Pet Sit</button>
             </div>
         );

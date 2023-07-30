@@ -21,7 +21,17 @@ class PetsittersController < ApplicationController
         else
           render json: { error: "Not authorized" }, status: :unauthorized
         end
-    end  
+    end
+
+    def update
+        petsitter = Petsitter.find_by(id: params[:id])
+        if petsitter
+            petsitter.update(pet_sitter_params)
+            render json: petsitter, status: :created
+        else
+            render json: { error: "unprocessable entity" }, status: :unprocessable_entity
+        end
+    end
 
     private
 

@@ -18,6 +18,16 @@ class ConversationsController < ApplicationController
         end
     end
 
+    def destroy
+        conversation = Conversation.find_by(id: params[:id])
+        if conversation
+            conversation.destroy
+            render json: conversation
+        else
+            render json: { error: "not found" }, status: :not_found
+        end
+    end
+
     private
 
     def convo_params

@@ -4,6 +4,15 @@ import Messages from "./Messages";
 import ConversationPetSitterCard from "./ConversationPetSitterCard";
 import ConversationClientCard from "./ConversationClientCard";
 
+const headerStyle = {
+    textAlign: 'center',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    color: '#9e9e9e',
+    width: '100%',
+    fontSize: '36px',
+    lineHeight: '1.2',
+  };
+
 export default function Conversations({ user }) {
 
     const [conversations, setConversations] = useState([])
@@ -26,6 +35,13 @@ export default function Conversations({ user }) {
             setCurrentConvoId(null)
             scrollToBottom()
         }
+    }
+
+    function removeConversation(oldConvo) {
+        let newConversations = conversations.filter((convo) => convo.id !== oldConvo.id)
+        setConversations(newConversations)
+        setCurrentConvoId(null)
+        setOpenConvoButton(false)
     }
 
     useEffect(() => {
@@ -53,13 +69,16 @@ export default function Conversations({ user }) {
                     {conversations.map((conversation) => (
                         <div key={conversation.id}>
                             {openConvoButton === false &&
-                                <ConversationCard updateConvoButton={updateConvoButton} conversation={conversation} user={user} key={conversation.id} />
+                                <div>
+                                    <h3 style={{ textAlign: "center" }}>Open conversations:</h3>
+                                    <ConversationCard updateConvoButton={updateConvoButton} conversation={conversation} user={user} key={conversation.id} />
+                                </div>
                             }
                             {currentConvoId === conversation.id && (
                                 <div>
                                     <h3 style={{ textAlign: "center" }}>Conversation between:</h3>
                                     <ConversationPetSitterCard scrollToBottom={scrollToBottom} petSitter={conversation.petsitter} />
-                                    <ConversationClientCard scrollToBottom={scrollToBottom} client={conversation.client} />
+                                    <ConversationClientCard conversation={conversation} removeConversation={removeConversation} scrollToBottom={scrollToBottom} client={conversation.client} />
                                     <h3 style={{ textAlign: "center" }}>Messages:</h3>
                                     <Messages scrollToBottom={scrollToBottom} updateConvoButton={updateConvoButton} currentConvoId={currentConvoId} user={user} />
                                 </div>
@@ -73,7 +92,7 @@ export default function Conversations({ user }) {
         )
     } else {
         return (
-            <div>No conversations yet, feel free to start one!</div>
+            <div style={headerStyle}>No conversations yet, feel free to start one!</div>
         )
     }
 }

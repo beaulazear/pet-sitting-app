@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import UpdateClient from "./UpdateClient";
 
 const styles = {
     clientProfile: {
@@ -37,7 +38,12 @@ const styles = {
     },
 };
 
-export default function ClientProfile({ client }) {
+export default function ClientProfile({ client, updateClient }) {
+    const [updateButton, setUpdateButton] = useState(false)
+
+    function changeFormView(){
+        setUpdateButton(!updateButton)
+    }
 
     return (
         <div id="clientProfile" style={styles.clientProfile}>
@@ -48,6 +54,10 @@ export default function ClientProfile({ client }) {
             <p style={styles.info}><b>My Name:</b> {client.full_name}, NYC</p>
             <p style={styles.info}><b>About my pet:</b> {client.pet_information}</p>
             <p style={styles.info}><b>Ideal petsitter:</b> {client.ideal_petsitter}</p>
+            <button onClick={() => changeFormView()}>Update Account</button>
+            {updateButton === true && (
+                <UpdateClient client={client} updateClient={updateClient} changeFormView={changeFormView} />
+            )}
         </div>
     );
 

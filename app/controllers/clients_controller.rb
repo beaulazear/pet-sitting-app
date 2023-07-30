@@ -23,6 +23,16 @@ class ClientsController < ApplicationController
         end
     end
 
+    def update
+        client = Client.find_by(id: params[:id])
+        if client
+            client.update(client_params)
+            render json: client, status: :created
+        else
+            render json: { error: "unprocessable entity" }, status: :unprocessable_entity
+        end
+    end
+
     private
 
     def client_params
