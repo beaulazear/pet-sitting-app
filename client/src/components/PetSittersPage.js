@@ -18,7 +18,7 @@ export default function PetSittersPage({ user }) {
         fetch("/petsitters")
             .then((response) => response.json())
             .then((petSitters) => {
-                let newSitters = petSitters.filter((sitter) => sitter.user_id !== user.id)
+                let newSitters = petSitters.filter((sitter) => sitter.user_id !== user.id && sitter.currently_available === true)
                 setPetSitters(newSitters)
             })
     }, [user.id])

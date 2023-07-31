@@ -33,9 +33,23 @@ class PetsittersController < ApplicationController
         end
     end
 
+    def update_availability
+        petsitter = Petsitter.find_by(id: params[:id])
+        if petsitter
+            petsitter.update(pet_sitter_availability_params)
+            render json: petsitter
+        else
+            render json: { error: "not found"}, status: :not_found
+        end
+    end
+
     private
 
     def pet_sitter_params
         params.permit(:bio, :photo, :city, :full_name, :my_ideal_pet_sit, :day_rate, :id, :user_id, :petsitter, :currently_available)
+    end
+
+    def pet_sitter_availability_params
+        params.require(:petsitter).permit(:currently_available)
     end
 end

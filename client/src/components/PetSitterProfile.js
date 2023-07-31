@@ -36,19 +36,50 @@ const styles = {
         color: '#666',
         margin: '10px 0'
     },
+    button: {
+        width: '100%',
+        padding: '10px',
+        fontSize: '16px',
+        fontWeight: 'bold',
+        color: '#fff',
+        backgroundColor: '#007bff',
+        borderRadius: '4px',
+        border: 'none',
+        cursor: 'pointer'
+    },
 };
 
 export default function PetSitterProfile({ petSitter, updatePetSitter }) {
     const [updateButton, setUpdateButton] = useState(false)
+    const [petSitterAvailable, setPetSitterAvailable] = useState(petSitter.currently_available)
 
-    function changeFormView(){
+    function changeFormView() {
         setUpdateButton(!updateButton)
+    }
+
+    function handleUpdateAvailability(e) {
+        let newAvailability = !petSitterAvailable
+        fetch(`/petsitters/${petSitter.id}/availability`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                currently_available: newAvailability
+            })
+        })
+            .then((resp) => resp.json())
+            .then((newPetSitter) => {
+                setPetSitterAvailable(newAvailability)
+                console.log(newPetSitter)
+                updatePetSitter(newPetSitter)
+            })
     }
 
     return (
         <div id="petSitterProfile" style={styles.petSitterProfile}>
             <div style={styles.imageWrapper}>
-                <img src={petSitter.photo} alt="the petsitter" style={styles.image}/>
+                <img src={petSitter.photo} alt="the petsitter" style={styles.image} />
             </div>
             <h2 style={styles.heading}>Your pet sitting account:</h2>
             <p style={styles.info}><b>Name:</b> Hi, I am {petSitter.full_name}!</p>
@@ -58,7 +89,21 @@ export default function PetSitterProfile({ petSitter, updatePetSitter }) {
             <p style={styles.info}><b>My Ideal Pet Sit:</b> {petSitter.my_ideal_pet_sit}</p>
             <button onClick={() => changeFormView()}>Update Account</button>
             {updateButton === true && (
-                <UpdatePetSitter changeFormView={changeFormView} updatePetSitter={updatePetSitter} petSitter={petSitter} />
+                <div>
+                    <UpdatePetSitter changeFormView={changeFormView} updatePetSitter={updatePetSitter} petSitter={petSitter} />
+                    {petSitterAvailable === true &&
+                        <div>
+                            <h3>You are currently listed as an available petsitter. List yourself as unavailable here. This means clients wont be able to find you on the Petsitters page.</h3>
+                            <button style={styles.button} onClick={handleUpdateAvailability}>Become unavailable</button>
+                        </div>
+                    }
+                    {petSitterAvailable === false &&
+                        <div>
+                            <h3>You are currently unavailable. List yourself as available here. This means clients can find you via the Petsitters page.</h3>
+                            <button style={styles.button} onClick={handleUpdateAvailability}>Become available</button>
+                        </div>
+                    }
+                </div>
             )}
         </div>
     );

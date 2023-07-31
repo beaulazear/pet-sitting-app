@@ -28,7 +28,7 @@ export default function Home({ user }) {
 
     return (
         <div style={welcomeMessageStyles}>
-            <h1 style={headingStyles}>Welcome to NYCPetSitters, {user.username}!</h1>
+            <h1 style={headingStyles}>Welcome, {user.username}!</h1>
             <p style={paragraphStyles}>We're thrilled to have you here and embark on a journey of connecting pet sitters to loving clients in the heart of New York City. Whether you're a seasoned pet sitter or a caring pet owner, NYCPetSitters is the perfect platform for you.</p>
             <p style={paragraphStyles}>Our mission is to connect independent animal caretakers with clients in need of support. Our pet sitters range from locals who do this professionaly, to out-of-towners who like to trade their pet sitting services for a stay in the big apple!</p>
             <p style={paragraphStyles}>Explore our community of experienced pet sitters who are eager to shower your pets with love and attention. For pet sitters, this is an excellent opportunity to connect with caring clients who share the same passion for animals.</p>

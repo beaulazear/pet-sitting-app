@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import '../App.css';
 import PetSitRequestForm from "./PetSitRequestForm";
 import ConvoRequestForm from "./ConvoRequestForm";
@@ -50,10 +50,17 @@ export default function PetSitterCard({ petSitter, user }) {
   const [displayForm, setDisplayForm] = useState(false)
   const [buttonText, setButtonText] = useState("Contact / Request Pet Sit")
 
+  const bottomElement = useRef(null);
+
+  function scrollToBottom() {
+      bottomElement?.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   function updateDisplayForm() {
     if (displayForm === false) {
       setDisplayForm(true)
       setButtonText("Close forms")
+      scrollToBottom()
     } else {
       setDisplayForm(false)
       setButtonText("Contact / Request Pet Sit")
@@ -88,6 +95,8 @@ export default function PetSitterCard({ petSitter, user }) {
           }
         </div>
       )}
+      <div ref={bottomElement}>
+      </div>
     </div>
   );
 }

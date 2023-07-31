@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post "/petsitters", to: "petsitters#create"
   get "/petsitter", to: "petsitters#show"
   patch "/petsitters/:id", to: "petsitters#update"
+  patch "/petsitters/:id/availability", to: "petsitters#update_availability"
 
   post "/clients", to: "clients#create"
   get "/clients", to: "clients#index"
