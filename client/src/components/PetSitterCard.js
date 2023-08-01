@@ -78,7 +78,7 @@ export default function PetSitterCard({ petSitter, user }) {
       </div>
       <h3 style={styles.heading}>{petSitter.full_name}</h3>
       <h4 style={styles.subheading}>About me:</h4>
-      <p style={styles.info}>I am based in {petSitter.city}, NYC</p>
+      <p style={styles.info}>I am based in {petSitter.city}</p>
       <p style={styles.info}>{petSitter.bio}</p>
       <h4 style={styles.subheading}>My ideal pet sit:</h4>
       <p style={styles.info}>{petSitter.my_ideal_pet_sit}</p>

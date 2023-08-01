@@ -40,14 +40,16 @@ const styles = {
 export default function ConversationClientCard({ conversation, removeConversation, client, scrollToBottom }) {
 
     function handleConvoDelete() {
-        fetch(`/conversations/${conversation.id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then((resp) => resp.json())
-        .then((data) => removeConversation(data))
+        if (window.confirm("Are you sure? Messages from this conversation will not be able to be viewed by either user.") === true) {
+            fetch(`/conversations/${conversation.id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then((resp) => resp.json())
+                .then((data) => removeConversation(data))
+        }
     }
 
     return (
