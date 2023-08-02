@@ -31,10 +31,6 @@ class ConversationsController < ApplicationController
     private
 
     def convo_params
-        params.require(:conversation).permit(
-            :petsitter_id,
-            :client_id,
-            :conversation_title
-        )
+        params.require(:conversation).permit(:petsitter_id, :client_id, :conversation_title)
     end
 end

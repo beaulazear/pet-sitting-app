@@ -20,7 +20,7 @@ class AppointmentsController < ApplicationController
         appointment.update(accepted: true, declined: false)
         render json: appointment, status: :created
       else
-        render json: { error: "Bird not found" }, status: :not_found
+        render json: { error: "Appointment not found" }, status: :not_found
       end
     end
 
@@ -30,7 +30,7 @@ class AppointmentsController < ApplicationController
         appointment.update(accepted: false, declined: true)
         render json: appointment, status: :created
       else
-        render json: { error: "Bird not found" }, status: :not_found
+        render json: { error: "Appointment not found" }, status: :not_found
       end
     end
 
@@ -40,14 +40,14 @@ class AppointmentsController < ApplicationController
         appointment.update(canceled: true)
         render json: appointment, status: :created
       else
-        render json: { error: "Bird not found" }, status: :not_found
+        render json: { error: "Appointment not found" }, status: :not_found
       end
     end
 
     private
 
     def appointment_params
-      params.require(:appointment).permit( :appointment_information, :start_date, :end_date, :boarding, :in_house, :petsitter_id, :client_id)
+      params.require(:appointment).permit(:appointment_information, :start_date, :end_date, :boarding, :in_house, :petsitter_id, :client_id)
     end
       
 end

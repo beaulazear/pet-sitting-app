@@ -54,6 +54,7 @@ const formStyles = {
 export default function NewMessageForm({ updateMessages, user, currentConvoId, updateConvoButton, scrollToBottom }) {
 
     const [messageInformation, setMessageInformation] = useState("")
+    const [errors, setErrorData] = useState([])
 
     scrollToBottom()
 
@@ -70,12 +71,20 @@ export default function NewMessageForm({ updateMessages, user, currentConvoId, u
                 body: messageInformation
             })
         })
-            .then((resp) => resp.json())
-            .then((data) => {
-                setMessageInformation("")
-                updateMessages(data)
-                scrollToBottom()
-            })
+            .then((response) => {
+                if (response.ok) {
+                    response.json().then((data) => {
+                        setMessageInformation("")
+                        updateMessages(data)
+                        scrollToBottom()
+                    });
+                } else {
+                    response.json().then((errorData) => {
+                        setErrorData(errorData.errors)
+                        console.log(errors)
+                    })
+                }
+            });
     }
 
     return (
