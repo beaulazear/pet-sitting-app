@@ -11,13 +11,15 @@ const headerStyle = {
     width: '100%',
     fontSize: '36px',
     lineHeight: '1.2',
-  };
+};
 
 export default function Conversations({ user }) {
 
     const [conversations, setConversations] = useState([])
     const [openConvoButton, setOpenConvoButton] = useState(false)
     const [currentConvoId, setCurrentConvoId] = useState(null)
+    const [messages, setMessages] = useState([])
+    const [errors, setErrors] = useState([])
 
     const bottomElement = useRef(null);
 
@@ -44,6 +46,39 @@ export default function Conversations({ user }) {
         setOpenConvoButton(false)
     }
 
+    function updateConversations(updatedConvo) {
+        let filteredConversations = conversations.filter((convo) => convo.id !== updatedConvo.id)
+        let newConversations = [...filteredConversations, updatedConvo]
+        setConversations(newConversations)
+
+        let newMessageBody = `Automated message: ${user.username} just changed the conversation title to "${updatedConvo.conversation_title}"`
+
+        fetch("/messages", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                user_id: user.id,
+                conversation_id: currentConvoId,
+                body: newMessageBody
+            })
+        })
+            .then((response) => {
+                if (response.ok) {
+                    response.json().then((newMessage) => {
+                        updateMessages(newMessage)
+                        scrollToBottom()
+                    });
+                } else {
+                    response.json().then((errorData) => {
+                        setErrors(errorData.errors)
+                        console.log(errors)
+                    })
+                }
+            });
+    }
+
     useEffect(() => {
         fetch("/conversations")
             .then((resp) => resp.json())
@@ -62,6 +97,20 @@ export default function Conversations({ user }) {
             })
     }, [user])
 
+    useEffect(() => [
+        fetch("/messages")
+            .then((resp) => resp.json())
+            .then((messages) => {
+                let convoMessages = messages.filter((message) => message.conversation_id === currentConvoId)
+                setMessages(convoMessages)
+            })
+    ], [currentConvoId])
+
+    function updateMessages(newMessage) {
+        const newMessages = [...messages, newMessage]
+        setMessages(newMessages)
+    }
+
     if (conversations.length > 0) {
         return (
             <div>
@@ -76,11 +125,11 @@ export default function Conversations({ user }) {
                             }
                             {currentConvoId === conversation.id && (
                                 <div>
-                                    <h3 style={{ textAlign: "center" }}>Conversation between:</h3>
+                                    <h3 style={{ textAlign: "center" }}>Conversation "{conversation.conversation_title}" between:</h3>
                                     <ConversationPetSitterCard scrollToBottom={scrollToBottom} petSitter={conversation.petsitter} />
-                                    <ConversationClientCard conversation={conversation} removeConversation={removeConversation} scrollToBottom={scrollToBottom} client={conversation.client} />
+                                    <ConversationClientCard updateConversations={updateConversations} conversation={conversation} removeConversation={removeConversation} scrollToBottom={scrollToBottom} client={conversation.client} />
                                     <h3 style={{ textAlign: "center" }}>Messages:</h3>
-                                    <Messages scrollToBottom={scrollToBottom} updateConvoButton={updateConvoButton} currentConvoId={currentConvoId} user={user} />
+                                    <Messages updateMessages={updateMessages} messages={messages} scrollToBottom={scrollToBottom} updateConvoButton={updateConvoButton} currentConvoId={currentConvoId} user={user} />
                                 </div>
                             )}
                         </div>
@@ -92,7 +141,7 @@ export default function Conversations({ user }) {
         )
     } else {
         return (
-            <div style={headerStyle}>No conversations yet, feel free to start one!</div>
+            <div style={headerStyle}>No conversations yet - if you're a client, feel free to start one! Petsitters, clients will reach out when they need help.</div>
         )
     }
 }

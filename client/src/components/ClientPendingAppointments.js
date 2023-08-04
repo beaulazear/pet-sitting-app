@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PendingAppointmentCard from "./PendingAppointmentCard";
 import ActiveAppointmentCard from "./ActiveAppointmentCard";
+import ClientPreviousSitters from "./ClientPreviousSitters";
 import '../App.css';
 
 const headerStyle = {
+    paddingTop: '20px',
     textAlign: 'center',
     fontFamily: 'Arial, Helvetica, sans-serif',
     color: '#9e9e9e',
@@ -12,7 +14,7 @@ const headerStyle = {
     lineHeight: '1.2',
 };
 
-export default function ClientPendingAppointments({ client, user }) {
+export default function ClientPendingAppointments({ updateClient, client, user }) {
 
     const [appointments, setAppointments] = useState([])
     const [pendingAppointments, setPendingAppointments] = useState([])
@@ -35,44 +37,68 @@ export default function ClientPendingAppointments({ client, user }) {
         });
     }, [client, user]);
 
-    function updatePendingAppointments(acceptedAppointment) {
+    function updatePendingAppointments(updatedAppointment) {
 
-        let newPendingAppointments = pendingAppointments.filter((apt) => apt.declined !== true && apt.id !== acceptedAppointment.id)
+        if (updatedAppointment.accepted === true) {
+            let newPendingAppointments = pendingAppointments.filter((apt) => apt.id !== updatedAppointment.id)
 
-        setPendingAppointments(newPendingAppointments)
+            setPendingAppointments(newPendingAppointments)
+            
+            let newActiveApts = [...activeAppointments, updatedAppointment]
+
+            setActiveAppointments(newActiveApts)
+        } else if (updatedAppointment.declined === true) {
+            let newPendingAppointments = pendingAppointments.filter((apt) => apt.id !== updatedAppointment.id)
+
+            setPendingAppointments(newPendingAppointments)
+        } else {
+            let newPendingAppointments = pendingAppointments.map((apt) => {
+                if (apt.id === updatedAppointment.id) {
+                    return { ...apt, ...updatedAppointment }
+                } else {
+                    return apt
+                }
+            })
+
+            setPendingAppointments(newPendingAppointments)
+        }
 
         let newApts = appointments.map((apt) => {
-            if (apt.id === acceptedAppointment.id) {
-                return { ...apt, ...acceptedAppointment }
+            if (apt.id === updatedAppointment.id) {
+                return { ...apt, ...updatedAppointment }
             } else {
                 return apt
             }
         })
-
         setAppointments(newApts)
-
-        if (acceptedAppointment.accepted === true) {
-            let newActiveApts = [...activeAppointments, acceptedAppointment]
-            console.log(newActiveApts)
-            setActiveAppointments(newActiveApts)
-        }
     }
 
-    function updateActiveAppointments(acceptedAppointment) {
+    function updateActiveAppointments(updatedAppointment) {
 
-        let newActiveAppointments = activeAppointments.filter((apt) => apt.id !== acceptedAppointment.id)
+        let newActiveAppointments = activeAppointments.filter((apt) => apt.id !== updatedAppointment.id)
 
         setActiveAppointments(newActiveAppointments)
 
         let newApts = appointments.map((apt) => {
-            if (apt.id === acceptedAppointment.id) {
-                return { ...apt, ...acceptedAppointment }
+            if (apt.id === updatedAppointment.id) {
+                return { ...apt, ...updatedAppointment }
             } else {
                 return apt
             }
         })
 
         setAppointments(newApts)
+    }
+
+    function newRequestFromClientPage(newApt) {
+        let newPendingAppointments = [...pendingAppointments, newApt]
+        setPendingAppointments(newPendingAppointments)
+    }
+
+    function deleteAppointmentRequest(deletedRequestId, newClient) {
+        let newPendingRequests = pendingAppointments.filter((apt) => apt.id !== deletedRequestId)
+        setPendingAppointments(newPendingRequests)
+        updateClient(newClient)
     }
 
     if (pendingAppointments.length > 0 || activeAppointments.length > 0) {
@@ -83,13 +109,17 @@ export default function ClientPendingAppointments({ client, user }) {
                     <ActiveAppointmentCard user={user} client={client} updateActiveAppointments={updateActiveAppointments} appointment={appointment} key={appointment.id} />
                 ))}
                 {pendingAppointments.map((appointment) => (
-                    <PendingAppointmentCard user={user} client={client} updatePendingAppointments={updatePendingAppointments} appointment={appointment} key={appointment.id} />
+                    <PendingAppointmentCard deleteAppointmentRequest={deleteAppointmentRequest} user={user} client={client} updatePendingAppointments={updatePendingAppointments} appointment={appointment} key={appointment.id} />
                 ))}
+                <ClientPreviousSitters newRequestFromClientPage={newRequestFromClientPage} client={client} user={user} />
             </div>
         )
     } else {
         return (
-            <div style={headerStyle}>No pending requests / active pet sits</div>
+            <div>
+                <h2 style={headerStyle}>No pending requests / active pet sits</h2>
+                <ClientPreviousSitters newRequestFromClientPage={newRequestFromClientPage} client={client} user={user} />
+            </div>
         )
     }
 }

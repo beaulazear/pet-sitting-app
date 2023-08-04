@@ -97,9 +97,10 @@ export default function NewMessageForm({ updateMessages, user, currentConvoId, u
                     </label>
                     <textarea type="text" className="custom-input" value={messageInformation} onChange={(e) => setMessageInformation(e.target.value)} style={formStyles.input} />
                 </div>
-                <button style={formStyles.button}>Send Message</button>
+                <button>Send Message</button>
             </form>
-            <button style={formStyles.button} onClick={updateConvoButton}>Exit Conversation</button>
+            <br></br>
+            <button onClick={updateConvoButton}>Exit Conversation</button>
         </div>
     );
 }

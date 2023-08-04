@@ -55,8 +55,6 @@ export default function ClientPage({ user, updateUser }) {
         });
     }, []);
 
-    console.log(client)
-
     function updateClient(newClient) {
         setClient(newClient)
     }
@@ -90,7 +88,7 @@ export default function ClientPage({ user, updateUser }) {
         return (
             <div>
                 <ClientProfile updateClient={updateClient} client={client} />
-                <ClientPendingAppointments client={client} user={user} />
+                <ClientPendingAppointments updateClient={updateClient} client={client} user={user} />
             </div>
         )
     } else {

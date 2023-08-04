@@ -99,7 +99,7 @@ export default function UpdatePetSitter({ updatePetSitter, petSitter, changeForm
                     <label htmlFor="dayRate" style={formStyles.label}>Day Rate:</label>
                     <input type="text" id="dayRate" value={day_rate} onChange={(e) => setDayRate(e.target.value)} style={formStyles.input} />
                 </div>
-                <button type="submit" style={formStyles.button}>Update Account</button>
+                <button type="submit">Update Account</button>
             </form>
             {/* {errors.length > 0 && (
                 <ul style={formStyles.errorList}>

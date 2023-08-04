@@ -26,13 +26,16 @@ Rails.application.routes.draw do
   
   post "/appointments", to: "appointments#create"
   get "/appointments", to: "appointments#index"
+  patch "/appointments/:id", to: "appointments#update"
   get "/appointments/:id/accepted", to: "appointments#accepted"
   get "/appointments/:id/declined", to: "appointments#declined"
-  get "/appointments/:id/canceled", to: "appointments#cancel"
+  get "/appointments/:id/canceled", to: "appointments#canceled"
+  get "/appointments/:id/delete", to: "appointments#destroy"
 
   get "/conversations", to: "conversations#index"
   post "/conversations", to: "conversations#create"
   delete "/conversations/:id", to: "conversations#destroy"
+  patch "/conversations/:id", to: "conversations#update"
 
   get "/messages", to: "messages#index"
   post "/messages", to: "messages#create"

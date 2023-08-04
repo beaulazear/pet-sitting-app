@@ -52,9 +52,16 @@ const styles = {
 export default function PetSitterProfile({ petSitter, updatePetSitter }) {
     const [updateButton, setUpdateButton] = useState(false)
     const [petSitterAvailable, setPetSitterAvailable] = useState(petSitter.currently_available)
+    const [updateButtonText, setUpdateButtonText] = useState("Update Account")
 
     function changeFormView() {
         setUpdateButton(!updateButton)
+
+        if (updateButtonText === "Update Account") {
+            setUpdateButtonText("Close Update Form")
+        } else {
+            setUpdateButtonText("Update Account")
+        }
     }
 
     function handleUpdateAvailability(e) {
@@ -82,27 +89,27 @@ export default function PetSitterProfile({ petSitter, updatePetSitter }) {
                 <img src={petSitter.photo} alt="the petsitter" style={styles.image} />
             </div>
             <h2 style={styles.heading}>Your pet sitting account:</h2>
-            <p style={styles.info}><b>Name:</b> Hi, I am {petSitter.full_name}!</p>
+            <p style={styles.info}><b>Name:</b> Hi, I am {petSitter.full_name}.</p>
             <p style={styles.info}><b>City:</b> I am located in {petSitter.city}</p>
             <p style={styles.info}><b>Day Rate:</b> ${petSitter.day_rate} a day.</p>
             <p style={styles.info}><b>Bio:</b> {petSitter.bio}</p>
             <p style={styles.info}><b>My Ideal Pet Sit:</b> {petSitter.my_ideal_pet_sit}</p>
-            <button onClick={() => changeFormView()}>Update Account</button>
+            <button onClick={() => changeFormView()}>{updateButtonText}</button>
             {updateButton === true && (
                 <div>
                     <UpdatePetSitter changeFormView={changeFormView} updatePetSitter={updatePetSitter} petSitter={petSitter} />
-                    {petSitterAvailable === true &&
-                        <div>
-                            <h3>You are currently listed as an available petsitter. List yourself as unavailable here. This means clients wont be able to find you on the Petsitters page.</h3>
-                            <button style={styles.button} onClick={handleUpdateAvailability}>Become unavailable</button>
-                        </div>
-                    }
-                    {petSitterAvailable === false &&
-                        <div>
-                            <h3>You are currently unavailable. List yourself as available here. This means clients can find you via the Petsitters page.</h3>
-                            <button style={styles.button} onClick={handleUpdateAvailability}>Become available</button>
-                        </div>
-                    }
+                </div>
+            )}
+            {petSitterAvailable === true && (
+                <div>
+                    <h3>You are currently listed as available on the pet sitters page! Update below to change availability.</h3>
+                    <button onClick={handleUpdateAvailability}>Become unavailable</button>
+                </div>
+            )}
+            {petSitterAvailable === false && (
+                <div>
+                    <h3>You are currently unavailable and not listed on the petsitters page. Update below to change availability.</h3>
+                    <button onClick={handleUpdateAvailability}>Become available</button>
                 </div>
             )}
         </div>

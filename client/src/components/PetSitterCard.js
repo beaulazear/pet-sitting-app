@@ -45,7 +45,7 @@ const styles = {
   },
 };
 
-export default function PetSitterCard({ petSitter, user }) {
+export default function PetSitterCard({ newRequestFromClientPage, petSitter, user }) {
 
   const [displayForm, setDisplayForm] = useState(false)
   const [buttonText, setButtonText] = useState("Contact / Request Pet Sit")
@@ -77,8 +77,9 @@ export default function PetSitterCard({ petSitter, user }) {
         <img src={petSitter.photo} alt="the petsitter" style={styles.image} />
       </div>
       <h3 style={styles.heading}>{petSitter.full_name}</h3>
-      <h4 style={styles.subheading}>About me:</h4>
+      <h4 style={styles.subheading}>Location:</h4>
       <p style={styles.info}>I am based in {petSitter.city}</p>
+      <h4 style={styles.subheading}>About me:</h4>
       <p style={styles.info}>{petSitter.bio}</p>
       <h4 style={styles.subheading}>My ideal pet sit:</h4>
       <p style={styles.info}>{petSitter.my_ideal_pet_sit}</p>
@@ -90,7 +91,7 @@ export default function PetSitterCard({ petSitter, user }) {
           {displayForm === true &&
             <div>
               <ConvoRequestForm user={user} petSitter={petSitter} />
-              <PetSitRequestForm updateDisplayForm={updateDisplayFormAfterSubmit} user={user} petSitter={petSitter} />
+              <PetSitRequestForm newRequestFromClientPage={newRequestFromClientPage} updateDisplayForm={updateDisplayFormAfterSubmit} user={user} petSitter={petSitter} />
             </div>
           }
         </div>

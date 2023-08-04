@@ -100,7 +100,7 @@ export default function UpdateClient({ updateClient, client, changeFormView }) {
                     </label>
                     <input style={formStyles.input} type="text" id="photo" value={photo} onChange={(e) => setPetPhoto(e.target.value)} />
                 </div>
-                <button style={formStyles.button} type="submit">Update Account</button>
+                <button type="submit">Update Account</button>
             </form>
         </div>
     )

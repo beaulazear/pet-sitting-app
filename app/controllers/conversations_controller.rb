@@ -28,9 +28,23 @@ class ConversationsController < ApplicationController
         end
     end
 
+    def update
+        conversation = Conversation.find_by(id: params[:id])
+        if conversation
+            conversation.update(update_title_params)
+            render json: conversation, status: :created
+        else
+            render json: { errors: conversation.errors.full_messages }, status: :unprocessable_entity
+        end
+    end
+
     private
 
     def convo_params
         params.require(:conversation).permit(:petsitter_id, :client_id, :conversation_title)
+    end
+
+    def update_title_params
+        params.require(:conversation).permit(:conversation_title)
     end
 end

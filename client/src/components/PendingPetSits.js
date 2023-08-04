@@ -4,6 +4,7 @@ import ActiveAppointmentCard from "./ActiveAppointmentCard";
 import '../App.css';
 
 const headerStyle = {
+    paddingTop: '20px',
     textAlign: 'center',
     fontFamily: 'Arial, Helvetica, sans-serif',
     color: '#9e9e9e',

@@ -1,4 +1,5 @@
 import React from "react";
+import UpdatePetSitRequest from "./UpdatePetSitRequest";
 
 const styles = {
   petSitterProfile: {
@@ -57,7 +58,7 @@ const styles = {
   },
 };
 
-export default function PendingAppointmentCard({ appointment, updatePendingAppointments, user }) {
+export default function PendingAppointmentCard({ deleteAppointmentRequest, appointment, updatePendingAppointments, user }) {
 
   function totalPriceCalculator(startDate, endDate) {
     const start = new Date(startDate);
@@ -70,12 +71,6 @@ export default function PendingAppointmentCard({ appointment, updatePendingAppoi
 
   function handleAccept() {
     fetch(`/appointments/${appointment.id}/accepted`)
-      .then((resp) => resp.json())
-      .then((apt) => updatePendingAppointments(apt))
-  }
-
-  function handleCancel() {
-    fetch(`/appointments/${appointment.id}/canceled`)
       .then((resp) => resp.json())
       .then((apt) => updatePendingAppointments(apt))
   }
@@ -115,8 +110,8 @@ export default function PendingAppointmentCard({ appointment, updatePendingAppoi
         <p><b>Total Price:</b> ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
         <p><b>Start Date:</b> {appointment.start_date}</p>
         <p><b>End Date:</b> {appointment.end_date}</p>
-        <p><b>Appointment Information:</b>{appointment.appointment_information}</p>
-        <button onClick={handleCancel} className="declineButton" value="Cancelled">Cancel Pet Sit Request</button>
+        <p><b>Appointment Information:</b> {appointment.appointment_information}</p>
+        <UpdatePetSitRequest deleteAppointmentRequest={deleteAppointmentRequest} appointment={appointment} updatePendingAppointments={updatePendingAppointments} />
       </div>
     );
   }

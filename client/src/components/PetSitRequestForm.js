@@ -51,7 +51,7 @@ const formStyles = {
     },
 };
 
-export default function PetSitRequestForm({ petSitter, user, updateDisplayForm }) {
+export default function PetSitRequestForm({ newRequestFromClientPage, petSitter, user, updateDisplayForm }) {
 
 
     const [appointment_information, setAppointmentInformation] = useState("")
@@ -91,6 +91,9 @@ export default function PetSitRequestForm({ petSitter, user, updateDisplayForm }
                         setEndDate("")
                         setErrorData([])
                         updateDisplayForm()
+                        if (newRequestFromClientPage) {
+                            newRequestFromClientPage(apt)
+                        }
                     });
                 } else {
                     response.json().then((errorData) => {

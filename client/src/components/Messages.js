@@ -1,24 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Message from "./Message";
 import NewMessageForm from "./NewMessageForm";
 
-export default function Messages({ currentConvoId, user, scrollToBottom, updateConvoButton }) {
-
-    const [messages, setMessages] = useState([])
-
-    useEffect(() => [
-        fetch("/messages")
-            .then((resp) => resp.json())
-            .then((messages) => {
-                let convoMessages = messages.filter((message) => message.conversation_id === currentConvoId)
-                setMessages(convoMessages)
-            })
-    ], [currentConvoId])
-
-    function updateMessages(newMessage) {
-        const newMessages = [...messages, newMessage]
-        setMessages(newMessages)
-    }
+export default function Messages({ currentConvoId, user, updateMessages, messages, scrollToBottom, updateConvoButton }) {
 
     if (messages.length > 0) {
         return (

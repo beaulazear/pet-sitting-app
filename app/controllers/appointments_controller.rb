@@ -14,6 +14,16 @@ class AppointmentsController < ApplicationController
       render json: appointments
     end
 
+    def update
+      appointment = Appointment.find_by(id: params[:id])
+      appointment.update(appointment_params)
+      if appointment.valid?
+        render json: appointment, status: :created
+      else
+        render json: { errors: appointment.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+
     def accepted
       appointment = Appointment.find_by(id: params[:id])
       if appointment
@@ -34,17 +44,32 @@ class AppointmentsController < ApplicationController
       end
     end
 
-    def cancel
+    # find by current user appointments instead of from Appointment, make a method in application controller called current user ... go from there
+
+    def canceled
       appointment = Appointment.find_by(id: params[:id])
       if appointment
         appointment.update(canceled: true)
-        render json: appointment, status: :created
+        render json: appointment
       else
         render json: { error: "Appointment not found" }, status: :not_found
       end
     end
 
+    def destroy
+      appointment = Appointment.find_by(id: params[:id])
+      if appointment
+        appointment.destroy
+        render json: appointment.client
+      else
+        render json: { error: "Appointment not found" }, status: :not_found
+      end
+    end
+
+
     private
+
+    # wrap parameter rails .. params wrapper 
 
     def appointment_params
       params.require(:appointment).permit(:appointment_information, :start_date, :end_date, :boarding, :in_house, :petsitter_id, :client_id)

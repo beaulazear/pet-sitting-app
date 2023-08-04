@@ -40,9 +40,15 @@ const styles = {
 
 export default function ClientProfile({ client, updateClient }) {
     const [updateButton, setUpdateButton] = useState(false)
+    const [updateButtonText, setUpdateButtonText] = useState("Update Account")
 
     function changeFormView(){
         setUpdateButton(!updateButton)
+        if (updateButtonText === "Update Account") {
+            setUpdateButtonText("Close Update Form")
+        } else {
+            setUpdateButtonText("Update Account")
+        }
     }
 
     return (
@@ -54,7 +60,7 @@ export default function ClientProfile({ client, updateClient }) {
             <p style={styles.info}><b>My Name:</b> {client.full_name}, NYC</p>
             <p style={styles.info}><b>About my pet:</b> {client.pet_information}</p>
             <p style={styles.info}><b>Ideal petsitter:</b> {client.ideal_petsitter}</p>
-            <button onClick={() => changeFormView()}>Update Account</button>
+            <button onClick={() => changeFormView()}>{updateButtonText}</button>
             {updateButton === true && (
                 <UpdateClient client={client} updateClient={updateClient} changeFormView={changeFormView} />
             )}
