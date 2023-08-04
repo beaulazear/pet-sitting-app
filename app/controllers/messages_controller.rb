@@ -1,12 +1,12 @@
 class MessagesController < ApplicationController
+    before_action :current_user
 
     def index
-        messages = Message.all
-        render json: messages
+        render json: @current_user.messages
     end
 
     def create
-        message = Message.create(message_params)
+        message = @current_user.messages.create(message_params)
         if message.valid?
             render json: message, status: :created
         else

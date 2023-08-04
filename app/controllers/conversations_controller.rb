@@ -1,16 +1,12 @@
 class ConversationsController < ApplicationController
+    before_action :current_user, :associated_conversations
 
     def index
-        conversations = Conversation.all
-        if conversations
-            render json: conversations
-        else
-            render json: { error: "Not found" }, status: :not_found
-        end
+        render json: @current_conversations
     end
 
     def create
-        conversation = Conversation.create(convo_params)
+        conversation = @current_client.conversations.create(convo_params)
         if conversation.valid?
             render json: conversation, status: :created
         else
@@ -19,7 +15,7 @@ class ConversationsController < ApplicationController
     end
 
     def destroy
-        conversation = Conversation.find_by(id: params[:id])
+        conversation = @current_conversations.find_by(id: params[:id])
         if conversation
             conversation.destroy
             render json: conversation
@@ -29,7 +25,7 @@ class ConversationsController < ApplicationController
     end
 
     def update
-        conversation = Conversation.find_by(id: params[:id])
+        conversation = @current_conversations.find_by(id: params[:id])
         if conversation
             conversation.update(update_title_params)
             render json: conversation, status: :created
@@ -47,4 +43,14 @@ class ConversationsController < ApplicationController
     def update_title_params
         params.require(:conversation).permit(:conversation_title)
     end
+
+    def associated_conversations
+        if @current_petsitter && @current_client
+          @current_conversations = @current_petsitter.conversations.concat(@current_client.conversations)
+        elsif @current_client
+          @current_conversations = @current_client.conversations
+        else
+          @current_conversations = @current_petsitter.conversations
+        end
+      end
 end

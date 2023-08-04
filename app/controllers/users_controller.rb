@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+    skip_before_action :authorized, only: :create 
+
     def index
         users = User.all
         render json: users
@@ -24,12 +26,6 @@ class UsersController < ApplicationController
           render json: { error: "Not authorized" }, status: :unauthorized
         end
     end   
-
-    def update_petsitter
-        user = User.find_by(id: params[:id])
-        user.update(is_pet_sitter: true)
-        render json: user, status: :created
-    end
 
     private
 
