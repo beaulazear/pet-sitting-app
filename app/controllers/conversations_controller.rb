@@ -1,12 +1,13 @@
 class ConversationsController < ApplicationController
-    before_action :current_user, :associated_conversations
+    before_action :current_user
 
     def index
-        render json: @current_conversations
+        conversations = Conversation.all
+        render json: conversations
     end
 
     def create
-        conversation = @current_client.conversations.create(convo_params)
+        conversation = Conversation.create(convo_params)
         if conversation.valid?
             render json: conversation, status: :created
         else
@@ -15,7 +16,7 @@ class ConversationsController < ApplicationController
     end
 
     def destroy
-        conversation = @current_conversations.find_by(id: params[:id])
+        conversation = Conversation.find_by(id: params[:id])
         if conversation
             conversation.destroy
             render json: conversation
@@ -25,7 +26,7 @@ class ConversationsController < ApplicationController
     end
 
     def update
-        conversation = @current_conversations.find_by(id: params[:id])
+        conversation = Conversation.find_by(id: params[:id])
         if conversation
             conversation.update(update_title_params)
             render json: conversation, status: :created
@@ -44,13 +45,13 @@ class ConversationsController < ApplicationController
         params.require(:conversation).permit(:conversation_title)
     end
 
-    def associated_conversations
-        if @current_petsitter && @current_client
-          @current_conversations = @current_petsitter.conversations.concat(@current_client.conversations)
-        elsif @current_client
-          @current_conversations = @current_client.conversations
-        else
-          @current_conversations = @current_petsitter.conversations
-        end
-      end
+    # def associated_conversations
+    #     if @current_petsitter && @current_client
+    #       Conversation = @current_petsitter.conversations + @current_client.conversations
+    #     elsif @current_client
+    #       Conversation = @current_client.conversations
+    #     else
+    #       Conversation = @current_petsitter.conversations
+    #     end
+    # end
 end

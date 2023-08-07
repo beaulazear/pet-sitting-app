@@ -1,8 +1,8 @@
 class AppointmentsController < ApplicationController
-  before_action :current_user, :associated_appointments
+  before_action :current_user
   
     def create
-        appointment = @current_client.appointments.create(appointment_params)
+        appointment = Appointment.create(appointment_params)
         if appointment.valid?
             render json: appointment, status: :created
         else
@@ -11,11 +11,12 @@ class AppointmentsController < ApplicationController
     end
 
     def index
-      render json: @current_appointments
+      appointments = Appointment.all
+      render json: appointments
     end
 
     def update
-      appointment = @current_appointments.find_by(id: params[:id])
+      appointment = Appointment.find_by(id: params[:id])
       appointment.update(appointment_params)
       if appointment.valid?
         render json: appointment, status: :created
@@ -25,7 +26,7 @@ class AppointmentsController < ApplicationController
     end
 
     def accepted
-      appointment = @current_appointments.find_by(id: params[:id])
+      appointment = Appointment.find_by(id: params[:id])
       if appointment
         appointment.update(accepted: true, declined: false)
         render json: appointment, status: :created
@@ -35,7 +36,7 @@ class AppointmentsController < ApplicationController
     end
 
     def declined
-      appointment = @current_appointments.find_by(id: params[:id])
+      appointment = Appointment.find_by(id: params[:id])
       if appointment
         appointment.update(accepted: false, declined: true)
         render json: appointment, status: :created
@@ -47,7 +48,7 @@ class AppointmentsController < ApplicationController
     # find by current user appointments instead of from Appointment, make a method in application controller called current user ... go from there ... notes from meeting with Ben, implemented this here already.
 
     def canceled
-      appointment = @current_appointments.find_by(id: params[:id])
+      appointment = Appointment.find_by(id: params[:id])
       if appointment
         appointment.update(canceled: true)
         render json: appointment
@@ -57,7 +58,8 @@ class AppointmentsController < ApplicationController
     end
 
     def destroy
-      appointment = @current_appointments.find_by(id: params[:id])
+      
+      appointment = Appointment.find_by(id: params[:id])
       if appointment
         appointment.destroy
         render json: appointment.client
@@ -75,13 +77,15 @@ class AppointmentsController < ApplicationController
       params.require(:appointment).permit(:appointment_information, :start_date, :end_date, :boarding, :in_house, :petsitter_id, :client_id)
     end
 
-    def associated_appointments
-      if @current_petsitter && @current_client
-        @current_appointments = @current_petsitter.appointments.concat(@current_client.appointments)
-      elsif @current_client
-        @current_appointments = @current_client.appointments
-      else
-        @current_appointments = @current_petsitter.appointments
-      end
-    end
+    # def associated_appointments
+    #   if @current_petsitter && @current_client
+    #     Appointment = @current_petsitter.appointments + @current_client.appointments
+    #   elsif @current_client
+    #     Appointment = @current_client.appointments
+    #   else
+    #     Appointment = @current_petsitter.appointments
+    #   end
+
+    #   puts Appointment
+    # end
 end

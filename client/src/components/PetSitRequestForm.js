@@ -91,6 +91,7 @@ export default function PetSitRequestForm({ newRequestFromClientPage, petSitter,
                         setEndDate("")
                         setErrorData([])
                         updateDisplayForm()
+                        console.log(apt)
                         if (newRequestFromClientPage) {
                             newRequestFromClientPage(apt)
                         }

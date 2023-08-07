@@ -63,7 +63,12 @@ export default function ActiveAppointmentCard({ appointment, updateActiveAppoint
         return totalPrice;
     }
 
-    if (user.id === appointment.petsitter.user_id) {
+    const isPetsitter = user.id === appointment.petsitter.user_id
+
+    console.log(isPetsitter)
+    console.log(appointment)
+
+    if (isPetsitter) {
         return (
             <div style={styles.activeAppointmentDiv}>
                 <div style={styles.imageWrapper}>

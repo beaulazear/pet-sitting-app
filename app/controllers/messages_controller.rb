@@ -2,7 +2,8 @@ class MessagesController < ApplicationController
     before_action :current_user
 
     def index
-        render json: @current_user.messages
+        messages = Message.all
+        render json: messages
     end
 
     def create

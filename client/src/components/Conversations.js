@@ -81,19 +81,26 @@ export default function Conversations({ user }) {
 
     useEffect(() => {
         fetch("/conversations")
-            .then((resp) => resp.json())
-            .then((convos) => {
-                if (user.client && user.petsitter) {
-                    let filteredConvos = convos.filter((convo) => convo.petsitter_id === user.petsitter.id || convo.client_id === user.client.id)
-                    setConversations(filteredConvos)
-                } else if (user.client) {
-                    let filteredConvos = convos.filter((convo) => convo.client_id === user.client.id)
-                    setConversations(filteredConvos)
+            .then((resp) => {
+                if (resp.ok) {
+                    resp.json().then((convos) => {
+                        if (user.client && user.petsitter) {
+                            let filteredConvos = convos.filter((convo) => convo.petsitter_id === user.petsitter.id || convo.client_id === user.client.id)
+                            setConversations(filteredConvos)
+                        } else if (user.client) {
+                            let filteredConvos = convos.filter((convo) => convo.client_id === user.client.id)
+                            setConversations(filteredConvos)
+                        } else {
+                            let filteredConvos = convos.filter((convo) => convo.petsitter_id === user.petsitter.id)
+                            setConversations(filteredConvos)
+                        }
+                        scrollToBottom()
+                    })
                 } else {
-                    let filteredConvos = convos.filter((convo) => convo.petsitter_id === user.petsitter.id)
-                    setConversations(filteredConvos)
+                    resp.json().then((errors) => {
+                        console.log(errors)
+                    })
                 }
-                scrollToBottom()
             })
     }, [user])
 
