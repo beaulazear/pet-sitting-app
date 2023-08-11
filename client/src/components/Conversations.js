@@ -84,6 +84,8 @@ export default function Conversations({ user }) {
             .then((resp) => {
                 if (resp.ok) {
                     resp.json().then((convos) => {
+                        setConversations(convos)
+                        console.log(convos)
                         if (user.client && user.petsitter) {
                             let filteredConvos = convos.filter((convo) => convo.petsitter_id === user.petsitter.id || convo.client_id === user.client.id)
                             setConversations(filteredConvos)

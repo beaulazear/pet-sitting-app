@@ -3,11 +3,8 @@ import { useState } from "react";
 
 const formStyles = {
     formContainer: {
-        marginTop: '20px',
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#FFD966',
         padding: '20px',
-        borderRadius: '8px',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
     },
     formGroup: {
         marginBottom: '15px'
@@ -107,7 +104,7 @@ export default function UpdatePetSitRequest({ deleteAppointmentRequest, appointm
         <div style={formStyles.formContainer}>
             <button value={buttonText} className="acceptButton" onClick={handleButtonToggle}>{buttonText}</button>
             {updateRequestButton === true &&
-                <div>
+                <div style={formStyles.formContainer}>
                     <form className="styled-form" onSubmit={patchProfile}>
                         <h2>Pet Sit Request Form</h2>
                         <div style={formStyles.formGroup}>

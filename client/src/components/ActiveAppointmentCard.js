@@ -2,7 +2,7 @@ import React from "react";
 
 const styles = {
     activeAppointmentDiv: {
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#C8E6C9',
         padding: '20px',
         borderRadius: '8px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',

@@ -73,8 +73,41 @@ export default function ConvoRequestForm({ user, petSitter }) {
                 }),
             })
                 .then((resp) => resp.json())
-                .then(() => {
-                    navigate('/conversations')
+                .then((convo) => {
+
+                    let newMessageBodyOne = `Automated message: ${user.username} just started a conversation.`
+
+                    fetch("/messages", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            user_id: user.id,
+                            conversation_id: convo.id,
+                            body: newMessageBodyOne
+                        })
+                    })
+                        .then((resp) => resp.json())
+                        .then(() => {
+
+                            let newMessageBodyTwo = `Automated message: ${user.username} just added petsitter ${petSitter.full_name} to a conversation.`
+
+                            fetch("/messages", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    user_id: petSitter.user_id,
+                                    conversation_id: convo.id,
+                                    body: newMessageBodyTwo
+                                })
+                            })
+                                .then((resp) => resp.json())
+                                .then(() => navigate('/conversations')
+                                )
+                        })
                 })
         }
     }

@@ -44,14 +44,4 @@ class ConversationsController < ApplicationController
     def update_title_params
         params.require(:conversation).permit(:conversation_title)
     end
-
-    # def associated_conversations
-    #     if @current_petsitter && @current_client
-    #       Conversation = @current_petsitter.conversations + @current_client.conversations
-    #     elsif @current_client
-    #       Conversation = @current_client.conversations
-    #     else
-    #       Conversation = @current_petsitter.conversations
-    #     end
-    # end
 end
