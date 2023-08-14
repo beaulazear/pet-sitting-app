@@ -94,7 +94,13 @@ export default function PendingAppointmentCard({ deleteAppointmentRequest, appoi
         <p><b>Total Price:</b> ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
         <p><b>Start Date:</b> {appointment.start_date}</p>
         <p><b>End Date:</b> {appointment.end_date}</p>
-        <p><b>Appointment Information:</b>{appointment.appointment_information}</p>
+        {appointment.boarding === true &&
+          <p><b>Open to boarding at petsitters place</b></p>
+        }
+        {appointment.in_house === true &&
+          <p><b>Open to house-sitting at clients place</b></p>
+        }
+        <p><b>Appointment Information:</b> {appointment.appointment_information}</p>
         <button onClick={handleAccept} className="acceptButton" value="Accepted">Accept Pet Sit</button>
         <button onClick={handleDecline} className="declineButton" value="Declined">Decline Pet Sit</button>
       </div>
