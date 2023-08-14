@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const formStyles = {
     formContainer: {
-        backgroundColor: '#FFD966',
+        backgroundColor: '#FFF3D0',
         padding: '20px',
     },
     formGroup: {
@@ -95,7 +95,7 @@ export default function UpdatePetSitRequest({ deleteAppointmentRequest, appointm
     }
 
     function handleDelete() {
-        fetch(`/appointments/${appointment.id}/delete`)
+        fetch(`/appointments/${appointment.id}`, { method: 'DELETE'})
             .then((resp) => resp.json())
             .then((updatedClient) => deleteAppointmentRequest(appointment.id, updatedClient))
     }

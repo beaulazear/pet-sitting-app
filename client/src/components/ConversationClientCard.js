@@ -92,14 +92,14 @@ export default function ConversationClientCard({ conversation, removeConversatio
             <p style={styles.info}><b>Ideal petsitter:</b> {client.ideal_petsitter}</p>
             <button className="declineButton" onClick={handleConvoDelete}>Delete conversation.</button>
             <br></br><br></br>
+            <button className="acceptButton" onClick={scrollToBottom}>Go to end of chat.</button>
+            <br></br><br></br>
             <form onSubmit={updateConvoTitle}>
                 <button className="acceptButton">Update conversation title</button>
                 <br></br><br></br>
                 <label style={styles.label} htmlFor="convoTitle">New Conversation Title:</label>
                 <input style={styles.input} className="convoTitle" type="text" value={convoTitle} onChange={(e) => setConvoTitle(e.target.value)} />
             </form>
-            <br></br><br></br>
-            <button className="acceptButton" onClick={scrollToBottom}>Go to end of chat.</button>
         </div>
     );
 }

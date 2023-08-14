@@ -2,7 +2,7 @@ class ConversationsController < ApplicationController
     before_action :current_user
 
     def index
-        conversations = Conversation.all
+        conversations = @current_user.conversations.all
         render json: conversations
     end
 
@@ -16,7 +16,7 @@ class ConversationsController < ApplicationController
     end
 
     def destroy
-        conversation = Conversation.find_by(id: params[:id])
+        conversation = @current_user.conversations.find_by(id: params[:id])
         if conversation
             conversation.destroy
             render json: conversation
@@ -26,7 +26,7 @@ class ConversationsController < ApplicationController
     end
 
     def update
-        conversation = Conversation.find_by(id: params[:id])
+        conversation = @current_user.conversations.find_by(id: params[:id])
         if conversation
             conversation.update(update_title_params)
             render json: conversation, status: :created

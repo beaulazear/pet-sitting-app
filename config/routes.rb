@@ -1,44 +1,26 @@
 Rails.application.routes.draw do
   
-  # resources :appointments
-  # resources :clients
-  # resources :petsitters
-  # resources :users, only: [:create, :index]
-
-
-  get "/me", to: "users#show"
-  get "/users", to: "users#index"
-  post "/signup", to: "users#create"
-
+  resources :appointments, only: [:create, :update, :index, :destroy]
+  resources :clients, only: [:index, :update, :create]
+  resources :petsitters, only: [:index, :create, :update]
+  resources :users, only: [:index]
+  resources :conversations, only: [:index, :create, :destroy, :update]
+  resources :messages, only: [:index, :create]
+  
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  get "/petsitters", to: "petsitters#index"
-  post "/petsitters", to: "petsitters#create"
+  get "/me", to: "users#show"
+  post "/signup", to: "users#create"
+
   get "/petsitter", to: "petsitters#show"
-  patch "/petsitters/:id", to: "petsitters#update"
   patch "/petsitters/:id/availability", to: "petsitters#update_availability"
 
-  post "/clients", to: "clients#create"
-  get "/clients", to: "clients#index"
   get "/client", to: "clients#show"
-  patch "/clients/:id", to: "clients#update"
-  
-  post "/appointments", to: "appointments#create"
-  get "/appointments", to: "appointments#index"
-  patch "/appointments/:id", to: "appointments#update"
+
   get "/appointments/:id/accepted", to: "appointments#accepted"
   get "/appointments/:id/declined", to: "appointments#declined"
   get "/appointments/:id/canceled", to: "appointments#canceled"
-  get "/appointments/:id/delete", to: "appointments#destroy"
-
-  get "/conversations", to: "conversations#index"
-  post "/conversations", to: "conversations#create"
-  delete "/conversations/:id", to: "conversations#destroy"
-  patch "/conversations/:id", to: "conversations#update"
-
-  get "/messages", to: "messages#index"
-  post "/messages", to: "messages#create"
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

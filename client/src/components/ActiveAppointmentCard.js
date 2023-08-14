@@ -51,7 +51,10 @@ export default function ActiveAppointmentCard({ appointment, updateActiveAppoint
     function handleCancel() {
         fetch(`/appointments/${appointment.id}/canceled`)
             .then((resp) => resp.json())
-            .then((apt) => updateActiveAppointments(apt))
+            .then((apt) => {
+                console.log(apt)
+                updateActiveAppointments(apt)
+            })
     }
 
     function totalPriceCalculator(startDate, endDate) {
