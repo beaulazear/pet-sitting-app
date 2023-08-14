@@ -9,6 +9,4 @@ class User < ApplicationRecord
     has_many :messages
     has_many :conversations, -> { distinct }, through: :messages
 
-    # distinct qualifier for has many through that prevents duplicates.
-
 end

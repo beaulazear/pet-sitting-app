@@ -55,27 +55,29 @@ class AppointmentsController < ApplicationController
     # review study guide in charlottes resrouce posts
 
     def canceled
+      appointments = []
+    
       if @current_user.client
-        appointment = @current_user.client.appointments.find_by(id: params[:id])
-        if appointment
-          appointment.update(canceled: true)
-          render json: appointment
-        else
-          render json: { error: "Appointment not found" }, status: :not_found
-        end        
-      else @current_user.petsitter
-        appointment = @current_user.petsitter.appointments.find_by(id: params[:id])
-        if appointment
-          appointment.update(canceled: true)
-          render json: appointment
-        else
-          render json: { error: "Appointment not found" }, status: :not_found
-        end
+        appointments += @current_user.client.appointments
+      end
+    
+      if @current_user.petsitter
+        appointments += @current_user.petsitter.appointments
+      end
+    
+      appointment = appointments.find { |app| app.id == params[:id].to_i }
+    
+      if appointment
+        appointment.update(canceled: true)
+        render json: appointment
+      else
+        render json: { error: "Appointment not found" }, status: :not_found
       end
     end
+    
 
     def destroy
-      appointment = Appointment.find_by(id: params[:id])
+      appointment = @current_user.client.appointments.find_by(id: params[:id])
       if appointment
         appointment.destroy
         render json: appointment.client

@@ -15,8 +15,10 @@ export default function ClientPreviousSitters({ client, user, newRequestFromClie
     const [previousSitters, setPreviousSitters] = useState([])
 
     useEffect(() => {
-        let noRepeatSitters = [...new Map(client.petsitters.map((p) => [p.id, p])).values()]
-        setPreviousSitters(noRepeatSitters)
+        if (client.petsitters) {
+            let noRepeatSitters = [...new Map(client.petsitters.map((p) => [p.id, p])).values()]
+            setPreviousSitters(noRepeatSitters)
+        }
     }, [client.petsitters])
 
     return (
