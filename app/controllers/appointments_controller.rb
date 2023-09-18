@@ -69,7 +69,7 @@ class AppointmentsController < ApplicationController
     
       if appointment
         appointment.update(canceled: true)
-        render json: appointment
+        render json: appointment, status: :created
       else
         render json: { error: "Appointment not found" }, status: :not_found
       end
@@ -91,6 +91,6 @@ class AppointmentsController < ApplicationController
     # wrap parameter rails .. params wrapper 
 
     def appointment_params
-      params.require(:appointment).permit(:appointment_information, :start_date, :end_date, :boarding, :in_house, :petsitter_id, :client_id)
+      params.require(:appointment).permit(:appointment_information, :start_date, :end_date, :boarding, :in_house, :petsitter_id, :client_id, :canceled)
     end
 end
