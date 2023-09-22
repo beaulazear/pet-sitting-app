@@ -105,7 +105,7 @@ export default function ConvoRequestForm({ user, petSitter }) {
                                 })
                             })
                                 .then((resp) => resp.json())
-                                .then(() => navigate('/conversations')
+                                .then(() => navigate('/conversationspage')
                                 )
                         })
                 })
