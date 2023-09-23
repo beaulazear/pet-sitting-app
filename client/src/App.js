@@ -39,10 +39,10 @@ function App() {
         <h1 style={headerStyle}>NYCPetSitters</h1>
         <Routes>
           <Route path="/" element={<Home user={user} setUser={setUser} />} />
-          <Route path="/petsitter" element={<PetSitterPage updateUser={updateUserPetsitter} user={user} setUser={setUser} handleLogout={handleLogout} />} />
-          <Route path="/client" element={<ClientPage updateUser={updateUserClient} user={user} setUser={setUser} handleLogout={handleLogout} />} />
-          <Route path="/petsitters" element={<PetSittersPage user={user} handleLogout={handleLogout} />} />
-          <Route path="/conversations" element={<Conversations user={user} handleLogout={handleLogout} />} />
+          <Route path="/petsitterpage" element={<PetSitterPage />} />
+          <Route path="/clientpage" element={<ClientPage />} />
+          <Route path="/petsitterspage" element={<PetSittersPage />} />
+          <Route path="/conversationspage" element={<Conversations />} />
         </Routes>
         <div style={{ marginTop: '20px' }}>
           <button style={{ position: 'fixed', bottom: '0', right: '0px', marginTop: "2%" }} onClick={handleLogout}>Logout</button>
