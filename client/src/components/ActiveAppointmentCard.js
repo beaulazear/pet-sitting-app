@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../context/user";
 
 const styles = {
     activeAppointmentDiv: {
@@ -46,7 +47,9 @@ const styles = {
     },
 };
 
-export default function ActiveAppointmentCard({ appointment, updateActiveAppointments, user }) {
+export default function ActiveAppointmentCard({ appointment, updateActiveAppointments }) {
+
+    const { user } = useContext(UserContext)
 
     function handleCancel() {
         fetch(`/appointments/${appointment.id}/canceled`)
@@ -67,9 +70,6 @@ export default function ActiveAppointmentCard({ appointment, updateActiveAppoint
     }
 
     const isPetsitter = user.id === appointment.petsitter.user_id
-
-    console.log(isPetsitter)
-    console.log(appointment)
 
     if (isPetsitter) {
         return (

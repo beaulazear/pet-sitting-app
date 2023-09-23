@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import UpdatePetSitRequest from "./UpdatePetSitRequest";
+import { UserContext } from "../context/user";
 
 const styles = {
   petSitterProfile: {
@@ -58,7 +59,9 @@ const styles = {
   },
 };
 
-export default function PendingAppointmentCard({ deleteAppointmentRequest, appointment, updatePendingAppointments, user }) {
+export default function PendingAppointmentCard({ deleteAppointmentRequest, appointment, updatePendingAppointments }) {
+
+  const { user } = useContext(UserContext)
 
   function totalPriceCalculator(startDate, endDate) {
     const start = new Date(startDate);

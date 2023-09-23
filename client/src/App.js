@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { UserContext } from './context/user';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import PageNavLinks from './components/PageNavLinks';
@@ -19,48 +20,31 @@ const headerStyle = {
 };
 
 function App() {
-  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    fetch("/me").then((response) => {
-      if (response.ok) {
-        response.json().then((user) => setUser(user));
-      }
-    });
-  }, []);
+  const { user, setUser } = useContext(UserContext)
 
   function handleLogout() {
     fetch("/logout", {
       method: "DELETE",
-    }).then(setUser(null))
-  }
-
-  function updateUserClient(clientAccount) {
-    const newUser = user
-    newUser.client = clientAccount
-    setUser(newUser)
-  }
-
-  function updateUserPetsitter(petsitterAccount) {
-    const newUser = user
-    newUser.petsitter = petsitterAccount
-    setUser(newUser)
+    }).then(() => {
+      setUser(null)
+    })
   }
 
 
   if (user) {
     return (
-      <div style={{paddingBottom: "20px"}}>
+      <div style={{ paddingBottom: "20px" }}>
         <PageNavLinks />
         <h1 style={headerStyle}>NYCPetSitters</h1>
         <Routes>
-          <Route path="/" element={<Home user={user} setUser={setUser} />} />
-          <Route path="/petsitterpage" element={<PetSitterPage updateUser={updateUserPetsitter} user={user} setUser={setUser} handleLogout={handleLogout} />} />
-          <Route path="/clientpage" element={<ClientPage updateUser={updateUserClient} user={user} setUser={setUser} handleLogout={handleLogout} />} />
-          <Route path="/petsitterspage" element={<PetSittersPage user={user} handleLogout={handleLogout} />} />
-          <Route path="/conversationspage" element={<Conversations user={user} handleLogout={handleLogout} />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/petsitter" element={<PetSitterPage />} />
+          <Route path="/client" element={<ClientPage />} />
+          <Route path="/petsitters" element={<PetSittersPage />} />
+          <Route path="/conversations" element={<Conversations />} />
         </Routes>
-        <div style={{ marginTop: '20px' }}> {/* Add some space above the button */}
+        <div style={{ marginTop: '20px' }}>
           <button style={{ position: 'fixed', bottom: '0', right: '0px', marginTop: "2%" }} onClick={handleLogout}>Logout</button>
         </div>
       </div>
@@ -69,8 +53,8 @@ function App() {
     return (
       <div id="notLoggedInHome">
         <h1 style={headerStyle}>NYC Pet Sitters</h1>
-        <Login onLogin={setUser} />
-        <Signup onLogin={setUser} />
+        <Login />
+        <Signup />
       </div>
     );
   }

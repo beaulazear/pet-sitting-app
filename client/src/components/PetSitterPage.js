@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../context/user";
 import PetSitterProfile from "./PetSitterProfile";
 import PendingPetSits from "./PendingPetSits";
 
@@ -39,27 +40,23 @@ const formStyles = {
     },
 };
 
-export default function PetSitterPage({ user, updateUser }) {
+export default function PetSitterPage() {
 
+    const { user, setUser } = useContext(UserContext)
+
+    const [petsitter, setPetsitter] = useState(user.petsitter)
     const [bio, setBio] = useState("")
     const [city, setCity] = useState("")
     const [photo, setPhoto] = useState("")
     const [day_rate, setDayRate] = useState("")
     const [full_name, setFullName] = useState("")
     const [my_ideal_pet_sit, setMyIdealPetSit] = useState("")
-    const [petSitter, setPetSitter] = useState(null)
     const [errors, setErrors] = useState([])
 
-    useEffect(() => {
-        fetch("/petsitter").then((response) => {
-            if (response.ok) {
-                response.json().then((petSitter) => setPetSitter(petSitter));
-            }
-        });
-    }, []);
-
     function updatePetSitter(newPetsitter) {
-        setPetSitter(newPetsitter)
+        const newUser = user
+        user.petsitter = newPetsitter
+        setUser(newUser)
     }
 
     function handlePetSitterOptIn(e) {
@@ -81,9 +78,11 @@ export default function PetSitterPage({ user, updateUser }) {
             }),
         }).then((response) => {
             if (response.ok) {
-                response.json().then((petSitter) => {
-                    setPetSitter(petSitter)
-                    updateUser(petSitter)
+                response.json().then((petsitter) => {
+                    const newUser = user
+                    newUser.petsitter = petsitter
+                    setUser(newUser)
+                    setPetsitter(petsitter)
                 });
             } else {
                 response.json().then((errorData) => {
@@ -94,11 +93,11 @@ export default function PetSitterPage({ user, updateUser }) {
         })
     }
 
-    if (petSitter) {
+    if (petsitter) {
         return (
             <div>
-                <PetSitterProfile updatePetSitter={updatePetSitter} petSitter={petSitter} />
-                <PendingPetSits petSitter={petSitter} user={user} />
+                <PetSitterProfile updatePetSitter={updatePetSitter} />
+                <PendingPetSits />
             </div>
 
         )

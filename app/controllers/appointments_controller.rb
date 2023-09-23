@@ -52,8 +52,6 @@ class AppointmentsController < ApplicationController
       end
     end
 
-    # review study guide in charlottes resrouce posts
-
     def canceled
       appointments = []
     

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../context/user';
 import '../App.css';
 
 const formStyles = {
@@ -44,7 +45,9 @@ const formStyles = {
   },
 };
 
-export default function Signup({ onLogin }) {
+export default function Signup() {
+
+  const { setUser } = useContext(UserContext)
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -66,7 +69,7 @@ export default function Signup({ onLogin }) {
     })
       .then((response) => {
         if (response.ok) {
-          response.json().then((user) => onLogin(user));
+          response.json().then((user) => setUser(user));
         } else {
           response.json().then((errorData) => setErrors(errorData.errors))
         }
