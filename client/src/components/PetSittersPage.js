@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import PetSitterCard from "./PetSitterCard";
+import { UserContext } from "../context/user";
 
 const headerStyle = {
     textAlign: 'center',
@@ -10,9 +11,11 @@ const headerStyle = {
     lineHeight: '1.2'
 };
 
-export default function PetSittersPage({ user }) {
+export default function PetSittersPage() {
 
     const [petSitters, setPetSitters] = useState(null)
+
+    const { user } = useContext(UserContext)
 
     useEffect(() => {
         fetch("/petsitters")

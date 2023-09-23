@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/user";
 import PendingAppointmentCard from "./PendingAppointmentCard";
 import ActiveAppointmentCard from "./ActiveAppointmentCard";
 import '../App.css';
@@ -13,7 +14,10 @@ const headerStyle = {
     lineHeight: '1.2'
 };
 
-export default function PendingPetSits({ petSitter, user }) {
+export default function PendingPetSits() {
+
+    const { user } = useContext(UserContext)
+    const petsitter = user.petsitter
 
     const [appointments, setAppointments] = useState([])
     const [pendingAppointments, setPendingAppointments] = useState([])
@@ -25,15 +29,15 @@ export default function PendingPetSits({ petSitter, user }) {
                 response.json().then((apts) => {
                     setAppointments(apts)
 
-                    let pendingApts = apts.filter((apt) => apt.petsitter_id === petSitter.id && apt.accepted !== true && apt.declined !== true && apt.canceled !== true)
+                    let pendingApts = apts.filter((apt) => apt.petsitter_id === petsitter.id && apt.accepted !== true && apt.declined !== true && apt.canceled !== true)
                     setPendingAppointments(pendingApts)
 
-                    let activeApts = apts.filter((apt) => apt.petsitter_id === petSitter.id && apt.accepted === true && apt.completed !== true && apt.canceled !== true)
+                    let activeApts = apts.filter((apt) => apt.petsitter_id === petsitter.id && apt.accepted === true && apt.completed !== true && apt.canceled !== true)
                     setActiveAppointments(activeApts)
                 });
             }
         });
-    }, [petSitter, user]);
+    }, [petsitter, user]);
 
     function updatePendingAppointments(updatedAppointment) {
 
@@ -75,10 +79,10 @@ export default function PendingPetSits({ petSitter, user }) {
             <div>
                 <h2 style={headerStyle}>Active Appointments / Requests:</h2>
                 {activeAppointments.map((appointment) => (
-                    <ActiveAppointmentCard user={user} petSitter={petSitter} updateActiveAppointments={updateActiveAppointments} appointment={appointment} key={appointment.id} />
+                    <ActiveAppointmentCard updateActiveAppointments={updateActiveAppointments} appointment={appointment} key={appointment.id} />
                 ))}
                 {pendingAppointments.map((appointment) => (
-                    <PendingAppointmentCard user={user} petSitter={petSitter} updatePendingAppointments={updatePendingAppointments} appointment={appointment} key={appointment.id} />
+                    <PendingAppointmentCard updatePendingAppointments={updatePendingAppointments} appointment={appointment} key={appointment.id} />
                 ))}
             </div>
         )

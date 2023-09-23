@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/user";
 import ActiveAppointmentCard from "./ActiveAppointmentCard";
 import '../App.css';
 
-export default function AcceptedAppointments({ petSitter }) {
+export default function AcceptedAppointments() {
+
+    const { user } = useContext(UserContext)
 
     const [appointments, setAppointments] = useState([])
 
@@ -10,7 +13,7 @@ export default function AcceptedAppointments({ petSitter }) {
         fetch("/appointments")
             .then((resp) => resp.json())
             .then((apts) => {
-                let newApts = apts.filter((apt) => apt.petsitter_id === petSitter.id && apt.accepted === true && apt.completed === null)
+                let newApts = apts.filter((apt) => apt.petsitter_id === user.petsitter.id && apt.accepted === true && apt.completed === null)
                 setAppointments(newApts)
             })
     }, [])

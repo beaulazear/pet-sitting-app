@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { UserContext } from "../context/user";
 import ConversationCard from "./ConversationCard";
 import Messages from "./Messages";
 import ConversationPetSitterCard from "./ConversationPetSitterCard";
@@ -13,7 +14,7 @@ const headerStyle = {
     lineHeight: '1.2',
 };
 
-export default function Conversations({ user }) {
+export default function Conversations() {
 
     const [conversations, setConversations] = useState([])
     const [openConvoButton, setOpenConvoButton] = useState(false)
@@ -22,6 +23,8 @@ export default function Conversations({ user }) {
     const [errors, setErrors] = useState([])
 
     const bottomElement = useRef(null);
+
+    const { user } = useContext(UserContext) 
 
     function scrollToBottom() {
         bottomElement?.current?.scrollIntoView({ behavior: 'smooth' });

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/user";
 import PetSitterCard from "./PetSitterCard";
 
 const headerStyle = {
@@ -10,16 +11,17 @@ const headerStyle = {
     lineHeight: '1.2',
 };
 
-export default function ClientPreviousSitters({ client, user, newRequestFromClientPage }) {
+export default function ClientPreviousSitters({ newRequestFromClientPage }) {
 
     const [previousSitters, setPreviousSitters] = useState([])
+    const { user } = useContext(UserContext)
 
     useEffect(() => {
-        if (client.petsitters) {
-            let noRepeatSitters = [...new Map(client.petsitters.map((p) => [p.id, p])).values()]
+        if (user.client.petsitters) {
+            let noRepeatSitters = [...new Map(user.client.petsitters.map((p) => [p.id, p])).values()]
             setPreviousSitters(noRepeatSitters)
         }
-    }, [client.petsitters])
+    }, [user])
 
     return (
         <div>

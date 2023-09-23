@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/user";
 import PendingAppointmentCard from "./PendingAppointmentCard";
 import ActiveAppointmentCard from "./ActiveAppointmentCard";
 import ClientPreviousSitters from "./ClientPreviousSitters";
@@ -14,7 +15,9 @@ const headerStyle = {
     lineHeight: '1.2',
 };
 
-export default function ClientPendingAppointments({ updateClient, client, user }) {
+export default function ClientPendingAppointments() {
+
+    const { user, setUser } = useContext(UserContext)
 
     const [appointments, setAppointments] = useState([])
     const [pendingAppointments, setPendingAppointments] = useState([])
@@ -35,7 +38,7 @@ export default function ClientPendingAppointments({ updateClient, client, user }
                 });
             }
         });
-    }, [client, user]);
+    }, [user]);
 
     function updatePendingAppointments(updatedAppointment) {
 
@@ -98,7 +101,9 @@ export default function ClientPendingAppointments({ updateClient, client, user }
     function deleteAppointmentRequest(deletedRequestId, newClient) {
         let newPendingRequests = pendingAppointments.filter((apt) => apt.id !== deletedRequestId)
         setPendingAppointments(newPendingRequests)
-        updateClient(newClient)
+        const newUser = user
+        user.client = newClient
+        setUser(newUser)
     }
 
     if (pendingAppointments.length > 0 || activeAppointments.length > 0) {
@@ -106,19 +111,19 @@ export default function ClientPendingAppointments({ updateClient, client, user }
             <div>
                 <h2 style={headerStyle}>Active Appointments / Requests:</h2>
                 {activeAppointments.map((appointment) => (
-                    <ActiveAppointmentCard user={user} client={client} updateActiveAppointments={updateActiveAppointments} appointment={appointment} key={appointment.id} />
+                    <ActiveAppointmentCard updateActiveAppointments={updateActiveAppointments} appointment={appointment} key={appointment.id} />
                 ))}
                 {pendingAppointments.map((appointment) => (
-                    <PendingAppointmentCard deleteAppointmentRequest={deleteAppointmentRequest} user={user} client={client} updatePendingAppointments={updatePendingAppointments} appointment={appointment} key={appointment.id} />
+                    <PendingAppointmentCard deleteAppointmentRequest={deleteAppointmentRequest} updatePendingAppointments={updatePendingAppointments} appointment={appointment} key={appointment.id} />
                 ))}
-                <ClientPreviousSitters newRequestFromClientPage={newRequestFromClientPage} client={client} user={user} />
+                <ClientPreviousSitters newRequestFromClientPage={newRequestFromClientPage} />
             </div>
         )
     } else {
         return (
             <div>
                 <h2 style={headerStyle}>No pending requests / active pet sits</h2>
-                <ClientPreviousSitters newRequestFromClientPage={newRequestFromClientPage} client={client} user={user} />
+                <ClientPreviousSitters newRequestFromClientPage={newRequestFromClientPage} />
             </div>
         )
     }

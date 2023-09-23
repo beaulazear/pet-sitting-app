@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../context/user";
 import ClientProfile from "./ClientProfile";
 import ClientPendingAppointments from "./ClientPendingAppointments";
 
@@ -39,25 +40,15 @@ const formStyles = {
     },
 };
 
-export default function ClientPage({ user, updateUser }) {
+export default function ClientPage() {
+
+    const { user, setUser } = useContext(UserContext)
 
     const [pet_information, setPetInformation] = useState("")
     const [photo, setPetPhoto] = useState("")
     const [full_name, setFullName] = useState("")
     const [ideal_petsitter, setIdealPetSitter] = useState("")
-    const [client, setClient] = useState(null)
-
-    useEffect(() => {
-        fetch("/client").then((response) => {
-            if (response.ok) {
-                response.json().then((client) => setClient(client));
-            }
-        });
-    }, []);
-
-    function updateClient(newClient) {
-        setClient(newClient)
-    }
+    const [client, setClient] = useState(user.client)
 
     function handleClientOptIn(e) {
         e.preventDefault();
@@ -77,8 +68,10 @@ export default function ClientPage({ user, updateUser }) {
         }).then((response) => {
             if (response.ok) {
                 response.json().then((client) => {
+                    const newUser = user
+                    user.client = client
+                    setUser(newUser)
                     setClient(client)
-                    updateUser(client)
                 });
             }
         })
@@ -87,8 +80,8 @@ export default function ClientPage({ user, updateUser }) {
     if (client) {
         return (
             <div>
-                <ClientProfile updateClient={updateClient} client={client} />
-                <ClientPendingAppointments updateClient={updateClient} client={client} user={user} />
+                <ClientProfile />
+                <ClientPendingAppointments />
             </div>
         )
     } else {
