@@ -16,6 +16,8 @@ const headerStyle = {
 
 export default function Conversations() {
 
+    const { user } = useContext(UserContext)
+
     const [conversations, setConversations] = useState([])
     const [openConvoButton, setOpenConvoButton] = useState(false)
     const [currentConvoId, setCurrentConvoId] = useState(null)
@@ -23,8 +25,6 @@ export default function Conversations() {
     const [errors, setErrors] = useState([])
 
     const bottomElement = useRef(null);
-
-    const { user } = useContext(UserContext) 
 
     function scrollToBottom() {
         bottomElement?.current?.scrollIntoView({ behavior: 'smooth' });
