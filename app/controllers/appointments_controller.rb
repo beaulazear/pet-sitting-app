@@ -19,9 +19,13 @@ class AppointmentsController < ApplicationController
         appointments = @current_user.client.appointments
       end
 
-      render json: appointments
+      if appointments
+        render json: appointments
+      else
+        render json: { error: "No appointments found" }, status: :not_found
+      end
     end
-
+    
     def update
       appointment = @current_user.client.appointments.find_by(id: params[:id])
       appointment.update(appointment_params)
@@ -29,6 +33,16 @@ class AppointmentsController < ApplicationController
         render json: appointment, status: :created
       else
         render json: { errors: appointment.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+    
+    def destroy
+      appointment = @current_user.client.appointments.find_by(id: params[:id])
+      if appointment
+        appointment.destroy
+        head :no_content
+      else
+        render json: { error: "Appointment not found" }, status: :not_found
       end
     end
 
@@ -68,17 +82,6 @@ class AppointmentsController < ApplicationController
       if appointment
         appointment.update(canceled: true)
         render json: appointment, status: :created
-      else
-        render json: { error: "Appointment not found" }, status: :not_found
-      end
-    end
-    
-
-    def destroy
-      appointment = @current_user.client.appointments.find_by(id: params[:id])
-      if appointment
-        appointment.destroy
-        head :no_content
       else
         render json: { error: "Appointment not found" }, status: :not_found
       end

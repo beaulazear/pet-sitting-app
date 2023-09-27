@@ -17,6 +17,7 @@ const headerStyle = {
 export default function PendingPetSits() {
 
     const { user } = useContext(UserContext)
+    console.log(user)
     const petsitter = user.petsitter
 
     const [appointments, setAppointments] = useState([])

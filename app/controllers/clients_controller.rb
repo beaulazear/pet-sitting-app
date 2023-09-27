@@ -1,4 +1,5 @@
 class ClientsController < ApplicationController
+    before_action :current_user
 
     def create
         client = Client.create(client_params)
@@ -15,7 +16,7 @@ class ClientsController < ApplicationController
     end
 
     def show
-        client = Client.find_by(user_id: session[:user_id])
+        client = @current_user.client
         if client
             render json: client
         else
@@ -24,7 +25,7 @@ class ClientsController < ApplicationController
     end
 
     def update
-        client = Client.find_by(id: params[:id])
+        client = @current_user.client
         if client
             client.update(client_params)
             render json: client, status: :created

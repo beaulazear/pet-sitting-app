@@ -1,4 +1,5 @@
 class PetsittersController < ApplicationController
+    before_action :current_user
 
     def create
         pet_sitter = Petsitter.create(pet_sitter_params)
@@ -15,7 +16,7 @@ class PetsittersController < ApplicationController
     end
 
     def show
-        petsitter = Petsitter.find_by(user_id: session[:user_id])
+        petsitter = @current_user.petsitter
         if petsitter
           render json: petsitter
         else
@@ -24,7 +25,7 @@ class PetsittersController < ApplicationController
     end
 
     def update
-        petsitter = Petsitter.find_by(id: params[:id])
+        petsitter = @current_user.petsitter
         if petsitter
             petsitter.update(pet_sitter_params)
             render json: petsitter, status: :created
@@ -34,7 +35,7 @@ class PetsittersController < ApplicationController
     end
 
     def update_availability
-        petsitter = Petsitter.find_by(id: params[:id])
+        petsitter = @current_user.petsitter
         if petsitter
             petsitter.update(pet_sitter_availability_params)
             render json: petsitter

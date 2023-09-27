@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import '../App.css';
 import PetSitRequestForm from "./PetSitRequestForm";
-import ConvoRequestForm from "./ConvoRequestForm";
 
 const styles = {
   petSitterCard: {
@@ -48,7 +47,7 @@ const styles = {
 export default function PetSitterCard({ newRequestFromClientPage, petSitter, user }) {
 
   const [displayForm, setDisplayForm] = useState(false)
-  const [buttonText, setButtonText] = useState("Contact / Request Pet Sit")
+  const [buttonText, setButtonText] = useState("Request Pet Sit")
 
   const bottomElement = useRef(null);
 
@@ -59,11 +58,11 @@ export default function PetSitterCard({ newRequestFromClientPage, petSitter, use
   function updateDisplayForm() {
     if (displayForm === false) {
       setDisplayForm(true)
-      setButtonText("Close forms")
+      setButtonText("Close form")
       scrollToBottom()
     } else {
       setDisplayForm(false)
-      setButtonText("Contact / Request Pet Sit")
+      setButtonText("Request Pet Sit")
     }
   }
 
@@ -90,7 +89,6 @@ export default function PetSitterCard({ newRequestFromClientPage, petSitter, use
           <button onClick={updateDisplayForm} value={buttonText}>{buttonText}</button>
           {displayForm === true &&
             <div>
-              <ConvoRequestForm user={user} petSitter={petSitter} />
               <PetSitRequestForm newRequestFromClientPage={newRequestFromClientPage} updateDisplayForm={updateDisplayFormAfterSubmit} user={user} petSitter={petSitter} />
             </div>
           }

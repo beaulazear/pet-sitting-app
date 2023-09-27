@@ -3,6 +3,5 @@ class UserSerializer < ActiveModel::Serializer
 
   has_one :petsitter
   has_one :client
-  has_many :conversations, through: :messages
 
 end

@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   resources :appointments, only: [:create, :update, :index, :destroy]
   resources :clients, only: [:index, :update, :create]
   resources :petsitters, only: [:index, :create, :update, :show]
-  resources :users, only: [:index, :show]
-  resources :conversations, only: [:index, :create, :destroy, :update]
-  resources :messages, only: [:index, :create]
+  resources :users, only: :show
   
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"

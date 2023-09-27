@@ -8,7 +8,6 @@ import Home from './components/Home';
 import PetSittersPage from './components/PetSittersPage';
 import PetSitterPage from './components/PetSitterPage';
 import ClientPage from './components/ClientPage';
-import Conversations from './components/Conversations';
 
 const headerStyle = {
   textAlign: 'center',
@@ -31,7 +30,6 @@ function App() {
     })
   }
 
-
   if (user) {
     return (
       <div style={{ paddingBottom: "20px" }}>
@@ -42,7 +40,6 @@ function App() {
           <Route path="/petsitterpage" element={<PetSitterPage />} />
           <Route path="/clientpage" element={<ClientPage />} />
           <Route path="/petsitterspage" element={<PetSittersPage />} />
-          <Route path="/conversationspage" element={<Conversations />} />
         </Routes>
         <div style={{ marginTop: '20px' }}>
           <button style={{ position: 'fixed', bottom: '0', right: '0px', marginTop: "2%" }} onClick={handleLogout}>Logout</button>
