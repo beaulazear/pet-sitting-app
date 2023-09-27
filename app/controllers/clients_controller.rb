@@ -5,7 +5,7 @@ class ClientsController < ApplicationController
         if client.valid?
             render json: client, status: :created
         else
-            render json: { error: "Unprocessable Entity" }, status: :unprocessable_entity
+            render json: { errors: client.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
@@ -29,7 +29,7 @@ class ClientsController < ApplicationController
             client.update(client_params)
             render json: client, status: :created
         else
-            render json: { error: "unprocessable entity" }, status: :unprocessable_entity
+            render json: { errors: client.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
