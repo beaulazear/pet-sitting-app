@@ -12,11 +12,11 @@ class Appointment < ApplicationRecord
   
     def ensure_dates_are_valid
       if start_date && start_date < Date.current
-        errors.add(:start_date, "must be in the future")
+        errors.add(:start_date, "Must be in the future")
       end
   
       if start_date && end_date && end_date < start_date
-        errors.add(:end_date, "must be after the start date")
+        errors.add(:end_date, "Must be after the start date")
       end
     end
   end

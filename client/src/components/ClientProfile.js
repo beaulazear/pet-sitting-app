@@ -87,6 +87,7 @@ export default function ClientProfile() {
     const [photo, setPetPhoto] = useState(client.photo)
     const [full_name, setFullName] = useState(client.full_name)
     const [ideal_petsitter, setIdealPetSitter] = useState(client.ideal_petsitter)
+    const [errors, setErrors] = useState([])
 
     function changeFormView() {
         setUpdateButton(!updateButton)
@@ -111,16 +112,22 @@ export default function ClientProfile() {
                 ideal_petsitter
             })
         })
-            .then((resp) => resp.json())
-            .then((newClient) => {
-                const newUser = user
-                user.client = newClient
-                setUser(newUser)
-                changeFormView()
-                setFullName(newClient.full_name)
-                setIdealPetSitter(newClient.ideal_petsitter)
-                setPetInformation(newClient.pet_information)
-                setPetPhoto(newClient.photo)
+            .then((response) => {
+                if (response.ok) {
+                    response.json().then((newClient) => {
+                        const newUser = user
+                        user.client = newClient
+                        setUser(newUser)
+                        changeFormView()
+                        setFullName(newClient.full_name)
+                        setIdealPetSitter(newClient.ideal_petsitter)
+                        setPetInformation(newClient.pet_information)
+                        setPetPhoto(newClient.photo)
+
+                    });
+                } else {
+                    response.json().then((errorData) => setErrors(errorData.errors))
+                }
             })
     }
 
@@ -164,6 +171,13 @@ export default function ClientProfile() {
                         </div>
                         <button type="submit">Update Account</button>
                     </form>
+                    {errors.length > 0 && (
+                        <ul style={formStyles.errorList}>
+                            {errors.map((error) => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             )}
         </div>
