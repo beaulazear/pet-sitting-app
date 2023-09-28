@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../context/user";
 import PetSitterProfile from "./PetSitterProfile";
-import PendingPetSits from "./PendingPetSits";
+import PendingAppointments from "./PendingAppointments";
 
 const formStyles = {
     formContainer: {
@@ -97,7 +97,7 @@ export default function PetSitterPage() {
         return (
             <div>
                 <PetSitterProfile updatePetSitter={updatePetSitter} />
-                <PendingPetSits />
+                <PendingAppointments />
             </div>
 
         )

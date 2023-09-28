@@ -8,6 +8,7 @@ class Petsitter < ApplicationRecord
     validates :bio, presence: true
     validates :city, presence: true
     validates :day_rate, presence: true
+    validates :day_rate, numericality: { only_integer: true }
     validates :user_id, presence: true
     validates :user_id, uniqueness: true
     validates :my_ideal_pet_sit, presence: true

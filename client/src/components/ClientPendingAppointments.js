@@ -38,7 +38,7 @@ export default function ClientPendingAppointments() {
                 });
             }
         });
-    }, [user]);
+    }, [user.client.id]);
 
     function updatePendingAppointments(updatedAppointment) {
 

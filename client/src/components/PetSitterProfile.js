@@ -84,6 +84,12 @@ const formStyles = {
         border: 'none',
         cursor: 'pointer'
     },
+    errorList: {
+        color: 'red',
+        marginTop: '10px',
+        textAlign: 'left',
+        paddingLeft: '20px'
+    },
 };
 
 export default function PetSitterProfile() {
@@ -102,7 +108,7 @@ export default function PetSitterProfile() {
     const [day_rate, setDayRate] = useState(petSitter.day_rate)
     const [full_name, setFullName] = useState(petSitter.full_name)
     const [my_ideal_pet_sit, setMyIdealPetSit] = useState(petSitter.my_ideal_pet_sit)
-    // const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState([])
 
     function changeFormView() {
         setUpdateButton(!updateButton)
@@ -150,12 +156,17 @@ export default function PetSitterProfile() {
                 my_ideal_pet_sit
             })
         })
-            .then((resp) => resp.json())
-            .then((newSitter) => {
-                const newUser = user
-                user.petsitter = newSitter
-                setUser(newUser)
-                changeFormView()
+            .then((response) => {
+                if (response.ok) {
+                    response.json().then((newSitter) => {
+                        const newUser = user
+                        user.petsitter = newSitter
+                        setUser(newUser)
+                        changeFormView()
+                    });
+                } else {
+                    response.json().then((errorData) => setErrors(errorData.errors))
+                }
             })
     }
 
@@ -201,13 +212,13 @@ export default function PetSitterProfile() {
                         </div>
                         <button type="submit">Update Account</button>
                     </form>
-                    {/* {errors.length > 0 && (
-            <ul style={formStyles.errorList}>
-                {errors.map((error) => (
-                    <li key={error}>{error}</li>
-                ))}
-            </ul>
-        )} */}
+                    {errors.length > 0 && (
+                        <ul style={formStyles.errorList}>
+                            {errors.map((error) => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             )}
             {petSitterAvailable === true && (

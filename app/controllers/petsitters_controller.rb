@@ -26,11 +26,11 @@ class PetsittersController < ApplicationController
 
     def update
         petsitter = @current_user.petsitter
-        if petsitter
-            petsitter.update(pet_sitter_params)
+        petsitter.update(pet_sitter_params)
+        if petsitter.valid?
             render json: petsitter, status: :created
         else
-            render json: { error: "unprocessable entity" }, status: :unprocessable_entity
+            render json: { errors: petsitter.errors.full_messages }, status: :unprocessable_entity
         end
     end
 

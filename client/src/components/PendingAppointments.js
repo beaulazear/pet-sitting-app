@@ -14,15 +14,16 @@ const headerStyle = {
     lineHeight: '1.2'
 };
 
-export default function PendingPetSits() {
+export default function PendingAppointments() {
 
     const { user } = useContext(UserContext)
-    console.log(user)
     const petsitter = user.petsitter
 
     const [appointments, setAppointments] = useState([])
     const [pendingAppointments, setPendingAppointments] = useState([])
     const [activeAppointments, setActiveAppointments] = useState([])
+
+    console.log(appointments)
 
     useEffect(() => {
         fetch("/appointments").then((response) => {
@@ -38,7 +39,7 @@ export default function PendingPetSits() {
                 });
             }
         });
-    }, [petsitter, user]);
+    }, [petsitter.id]);
 
     function updatePendingAppointments(updatedAppointment) {
 
