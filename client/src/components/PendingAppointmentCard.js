@@ -84,9 +84,7 @@ export default function PendingAppointmentCard({ deleteAppointmentRequest, appoi
       .then((apt) => updatePendingAppointments(apt))
   }
 
-  console.log(user, appointment)
-
-  const isPetsitter = user.id === appointment.petsitter_id;
+  const isPetsitter = user.id === appointment.petsitter.user_id;
 
   if (isPetsitter) {
     return (
