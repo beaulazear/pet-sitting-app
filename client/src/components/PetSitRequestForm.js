@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../context/user";
+import { useNavigate } from "react-router-dom";
 
 const formStyles = {
     formContainer: {
@@ -51,8 +53,11 @@ const formStyles = {
     },
 };
 
-export default function PetSitRequestForm({ newRequestFromClientPage, petSitter, user, updateDisplayForm }) {
+export default function PetSitRequestForm({ newRequestFromClientPage, petSitter, updateDisplayForm }) {
 
+    const navigate = useNavigate()
+
+    const { user } = useContext(UserContext)
 
     const [appointment_information, setAppointmentInformation] = useState("")
     const [start_date, setStartDate] = useState("")
@@ -83,7 +88,6 @@ export default function PetSitRequestForm({ newRequestFromClientPage, petSitter,
             .then((response) => {
                 if (response.ok) {
                     response.json().then((apt) => {
-                        window.alert("Appointment was requested!")
                         setAppointmentInformation("")
                         setBoarding(true)
                         setInHouse(true)
@@ -91,7 +95,7 @@ export default function PetSitRequestForm({ newRequestFromClientPage, petSitter,
                         setEndDate("")
                         setErrorData([])
                         updateDisplayForm()
-                        console.log(apt)
+                        navigate("/clientpage")
                         if (newRequestFromClientPage) {
                             newRequestFromClientPage(apt)
                         }

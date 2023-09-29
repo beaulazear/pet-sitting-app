@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
+import { UserContext } from "../context/user";
 import '../App.css';
 import PetSitRequestForm from "./PetSitRequestForm";
 
@@ -44,7 +45,9 @@ const styles = {
   },
 };
 
-export default function PetSitterCard({ newRequestFromClientPage, petSitter, user }) {
+export default function PetSitterCard({ newRequestFromClientPage, petSitter }) {
+
+  const { user } = useContext(UserContext)
 
   const [displayForm, setDisplayForm] = useState(false)
   const [buttonText, setButtonText] = useState("Request Pet Sit")
@@ -89,7 +92,7 @@ export default function PetSitterCard({ newRequestFromClientPage, petSitter, use
           <button onClick={updateDisplayForm} value={buttonText}>{buttonText}</button>
           {displayForm === true &&
             <div>
-              <PetSitRequestForm newRequestFromClientPage={newRequestFromClientPage} updateDisplayForm={updateDisplayFormAfterSubmit} user={user} petSitter={petSitter} />
+              <PetSitRequestForm newRequestFromClientPage={newRequestFromClientPage} updateDisplayForm={updateDisplayFormAfterSubmit} petSitter={petSitter} />
             </div>
           }
         </div>

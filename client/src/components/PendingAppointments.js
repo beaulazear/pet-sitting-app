@@ -23,8 +23,6 @@ export default function PendingAppointments() {
     const [pendingAppointments, setPendingAppointments] = useState([])
     const [activeAppointments, setActiveAppointments] = useState([])
 
-    console.log(appointments)
-
     useEffect(() => {
         fetch("/appointments").then((response) => {
             if (response.ok) {
