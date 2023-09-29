@@ -96,6 +96,7 @@ export default function UpdatePetSitRequest({ deleteAppointmentRequest, appointm
 
     function handleDelete() {
         fetch(`/appointments/${appointment.id}`, { method: "DELETE" })
+            .then((resp) => resp.json())
             .then((updatedClient) => deleteAppointmentRequest(appointment.id, updatedClient))
     }
 

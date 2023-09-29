@@ -40,7 +40,7 @@ class AppointmentsController < ApplicationController
       appointment = @current_user.client.appointments.find_by(id: params[:id])
       if appointment
         appointment.destroy
-        head :no_content
+        render json: @current_user.client
       else
         render json: { error: "Appointment not found" }, status: :not_found
       end

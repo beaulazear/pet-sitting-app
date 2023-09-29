@@ -21,7 +21,7 @@ export default function ClientPreviousSitters({ newRequestFromClientPage }) {
             let noRepeatSitters = [...new Map(user.client.petsitters.map((p) => [p.id, p])).values()]
             setPreviousSitters(noRepeatSitters)
         }
-    }, [user])
+    }, [user.client.petsitters])
 
     return (
         <div>
