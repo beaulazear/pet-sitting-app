@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/user';
 import '../App.css';
 
@@ -43,6 +44,8 @@ export default function Login() {
 
     const { setUser } = useContext(UserContext)
 
+    const navigate = useNavigate()
+
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState([])
@@ -68,6 +71,7 @@ export default function Login() {
                     response.json().then((errorData) => setErrors([errorData.error]))
                 }
             })
+        navigate("/")
     }
 
     return (
