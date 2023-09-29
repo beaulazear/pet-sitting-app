@@ -1,5 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../context/user";
+
+// why isnt useRef working here? I want the screen to follow the update form..
 
 const styles = {
     clientProfile: {
@@ -93,10 +95,17 @@ export default function ClientProfile() {
         setUpdateButton(!updateButton)
         if (updateButtonText === "Update Account") {
             setUpdateButtonText("Close Update Form")
+            scrollToBottom()
         } else {
             setUpdateButtonText("Update Account")
         }
     }
+
+    const bottomElement = useRef(null);
+
+    function scrollToBottom() {
+        bottomElement?.current?.scrollIntoView({ behavior: 'smooth' });
+    };
 
     function patchProfile(e) {
         e.preventDefault()
@@ -175,10 +184,11 @@ export default function ClientProfile() {
                         <ul style={formStyles.errorList}>
                             {errors.map((error) => (
                                 <li key={error}>{error}</li>
-                            ))}
+                                ))}
                         </ul>
                     )}
-                </div>
+                    <div ref={bottomElement}></div>
+                </div >
             )}
         </div>
     );
