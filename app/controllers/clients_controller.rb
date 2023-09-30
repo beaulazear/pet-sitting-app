@@ -2,17 +2,12 @@ class ClientsController < ApplicationController
     before_action :current_user
 
     def create
-        client = Client.create(client_params)
+        client = @current_user.create_client(client_params)
         if client.valid?
             render json: client, status: :created
         else
             render json: { errors: client.errors.full_messages }, status: :unprocessable_entity
         end
-    end
-
-    def index
-        clients = Client.all
-        render json: clients
     end
 
     def show

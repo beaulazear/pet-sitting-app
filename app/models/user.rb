@@ -6,7 +6,5 @@ class User < ApplicationRecord
 
     has_one :petsitter
     has_one :client
-    has_many :messages
-    has_many :conversations, -> { distinct }, through: :messages
 
 end

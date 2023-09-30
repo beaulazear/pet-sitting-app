@@ -2,7 +2,7 @@ class PetsittersController < ApplicationController
     before_action :current_user
 
     def create
-        pet_sitter = Petsitter.create(pet_sitter_params)
+        pet_sitter = @current_user.create_petsitter(pet_sitter_params)
         if pet_sitter.valid?
             render json: pet_sitter, include: :user, status: :created 
         else 
