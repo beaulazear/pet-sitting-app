@@ -42,7 +42,7 @@ function App() {
           <Route path="/petsitterspage" element={<PetSittersPage />} />
         </Routes>
         <div style={{ marginTop: '20px' }}>
-          <button style={{ position: 'fixed', bottom: '0', right: '0px', marginTop: "2%" }} onClick={handleLogout}>Logout</button>
+          <button className="logoutButton" onClick={handleLogout}>Logout</button>
         </div>
       </div>
     );

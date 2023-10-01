@@ -149,7 +149,7 @@ export default function ClientProfile() {
             <p style={styles.info}><b>My Name:</b> {client.full_name}, NYC</p>
             <p style={styles.info}><b>About my pet:</b> {client.pet_information}</p>
             <p style={styles.info}><b>Ideal petsitter:</b> {client.ideal_petsitter}</p>
-            <button onClick={() => changeFormView()}>{updateButtonText}</button>
+            <button className="acceptButton" onClick={() => changeFormView()}>{updateButtonText}</button>
             {updateButton === true && (
                 <div style={formStyles.formContainer}>
                     <form className="styled-form" onSubmit={patchProfile}>

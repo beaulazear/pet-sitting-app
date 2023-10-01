@@ -181,7 +181,7 @@ export default function PetSitterProfile() {
             <p style={styles.info}><b>Day Rate:</b> ${petSitter.day_rate} a day.</p>
             <p style={styles.info}><b>Bio:</b> {petSitter.bio}</p>
             <p style={styles.info}><b>My Ideal Pet Sit:</b> {petSitter.my_ideal_pet_sit}</p>
-            <p style={styles.info}><b>Account Status:</b> {petSitter.currently_available? "Active" : "Not Active"}</p>
+            {/* <p style={styles.info}><b>Account Status:</b> {petSitter.currently_available? "Active" : "Not Active"}</p> */}
             <button className="acceptButton" onClick={() => changeFormView()}>{updateButtonText}</button>
             {updateButton === true && (
                 <div style={formStyles.formContainer}>
@@ -211,7 +211,7 @@ export default function PetSitterProfile() {
                             <label htmlFor="dayRate" style={formStyles.label}>Day Rate:</label>
                             <input type="text" id="dayRate" value={day_rate} onChange={(e) => setDayRate(e.target.value)} style={formStyles.input} />
                         </div>
-                        <button className="acceptButton" type="submit">Update Account</button>
+                        <button type="submit">Update Account</button>
                     </form>
                     {errors.length > 0 && (
                         <ul style={formStyles.errorList}>
