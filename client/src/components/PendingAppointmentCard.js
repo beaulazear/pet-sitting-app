@@ -8,9 +8,11 @@ const styles = {
     padding: '20px',
     borderRadius: '8px',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    maxWidth: '400px',
+    maxWidth: '340px',
     margin: '0 auto',
-    textAlign: 'center'
+    marginBottom: "5px",
+    marginTop: "5px",
+    textAlign: 'left'
   },
   imageWrapper: {
     width: '150px',
@@ -92,18 +94,18 @@ export default function PendingAppointmentCard({ deleteAppointmentRequest, appoi
         <div style={styles.imageWrapper}>
           <img height="150" width="150" src={appointment.client.photo} style={styles.image} alt="the pet of the appointment" />
         </div>
-        <h2>Pending Request:</h2>
+        <h2>New Pet Sit Request</h2>
         <p><b>Client Name:</b> {appointment.client.full_name}</p>
         <p><b>Total Price:</b> ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
         <p><b>Start Date:</b> {appointment.start_date}</p>
         <p><b>End Date:</b> {appointment.end_date}</p>
+        <p><b>Appointment Information:</b> {appointment.appointment_information}</p>
         {appointment.boarding === true &&
-          <p><b>Open to boarding at petsitters place</b></p>
+          <p>In house pet sitting is okay.</p>
         }
         {appointment.in_house === true &&
-          <p><b>Open to house-sitting at clients place</b></p>
+          <p>I am open to boarding my pet at your place.</p>
         }
-        <p><b>Appointment Information:</b> {appointment.appointment_information}</p>
         <button onClick={handleAccept} className="acceptButton" value="Accepted">Accept Pet Sit</button>
         <button onClick={handleDecline} className="declineButton" value="Declined">Decline Pet Sit</button>
       </div>

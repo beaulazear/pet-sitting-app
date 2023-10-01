@@ -11,6 +11,22 @@ const headerStyle = {
     lineHeight: '1.2',
 };
 
+const welcomeMessageStyles = {
+    fontFamily: 'Helvetica, sans-serif',
+    maxWidth: '340px',
+    margin: '0 auto',
+    marginTop: '20px',
+    marginBottom: '20px',
+    paddingTop: '20px',
+    paddingBottom: '20px',
+    paddingLeft: '20px',
+    paddingRight: '20px',
+    backgroundColor: '#f2f2f2',
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    textAlign: 'center',
+};
+
 export default function ClientPreviousSitters({ newRequestFromClientPage }) {
 
     const [previousSitters, setPreviousSitters] = useState([])
@@ -27,7 +43,9 @@ export default function ClientPreviousSitters({ newRequestFromClientPage }) {
         <div>
             {previousSitters.length > 0 && (
                 <div>
-                    <h2 style={headerStyle}>Previous Pet Sitters:</h2>
+                    <div style={welcomeMessageStyles}>
+                        <div style={headerStyle}>Previously booked Pet Sitters:</div>
+                    </div>
                     {previousSitters.map((sitter) => (
                         <PetSitterCard newRequestFromClientPage={newRequestFromClientPage} key={sitter.id} petSitter={sitter} user={user} />
                     ))}

@@ -8,9 +8,9 @@ const styles = {
         border: '1px solid #ddd',
         borderRadius: '8px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-        maxWidth: '400px',
+        maxWidth: '340px',
         margin: '0 auto',
-        textAlign: 'center'
+        textAlign: 'left'
     },
     imageWrapper: {
         width: '150px',
@@ -55,10 +55,10 @@ const formStyles = {
         backgroundColor: '#f8f8f8',
         padding: '20px',
         borderRadius: '8px',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     },
     formGroup: {
-        marginBottom: '15px'
+        marginBottom: '15px',
     },
     label: {
         display: 'block',
@@ -71,7 +71,7 @@ const formStyles = {
         padding: '8px',
         fontSize: '16px',
         borderRadius: '4px',
-        border: '1px solid #ccc'
+        border: '1px solid #ccc',
     },
     button: {
         width: '100%',
@@ -176,12 +176,13 @@ export default function PetSitterProfile() {
                 <img src={petSitter.photo} alt="the petsitter" style={styles.image} />
             </div>
             <h2 style={styles.heading}>Your pet sitting account:</h2>
-            <p style={styles.info}><b>Name:</b> Hi, I am {petSitter.full_name}.</p>
-            <p style={styles.info}><b>City:</b> I am located in {petSitter.city}</p>
+            <p style={styles.info}><b>Name:</b> Hi, I am {petSitter.full_name}</p>
+            <p style={styles.info}><b>City:</b> I am located in {petSitter.city}.</p>
             <p style={styles.info}><b>Day Rate:</b> ${petSitter.day_rate} a day.</p>
             <p style={styles.info}><b>Bio:</b> {petSitter.bio}</p>
             <p style={styles.info}><b>My Ideal Pet Sit:</b> {petSitter.my_ideal_pet_sit}</p>
-            <button onClick={() => changeFormView()}>{updateButtonText}</button>
+            {/* <p style={styles.info}><b>Total Referrals:</b> {petSitter.referrals}</p> */}
+            <button className="acceptButton" onClick={() => changeFormView()}>{updateButtonText}</button>
             {updateButton === true && (
                 <div style={formStyles.formContainer}>
                     <form className="styled-form" onSubmit={patchProfile}>
@@ -210,7 +211,7 @@ export default function PetSitterProfile() {
                             <label htmlFor="dayRate" style={formStyles.label}>Day Rate:</label>
                             <input type="text" id="dayRate" value={day_rate} onChange={(e) => setDayRate(e.target.value)} style={formStyles.input} />
                         </div>
-                        <button type="submit">Update Account</button>
+                        <button className="acceptButton" type="submit">Update Account</button>
                     </form>
                     {errors.length > 0 && (
                         <ul style={formStyles.errorList}>
@@ -223,14 +224,12 @@ export default function PetSitterProfile() {
             )}
             {petSitterAvailable === true && (
                 <div>
-                    <h3>You are currently listed as available on the pet sitters page! Update below to change availability.</h3>
-                    <button onClick={handleUpdateAvailability}>Become unavailable</button>
+                    <button className="declineButton" onClick={handleUpdateAvailability}>Temporarily Deactivate Profile</button>
                 </div>
             )}
             {petSitterAvailable === false && (
                 <div>
-                    <h3>You are currently unavailable and not listed on the petsitters page. Update below to change availability.</h3>
-                    <button onClick={handleUpdateAvailability}>Become available</button>
+                    <button className="acceptButton" onClick={handleUpdateAvailability}>Activate Profile</button>
                 </div>
             )}
         </div>

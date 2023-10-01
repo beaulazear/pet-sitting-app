@@ -3,8 +3,9 @@ import { UserContext } from '../context/user';
 
 const welcomeMessageStyles = {
     fontFamily: 'Helvetica, sans-serif',
-    maxWidth: '600px',
+    maxWidth: '400px',
     margin: '0 auto',
+    paddingTop: '10px',
     paddingBottom: '40px',
     paddingLeft: '40px',
     paddingRight: '40px',

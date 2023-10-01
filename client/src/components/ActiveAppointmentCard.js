@@ -7,9 +7,11 @@ const styles = {
         padding: '20px',
         borderRadius: '8px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-        maxWidth: '400px',
+        maxWidth: '340px',
         margin: '0 auto',
-        textAlign: 'center',
+        marginBottom: "5px",
+        marginTop: "5px",
+        textAlign: 'left',
     },
     imageWrapper: {
         width: '150px',
@@ -77,13 +79,13 @@ export default function ActiveAppointmentCard({ appointment, updateActiveAppoint
                 <div style={styles.imageWrapper}>
                     <img height="150" width="150" src={appointment.client.photo} style={styles.image} alt="Client's Pet" />
                 </div>
-                <h2 style={styles.heading}>Accepted Appointment:</h2>
-                <p style={styles.subheading}>Client Name: {appointment.client.full_name}</p>
-                <p style={styles.subheading}>Total Price: ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
-                <p style={styles.subheading}>Start Date: {appointment.start_date}</p>
-                <p style={styles.subheading}>End Date: {appointment.end_date}</p>
-                <p style={styles.subheading}>Pet Information: {appointment.client.pet_information}</p>
-                <p style={styles.subheading}>Appointment Information: {appointment.appointment_information}</p>
+                <h2 style={styles.heading}>Accepted Pet Sit:</h2>
+                <p style={styles.subheading}><b>Client Name:</b> {appointment.client.full_name}</p>
+                <p style={styles.subheading}><b>Total Price:</b> ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
+                <p style={styles.subheading}><b>Start Date:</b> {appointment.start_date}</p>
+                <p style={styles.subheading}><b>End Date:</b> {appointment.end_date}</p>
+                <p style={styles.subheading}><b>Pet Information:</b> {appointment.client.pet_information}</p>
+                <p style={styles.subheading}><b>Appointment Information:</b> {appointment.appointment_information}</p>
                 <button onClick={handleCancel} className="declineButton">Cancel Pet Sit</button>
             </div>
         );
@@ -94,11 +96,11 @@ export default function ActiveAppointmentCard({ appointment, updateActiveAppoint
                     <img height="150" width="150" src={appointment.petsitter.photo} alt="Petsitter" style={styles.image} />
                 </div>
                 <h2 style={styles.heading}>Accepted Appointment:</h2>
-                <p style={styles.subheading}>Pet Sitter Name: {appointment.petsitter.full_name}</p>
-                <p style={styles.subheading}>Total Price: ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
-                <p style={styles.subheading}>Start Date: {appointment.start_date}</p>
-                <p style={styles.subheading}>End Date: {appointment.end_date}</p>
-                <p style={styles.subheading}>Pet Information: {appointment.client.pet_information}</p>
+                <p style={styles.subheading}><b>Pet Sitter Name:</b> {appointment.petsitter.full_name}</p>
+                <p style={styles.subheading}><b>Total Price:</b> ${totalPriceCalculator(appointment.start_date, appointment.end_date)}</p>
+                <p style={styles.subheading}><b>Start Date:</b> {appointment.start_date}</p>
+                <p style={styles.subheading}><b>End Date:</b> {appointment.end_date}</p>
+                <p style={styles.subheading}><b>Pet Information:</b> {appointment.client.pet_information}</p>
                 <button onClick={handleCancel} className="declineButton">Cancel Pet Sit</button>
             </div>
         );

@@ -8,6 +8,8 @@ const formStyles = {
         marginTop: '20px',
         backgroundColor: '#f8f8f8',
         padding: '20px',
+        marginRight: "50px",
+        marginLeft: "50px",
         borderRadius: '8px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
     },

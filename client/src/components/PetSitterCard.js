@@ -10,9 +10,9 @@ const styles = {
     border: '1px solid #ddd',
     borderRadius: '8px',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    maxWidth: '400px',
+    maxWidth: '340px',
     margin: '10px auto',
-    textAlign: 'center'
+    textAlign: 'left'
   },
   imageWrapper: {
     width: '150px',
@@ -55,7 +55,7 @@ export default function PetSitterCard({ newRequestFromClientPage, petSitter }) {
   const bottomElement = useRef(null);
 
   function scrollToBottom() {
-      bottomElement?.current?.scrollIntoView({ behavior: 'smooth' });
+    bottomElement?.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   function updateDisplayForm() {
@@ -89,7 +89,7 @@ export default function PetSitterCard({ newRequestFromClientPage, petSitter }) {
       <p style={styles.info}>My rate is currently ${petSitter.day_rate}</p>
       {user.client && (
         <div>
-          <button onClick={updateDisplayForm} value={buttonText}>{buttonText}</button>
+          <button className="acceptButton" onClick={updateDisplayForm} value={buttonText}>{buttonText}</button>
           {displayForm === true &&
             <div>
               <PetSitRequestForm newRequestFromClientPage={newRequestFromClientPage} updateDisplayForm={updateDisplayFormAfterSubmit} petSitter={petSitter} />

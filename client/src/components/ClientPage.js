@@ -7,6 +7,8 @@ const formStyles = {
     formContainer: {
         marginTop: '20px',
         backgroundColor: '#f8f8f8',
+        marginRight: "50px",
+        marginLeft: "50px",
         padding: '20px',
         borderRadius: '8px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',

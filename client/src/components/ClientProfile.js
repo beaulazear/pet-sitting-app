@@ -10,9 +10,9 @@ const styles = {
         border: '1px solid #ddd',
         borderRadius: '8px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-        maxWidth: '400px',
+        maxWidth: '340px',
         margin: '0 auto',
-        textAlign: 'center',
+        textAlign: 'left',
     },
     imageWrapper: {
         width: '150px',
