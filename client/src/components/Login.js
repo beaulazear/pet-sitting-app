@@ -8,6 +8,8 @@ const formStyles = {
         marginTop: '20px',
         backgroundColor: '#f8f8f8',
         padding: '20px',
+        marginRight: "50px",
+        marginLeft: "50px",
         borderRadius: '8px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
     },
@@ -21,7 +23,7 @@ const formStyles = {
         marginBottom: '5px'
     },
     input: {
-        width: '100%',
+        width: '96%',
         padding: '8px',
         fontSize: '16px',
         borderRadius: '4px',
@@ -37,7 +39,7 @@ const formStyles = {
         borderRadius: '4px',
         border: 'none',
         cursor: 'pointer'
-    }
+    },
 };
 
 export default function Login() {

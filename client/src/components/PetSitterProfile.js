@@ -95,7 +95,7 @@ const formStyles = {
 export default function PetSitterProfile() {
 
     const { user, setUser } = useContext(UserContext)
-    const petSitter = user.petsitter
+    let petSitter = user.petsitter
 
     const [updateButton, setUpdateButton] = useState(false)
     const [petSitterAvailable, setPetSitterAvailable] = useState(petSitter.currently_available)
@@ -181,7 +181,7 @@ export default function PetSitterProfile() {
             <p style={styles.info}><b>Day Rate:</b> ${petSitter.day_rate} a day.</p>
             <p style={styles.info}><b>Bio:</b> {petSitter.bio}</p>
             <p style={styles.info}><b>My Ideal Pet Sit:</b> {petSitter.my_ideal_pet_sit}</p>
-            {/* <p style={styles.info}><b>Total Referrals:</b> {petSitter.referrals}</p> */}
+            <p style={styles.info}><b>Account Status:</b> {petSitter.currently_available? "Active" : "Not Active"}</p>
             <button className="acceptButton" onClick={() => changeFormView()}>{updateButtonText}</button>
             {updateButton === true && (
                 <div style={formStyles.formContainer}>

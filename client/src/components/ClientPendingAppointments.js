@@ -138,11 +138,10 @@ export default function ClientPendingAppointments() {
         )
     } else {
         return (
-            <div style={welcomeMessageStyles}>
-                <h2 style={headerStyle}>No pending requests or active pet sits.
-                    <br></br><br></br>
-                    View the petsitters page to find your next sitter.
-                </h2>
+            <div>
+                <div style={welcomeMessageStyles}>
+                    <div style={headerStyle}>No pending requests or active pet sits.</div>
+                </div>
                 <ClientPreviousSitters newRequestFromClientPage={newRequestFromClientPage} />
             </div>
         )

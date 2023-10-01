@@ -4,38 +4,40 @@ import '../App.css';
 
 const formStyles = {
   formContainer: {
-    marginTop: '20px',
-    backgroundColor: '#f8f8f8',
-    padding: '20px',
-    borderRadius: '8px',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+      marginTop: '20px',
+      backgroundColor: '#f8f8f8',
+      padding: '20px',
+      marginRight: "50px",
+      marginLeft: "50px",
+      borderRadius: '8px',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
   },
   formGroup: {
-    marginBottom: '15px'
+      marginBottom: '15px'
   },
   label: {
-    display: 'block',
-    fontSize: '16px',
-    color: '#333',
-    marginBottom: '5px'
+      display: 'block',
+      fontSize: '16px',
+      color: '#333',
+      marginBottom: '5px'
   },
   input: {
-    width: '100%',
-    padding: '8px',
-    fontSize: '16px',
-    borderRadius: '4px',
-    border: '1px solid #ccc'
+      width: '96%',
+      padding: '8px',
+      fontSize: '16px',
+      borderRadius: '4px',
+      border: '1px solid #ccc'
   },
   button: {
-    width: '100%',
-    padding: '10px',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    color: '#fff',
-    backgroundColor: '#007bff',
-    borderRadius: '4px',
-    border: 'none',
-    cursor: 'pointer'
+      width: '100%',
+      padding: '10px',
+      fontSize: '16px',
+      fontWeight: 'bold',
+      color: '#fff',
+      backgroundColor: '#007bff',
+      borderRadius: '4px',
+      border: 'none',
+      cursor: 'pointer'
   },
   errorList: {
     color: 'red',

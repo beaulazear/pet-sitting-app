@@ -7,27 +7,27 @@ const formStyles = {
     formContainer: {
         marginTop: '20px',
         backgroundColor: '#f8f8f8',
+        padding: '20px',
         marginRight: "50px",
         marginLeft: "50px",
-        padding: '20px',
         borderRadius: '8px',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
     },
     formGroup: {
-        marginBottom: '15px',
+        marginBottom: '15px'
     },
     label: {
         display: 'block',
         fontSize: '16px',
         color: '#333',
-        marginBottom: '5px',
+        marginBottom: '5px'
     },
     input: {
-        width: '100%',
+        width: '96%',
         padding: '8px',
         fontSize: '16px',
         borderRadius: '4px',
-        border: '1px solid #ccc',
+        border: '1px solid #ccc'
     },
     button: {
         width: '100%',
@@ -38,7 +38,7 @@ const formStyles = {
         backgroundColor: '#007bff',
         borderRadius: '4px',
         border: 'none',
-        cursor: 'pointer',
+        cursor: 'pointer'
     },
 };
 
