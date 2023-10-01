@@ -22,7 +22,7 @@ const formStyles = {
       marginBottom: '5px'
   },
   input: {
-      width: '96%',
+      width: '90%',
       padding: '8px',
       fontSize: '16px',
       borderRadius: '4px',
