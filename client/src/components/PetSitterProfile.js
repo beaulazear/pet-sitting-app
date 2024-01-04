@@ -225,11 +225,13 @@ export default function PetSitterProfile() {
             {petSitterAvailable === true && (
                 <div>
                     <button className="declineButton" onClick={handleUpdateAvailability}>Temporarily Deactivate Profile</button>
+                    <h3 style={{color: 'green'}}>You are currently listed as available and can be viewed by clients on the "View Pet Sitters" page.</h3>
                 </div>
             )}
             {petSitterAvailable === false && (
                 <div>
                     <button className="acceptButton" onClick={handleUpdateAvailability}>Activate Profile</button>
+                    <h3 style={{color: 'red'}}>You are currently listed as unavailable and cannot be viewed by clients on the "View Pet Sitters" page.</h3>
                 </div>
             )}
         </div>

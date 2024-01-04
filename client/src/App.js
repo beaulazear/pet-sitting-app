@@ -18,6 +18,21 @@ const headerStyle = {
   lineHeight: '1.2',
 };
 
+const logoutButtonStyle = {
+  position: 'fixed',
+  bottom: '0',
+  left: '0',
+  width: '100%',
+  height: '36px',
+  backgroundColor: 'red',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: 'white',
+  fontSize: '24px',
+};
+
+
 function App() {
 
   const { user, setUser } = useContext(UserContext)
@@ -42,7 +57,7 @@ function App() {
           <Route path="/petsitterspage" element={<PetSittersPage />} />
         </Routes>
         <div style={{ marginTop: '20px' }}>
-          <button className="logoutButton" onClick={handleLogout}>Logout</button>
+          <button style={logoutButtonStyle} onClick={handleLogout}>Logout</button>
         </div>
       </div>
     );

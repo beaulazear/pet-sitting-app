@@ -3,43 +3,69 @@ import { UserContext } from "../context/user";
 import ClientProfile from "./ClientProfile";
 import ClientPendingAppointments from "./ClientPendingAppointments";
 
+const commonWidth = '550px';
+
 const formStyles = {
     formContainer: {
-        marginTop: '20px',
-        backgroundColor: '#f8f8f8',
-        padding: '20px',
-        marginRight: "50px",
-        marginLeft: "50px",
+        margin: '20px auto',
+        backgroundColor: '#ffffff',
+        padding: '30px',
         borderRadius: '8px',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        maxWidth: commonWidth,
     },
     formGroup: {
-        marginBottom: '15px'
+        marginBottom: '20px',
     },
     label: {
         display: 'block',
-        fontSize: '16px',
+        fontSize: '18px',
         color: '#333',
-        marginBottom: '5px'
+        marginBottom: '8px',
     },
     input: {
-        width: '90%',
-        padding: '8px',
+        padding: '12px',
+        width: 'calc(100% - 24px)', // Adjusted width considering padding
         fontSize: '16px',
-        borderRadius: '4px',
-        border: '1px solid #ccc'
+        borderRadius: '6px',
+        border: '2px solid #ddd',
+        boxSizing: 'border-box',
     },
     button: {
         width: '100%',
-        padding: '10px',
+        padding: '12px',
         fontSize: '16px',
         fontWeight: 'bold',
         color: '#fff',
         backgroundColor: '#007bff',
-        borderRadius: '4px',
+        borderRadius: '6px',
         border: 'none',
-        cursor: 'pointer'
+        cursor: 'pointer',
     },
+};
+
+const welcomeMessageStyles = {
+    padding: '30px',
+    fontFamily: 'Helvetica, sans-serif',
+    maxWidth: commonWidth,
+    margin: '20px auto', // Adjusted margin here
+    backgroundColor: '#ffffff',
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    textAlign: 'center',
+};
+
+const headingStyles = {
+    fontSize: '32px',
+    marginBottom: '20px',
+    color: 'black',
+};
+
+const paragraphStyles = {
+    fontSize: '18px',
+    lineHeight: '1.6',
+    color: '#333',
+    marginBottom: '16px',
 };
 
 export default function ClientPage() {
@@ -88,38 +114,44 @@ export default function ClientPage() {
         )
     } else {
         return (
-            <div style={formStyles.formContainer}>
-                <form className="styled-form" onSubmit={handleClientOptIn}>
-                    <h2>Client Form</h2>
-                    <div style={formStyles.formGroup}>
-                        <label style={formStyles.label} htmlFor="full_name">
-                            Full Name:
-                        </label>
-                        <input style={formStyles.input} type="text" id="photo" value={full_name} onChange={(e) => setFullName(e.target.value)} />
-                    </div>
-                    <div style={formStyles.formGroup}>
-                        <label style={formStyles.label} htmlFor="pet_information">
-                            Pet Information:
-                        </label>
-                        <textarea style={formStyles.input} type="text" id="pet_information" value={pet_information} onChange={(e) => setPetInformation(e.target.value)} />
-                    </div>
-                    <div style={formStyles.formGroup}>
-                        <label style={formStyles.label} htmlFor="ideal_petsitter">
-                            Your Ideal Pet-Sitter:
-                        </label>
-                        <textarea style={formStyles.input} type="text" id="ideal_petsitter" value={ideal_petsitter} onChange={(e) => setIdealPetSitter(e.target.value)} />
-                    </div>
-                    <div style={formStyles.formGroup}>
-                        <label style={formStyles.label} htmlFor="photo">
-                            Pet Photo Url:
-                        </label>
-                        <input style={formStyles.input} type="text" id="photo" value={photo} onChange={(e) => setPetPhoto(e.target.value)} />
-                    </div>
-                    <button style={formStyles.button} type="submit">
-                        Create client account
-                    </button>
-                </form>
-            </div>
+            <>
+                <div style={welcomeMessageStyles}>
+                    <h2 style={headingStyles}>Sign up as a client below!</h2>
+                    <p style={paragraphStyles}>You are currenly not signed up as a client. Use the form to sign up and contact petsitters for pet sits!</p>
+                </div>
+                <div style={formStyles.formContainer}>
+                    <form className="styled-form" onSubmit={handleClientOptIn}>
+                        <h2>Client Form</h2>
+                        <div style={formStyles.formGroup}>
+                            <label style={formStyles.label} htmlFor="full_name">
+                                Full Name:
+                            </label>
+                            <input style={formStyles.input} type="text" id="photo" value={full_name} onChange={(e) => setFullName(e.target.value)} />
+                        </div>
+                        <div style={formStyles.formGroup}>
+                            <label style={formStyles.label} htmlFor="pet_information">
+                                Pet Information:
+                            </label>
+                            <textarea style={formStyles.input} type="text" id="pet_information" value={pet_information} onChange={(e) => setPetInformation(e.target.value)} />
+                        </div>
+                        <div style={formStyles.formGroup}>
+                            <label style={formStyles.label} htmlFor="ideal_petsitter">
+                                Your Ideal Pet-Sitter:
+                            </label>
+                            <textarea style={formStyles.input} type="text" id="ideal_petsitter" value={ideal_petsitter} onChange={(e) => setIdealPetSitter(e.target.value)} />
+                        </div>
+                        <div style={formStyles.formGroup}>
+                            <label style={formStyles.label} htmlFor="photo">
+                                Pet Photo Url:
+                            </label>
+                            <input style={formStyles.input} type="text" id="photo" value={photo} onChange={(e) => setPetPhoto(e.target.value)} />
+                        </div>
+                        <button style={formStyles.button} type="submit">
+                            Create client account
+                        </button>
+                    </form>
+                </div>
+            </>
         );
     }
 }
